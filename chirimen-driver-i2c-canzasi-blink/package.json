@@ -1,10 +1,13 @@
 {
-  "name": "chirimen-driver-i2c-canzasi-blink",
+  "name": "@chirimen-raspi/chirimen-driver-i2c-canzasi-blink",
   "version": "1.0.0",
   "main": "canzasi.js",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
