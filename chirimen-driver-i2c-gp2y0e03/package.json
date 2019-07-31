@@ -1,0 +1,10 @@
+{
+  "name": "chirimen-driver-i2c-gp2y0e03",
+  "version": "1.0.0",
+  "main": "GP2Y0E03.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git"
+  }
+}
