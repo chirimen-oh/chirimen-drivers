@@ -1,0 +1,16 @@
+{
+  "name": "chirimen-drivers",
+  "version": "1.0.0",
+  "repository": "git@github.com:chirimen-oh/chirimen-drivers.git",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "chirimen-driver-*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  },
+  "scripts": {
+    "release": "lerna publish"
+  }
+}

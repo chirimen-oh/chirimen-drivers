@@ -13,3 +13,9 @@
 - chirimen-driver-i2c-pca9685
 - chirimen-driver-i2c-s11059
 - chirimen-driver-i2c-veml6070
+
+## Release
+
+```sh
+npm i && npm run release
+```

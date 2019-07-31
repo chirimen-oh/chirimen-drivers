@@ -1,0 +1,4 @@
+{
+  "packages": ["chirimen-driver-*"],
+  "version": "0.0.0"
+}
