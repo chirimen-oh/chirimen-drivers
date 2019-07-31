@@ -1,18 +1,18 @@
 # CHIRIMEN Drivers
 
-- chirimen-driver-i2c-ads1015
-- chirimen-driver-i2c-adt7410
-- chirimen-driver-i2c-arduino-stepping-motor
-- chirimen-driver-i2c-canzasi-blink
-- chirimen-driver-i2c-gp2y0e03
-- chirimen-driver-i2c-grove-accelerometer
-- chirimen-driver-i2c-grove-gesture
-- chirimen-driver-i2c-grove-light
-- chirimen-driver-i2c-grove-oled-display
-- chirimen-driver-i2c-grove-touch
-- chirimen-driver-i2c-pca9685
-- chirimen-driver-i2c-s11059
-- chirimen-driver-i2c-veml6070
+- @chirimen-raspi/chirimen-driver-i2c-ads1015@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-adt7410@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-arduino-stepping-motor@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-canzasi-blink@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-gp2y0e03@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-grove-accelerometer@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-grove-gesture@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-grove-light@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-grove-oled-display@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-grove-touch@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-pca9685@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-s11059@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-veml6070@1.0.0
 
 ## Release
 
