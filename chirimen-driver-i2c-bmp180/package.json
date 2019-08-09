@@ -1,7 +1,7 @@
 {
-  "name": "@chirimen-raspi/chirimen-driver-i2c-canzasi-blink",
+  "name": "@chirimen-raspi/chirimen-driver-i2c-bmp180",
   "version": "1.0.0",
-  "main": "canzasi.js",
+  "main": "BMP180.js",
   "license": "MIT",
   "repository": {
     "type": "git",
