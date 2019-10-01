@@ -157,6 +157,10 @@ OledDisplay.prototype = {
     }
   },
   putStringQ: function(string){
+    if(typeof string === "object") {
+      console.warn(`Ignoring invalid parameter: "${string}" is not string.`); 
+      return;
+    }
     if(typeof string === "number" || typeof string === "boolean") {
       string = `${string}`;
     }
