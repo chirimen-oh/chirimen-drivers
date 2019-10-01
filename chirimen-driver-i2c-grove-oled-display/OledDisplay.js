@@ -157,6 +157,9 @@ OledDisplay.prototype = {
     }
   },
   putStringQ: function(string){
+    if(typeof string === "number" || typeof string === "boolean") {
+      string = `${string}`;
+    }
     for(var i=0;i < string.length; i++){
       var c =  string.charAt(i);
       this.putCharQ(c);     
