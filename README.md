@@ -30,6 +30,7 @@
 - @chirimen-raspi/chirimen-driver-i2c-neopixel-i2c@1.0.0
 - @chirimen-raspi/chirimen-driver-i2c-pca9685-pwm@1.0.0
 - @chirimen-raspi/chirimen-driver-i2c-pcf8591@1.0.0
+- @chirimen-raspi/chirimen-driver-i2c-bh1750
 
 ## Release
 
