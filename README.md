@@ -32,6 +32,7 @@
 - @chirimen-raspi/chirimen-driver-i2c-pcf8591@1.0.0
 - @chirimen-raspi/chirimen-driver-i2c-bh1750
 - @chirimen-raspi/chirimen-driver-i2c-sht30
+- @chirimen-raspi/chirimen-driver-i2c-tcs34725
 
 ## Release
 

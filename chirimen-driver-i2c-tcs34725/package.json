@@ -1,0 +1,14 @@
+{
+  "name": "@chirimen-raspi/chirimen-driver-i2c-tcs34725",
+  "version": "1.0.0",
+  "main": "TCS34725.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "chirimen-driver-i2c-tcs34725"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
