@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "chirimen-driver-*"
+    "packages/*"
   ],
   "devDependencies": {
     "lerna": "^3.16.4"
