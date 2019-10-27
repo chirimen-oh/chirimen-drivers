@@ -1,6 +1,7 @@
 {
   "name": "@chirimen/bmp180",
   "version": "0.0.1",
+  "description": "Driver for BMP180 with WebI2C",
   "main": "bmp180.js",
   "module": "bmp180.mjs",
   "license": "MIT",

@@ -1,6 +1,7 @@
 {
   "name": "@chirimen/grove-gesture",
   "version": "0.0.1",
+  "description": "Driver for PAJ7620 with WebI2C",
   "main": "grove-gesture.js",
   "module": "grove-gesture.mjs",
   "license": "MIT",

@@ -1,6 +1,7 @@
 {
   "name": "@chirimen/grove-touch",
   "version": "0.0.1",
+  "description": "Driver for MPR121 with WebI2C",
   "main": "grove-touch.js",
   "module": "grove-touch.mjs",
   "license": "MIT",
