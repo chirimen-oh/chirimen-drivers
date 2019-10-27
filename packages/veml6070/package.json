@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/veml6070",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.0",
   "description": "Driver for VEML6070 with WebI2C",
   "main": "veml6070.js",
   "module": "veml6070.mjs",

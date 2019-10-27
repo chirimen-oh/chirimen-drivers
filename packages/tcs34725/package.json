@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/tcs34725",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.0",
   "description": "Driver for TCS34725 with WebI2C",
   "main": "tcs34725.js",
   "module": "tcs34725.mjs",
