@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/mpu6050",
   "version": "0.0.1",
-  "main": "MPU6050.js",
+  "main": "mpu6050.js",
   "license": "MIT",
   "repository": {
     "type": "git",

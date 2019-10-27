@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/veml6070",
   "version": "0.0.1",
-  "main": "VEML6070.js",
+  "main": "veml6070.js",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/bme280",
   "version": "0.0.1",
-  "main": "BME280.js",
+  "main": "bme280.js",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/gp2y0e03",
   "version": "0.0.1",
-  "main": "GP2Y0E03.js",
+  "main": "gp2y0e03.js",
   "license": "MIT",
   "repository": {
     "type": "git",

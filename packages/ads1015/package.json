@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/ads1015",
   "version": "0.0.1",
-  "main": "ADS1015.js",
+  "main": "ads1015.js",
   "license": "MIT",
   "repository": {
     "type": "git",

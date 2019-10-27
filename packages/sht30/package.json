@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/sht30",
   "version": "0.0.1",
-  "main": "SHT30.js",
+  "main": "sht30.js",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/tcs34725",
   "version": "0.0.1",
-  "main": "TCS34725.js",
+  "main": "tcs34725.js",
   "license": "MIT",
   "repository": {
     "type": "git",

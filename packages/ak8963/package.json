@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/ak8963",
   "version": "0.0.1",
-  "main": "AK8963.js",
+  "main": "ak8963.js",
   "license": "MIT",
   "repository": {
     "type": "git",

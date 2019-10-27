@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/amg8833",
   "version": "0.0.1",
-  "main": "AMG8833.js",
+  "main": "amg8833.js",
   "license": "MIT",
   "repository": {
     "type": "git",
