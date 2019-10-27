@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/grove-gesture",
   "version": "0.0.1",
-  "main": "paj7620.js",
+  "main": "grove-gesture.js",
   "license": "MIT",
   "repository": {
     "type": "git",
