@@ -2,6 +2,7 @@
   "name": "@chirimen/gp2y0e03",
   "version": "0.0.1",
   "main": "gp2y0e03.js",
+  "module": "gp2y0e03.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

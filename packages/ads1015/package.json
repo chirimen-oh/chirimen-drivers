@@ -2,6 +2,7 @@
   "name": "@chirimen/ads1015",
   "version": "0.0.1",
   "main": "ads1015.js",
+  "module": "ads1015.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

@@ -2,6 +2,7 @@
   "name": "@chirimen/sht30",
   "version": "0.0.1",
   "main": "sht30.js",
+  "module": "sht30.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

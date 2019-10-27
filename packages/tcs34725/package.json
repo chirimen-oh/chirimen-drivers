@@ -2,6 +2,7 @@
   "name": "@chirimen/tcs34725",
   "version": "0.0.1",
   "main": "tcs34725.js",
+  "module": "tcs34725.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

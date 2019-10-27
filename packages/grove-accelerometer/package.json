@@ -2,6 +2,7 @@
   "name": "@chirimen/grove-accelerometer",
   "version": "0.0.1",
   "main": "grove-accelerometer.js",
+  "module": "grove-accelerometer.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

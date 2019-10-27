@@ -2,6 +2,7 @@
   "name": "@chirimen/pca9685",
   "version": "0.0.1",
   "main": "pca9685.js",
+  "module": "pca9685.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }
