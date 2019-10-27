@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/pca9685-pwm",
   "version": "0.0.1",
-  "main": "PCA9685_PWM.js",
+  "main": "pca9685_pwm.js",
   "license": "MIT",
   "repository": {
     "type": "git",

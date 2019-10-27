@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/adt7410",
   "version": "0.0.1",
-  "main": "ADT7410.js",
+  "main": "adt7410.js",
   "license": "MIT",
   "repository": {
     "type": "git",

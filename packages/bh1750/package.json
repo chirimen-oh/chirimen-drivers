@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/bh1750",
   "version": "0.0.1",
-  "main": "BH1750.js",
+  "main": "bh1750.js",
   "license": "MIT",
   "repository": {
     "type": "git",

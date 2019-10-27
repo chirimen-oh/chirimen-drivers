@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/grove-light",
   "version": "0.0.1",
-  "main": "GROVELIGHT.js",
+  "main": "grovelight.js",
   "license": "MIT",
   "repository": {
     "type": "git",

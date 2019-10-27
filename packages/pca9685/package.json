@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/pca9685",
   "version": "0.0.1",
-  "main": "PCA9685.js",
+  "main": "pca9685.js",
   "license": "MIT",
   "repository": {
     "type": "git",

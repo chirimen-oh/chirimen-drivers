@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/neopixel-i2c",
   "version": "0.0.1",
-  "main": "NEOPIXEL_I2C.js",
+  "main": "neopixel_i2c.js",
   "license": "MIT",
   "repository": {
     "type": "git",

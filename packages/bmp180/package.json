@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/bmp180",
   "version": "0.0.1",
-  "main": "BMP180.js",
+  "main": "bmp180.js",
   "license": "MIT",
   "repository": {
     "type": "git",

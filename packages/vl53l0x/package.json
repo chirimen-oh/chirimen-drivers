@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/vl53l0x",
   "version": "0.0.1",
-  "main": "VL53L0X.js",
+  "main": "vl53l0x.js",
   "license": "MIT",
   "repository": {
     "type": "git",
