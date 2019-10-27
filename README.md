@@ -25,7 +25,7 @@
 - @chirimen/bme280
 - @chirimen/bmp180
 - @chirimen/bmp280
-- @chirimen/canzasi-blink
+- @chirimen/canzasi
 - @chirimen/mpu6050
 - @chirimen/mpu6500
 - @chirimen/neopixel-i2c
