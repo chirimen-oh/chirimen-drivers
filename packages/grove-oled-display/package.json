@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/grove-oled-display",
   "version": "0.0.1",
-  "main": "oleddisplay.js",
+  "main": "grove-oled-display.js",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/grove-accelerometer",
   "version": "0.0.1",
-  "main": "groveaccelerometer.js",
+  "main": "grove-accelerometer.js",
   "license": "MIT",
   "repository": {
     "type": "git",

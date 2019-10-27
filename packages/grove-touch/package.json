@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/grove-touch",
   "version": "0.0.1",
-  "main": "grovetouch.js",
+  "main": "grove-touch.js",
   "license": "MIT",
   "repository": {
     "type": "git",

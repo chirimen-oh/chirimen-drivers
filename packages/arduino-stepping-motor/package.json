@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/arduino-stepping-motor",
   "version": "0.0.1",
-  "main": "steppingmotor.js",
+  "main": "arduino-stepping-motor.js",
   "license": "MIT",
   "repository": {
     "type": "git",
