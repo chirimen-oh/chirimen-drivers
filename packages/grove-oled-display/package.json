@@ -1,0 +1,13 @@
+{
+  "name": "@chirimen/grove-oled-display",
+  "version": "0.0.1",
+  "main": "OledDisplay.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@chirimen/pcf8591",
+  "version": "0.0.1",
+  "main": "PCF8591.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
