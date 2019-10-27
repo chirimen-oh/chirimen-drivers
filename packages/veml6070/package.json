@@ -2,6 +2,7 @@
   "name": "@chirimen/veml6070",
   "version": "0.0.1",
   "main": "veml6070.js",
+  "module": "veml6070.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

@@ -2,6 +2,7 @@
   "name": "@chirimen/s11059",
   "version": "0.0.1",
   "main": "s11059.js",
+  "module": "s11059.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

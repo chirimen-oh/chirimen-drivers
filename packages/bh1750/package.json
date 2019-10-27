@@ -2,6 +2,7 @@
   "name": "@chirimen/bh1750",
   "version": "0.0.1",
   "main": "bh1750.js",
+  "module": "bh1750.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

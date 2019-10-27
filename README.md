@@ -34,8 +34,24 @@
 - @chirimen/sht30
 - @chirimen/tcs34725
 
-## Release
+## Build all packages
+
+### Yarn
 
 ```sh
-npm i && npm run release
+yarn && yarn workspaces run build
+```
+
+## Release
+
+### Yarn
+
+```sh
+yarn release
+```
+
+### npm
+
+```sh
+npm run release
 ```

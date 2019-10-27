@@ -2,6 +2,7 @@
   "name": "@chirimen/mpu6050",
   "version": "0.0.1",
   "main": "mpu6050.js",
+  "module": "mpu6050.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }

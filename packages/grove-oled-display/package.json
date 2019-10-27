@@ -2,6 +2,7 @@
   "name": "@chirimen/grove-oled-display",
   "version": "0.0.1",
   "main": "grove-oled-display.js",
+  "module": "grove-oled-display.mjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,5 +11,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
   }
 }
