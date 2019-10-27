@@ -1,6 +1,7 @@
 {
   "name": "@chirimen/s11059",
   "version": "0.0.1",
+  "description": "Driver for S11059 with WebI2C",
   "main": "s11059.js",
   "module": "s11059.mjs",
   "license": "MIT",
