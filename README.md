@@ -2,37 +2,37 @@
 
 ## Verified official drivers
 
-- @chirimen-raspi/chirimen-driver-i2c-ads1015@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-adt7410@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-gp2y0e03@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-grove-accelerometer@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-grove-gesture@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-grove-light@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-grove-oled-display@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-grove-touch@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-pca9685@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-s11059@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-veml6070@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-vl53l0x@1.0.0
+- @chirimen/ads1015
+- @chirimen/adt7410
+- @chirimen/gp2y0e03
+- @chirimen/grove-accelerometer
+- @chirimen/grove-gesture
+- @chirimen/grove-light
+- @chirimen/grove-oled-display
+- @chirimen/grove-touch
+- @chirimen/pca9685
+- @chirimen/s11059
+- @chirimen/veml6070
+- @chirimen/vl53l0x
 
 ## Contributed drivers
 
-- @chirimen-raspi/chirimen-driver-i2c-ads1x15@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-ak8963@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-amg8833@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-arduino-stepping-motor@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-bme280@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-bmp180@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-bmp280@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-canzasi-blink@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-mpu6050@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-mpu6500@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-neopixel-i2c@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-pca9685-pwm@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-pcf8591@1.0.0
-- @chirimen-raspi/chirimen-driver-i2c-bh1750
-- @chirimen-raspi/chirimen-driver-i2c-sht30
-- @chirimen-raspi/chirimen-driver-i2c-tcs34725
+- @chirimen/ads1x15
+- @chirimen/ak8963
+- @chirimen/amg8833
+- @chirimen/arduino-stepping-motor
+- @chirimen/bh1750
+- @chirimen/bme280
+- @chirimen/bmp180
+- @chirimen/bmp280
+- @chirimen/canzasi-blink
+- @chirimen/mpu6050
+- @chirimen/mpu6500
+- @chirimen/neopixel-i2c
+- @chirimen/pca9685-pwm
+- @chirimen/pcf8591
+- @chirimen/sht30
+- @chirimen/tcs34725
 
 ## Release
 

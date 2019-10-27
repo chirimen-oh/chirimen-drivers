@@ -1,0 +1,13 @@
+{
+  "name": "@chirimen/bmp280",
+  "version": "0.0.1",
+  "main": "BMP280.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
