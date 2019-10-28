@@ -12,3 +12,7 @@ Grove-Touch で使用されているチップは、MPR121 です。[ジェネリ
 
 - [GROVE - I2C タッチセンサ](https://www.switch-science.com/catalog/825/) x 1
 - [GROVE - 4 ピン-ジャンパメスケーブル](https://www.switch-science.com/catalog/1048/) x 1
+
+## 配線図
+
+![配線図](schematic.png)
