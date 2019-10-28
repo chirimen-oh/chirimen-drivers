@@ -74,6 +74,12 @@ Using ES Modules:
 import ADT7410 from "@chirimen/adt7410";
 ```
 
+## Documents
+
+- [CHIRIMEN Tutorial](https://r.chirimen.org/tutorial)
+- [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
+- [Web I2C API](https://browserobo.github.io/WebI2C/)
+
 ## Build all packages
 
 ### Using Yarn
