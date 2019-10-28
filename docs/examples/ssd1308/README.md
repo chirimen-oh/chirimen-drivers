@@ -1,7 +1,7 @@
 {% include translate.md %}
 {% include edit-on-codesandbox.md %}
 
-# SSD1308/SSD1306 Grove OLED Display OLED ディスプレイ
+# SSD1308 Grove OLED ディスプレイ
 
 ## 概要
 
