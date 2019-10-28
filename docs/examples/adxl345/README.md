@@ -12,3 +12,7 @@ Grove-Accelerometer で使用されているチップは、ADXL345 です。適�
 
 - [GROVE - I2C 三軸加速度センサ ADXL345 搭載](https://www.switch-science.com/catalog/972/) x 1
 - [GROVE - 4 ピン-ジャンパメスケーブル](https://www.switch-science.com/catalog/1048/) x 1
+
+## 配線図
+
+![配線図](schematic.png)

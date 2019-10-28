@@ -12,3 +12,7 @@ GP2Y0E03 よりも長距離(最長 2m)の測定ができます。（このセン
 
 - VL53L0X レーザー距離センサー x 1 ([Amazon.co.jp](https://www.amazon.co.jp/s/?field-keywords=VL53L0X), [秋月通商](http://akizukidenshi.com/catalog/g/gM-12590/))
 - ジャンパー（メス・メス）ケーブル x 4
+
+## 配線図
+
+![配線図](schematic.png)

@@ -12,3 +12,7 @@ I2C 接続の UV センサー（紫外線の強さを測定することができ
 
 - [VEML6070 搭載 UV センサボード](https://www.switch-science.com/catalog/2748/) x 1
 - ジャンパー（メス・メス）ケーブル x 4
+
+## 配線図
+
+![配線図](schematic.png)

@@ -12,3 +12,7 @@ Grove-OledDisplay で使用されているチップは SSD1308 です。近い�
 
 - [GROVE - I2C OLED ディスプレイ 128×64](https://www.switch-science.com/catalog/829/) x 1
 - [GROVE - 4 ピン-ジャンパメスケーブル](https://www.switch-science.com/catalog/1048/) x 1
+
+## 配線図
+
+![配線図](schematic.png)
