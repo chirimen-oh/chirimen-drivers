@@ -14,7 +14,3 @@
 - [GROVE - 4 ピン-ジャンパメスケーブル](https://www.switch-science.com/catalog/1048/) x 2
 - [GROVE - 4 ピンケーブル 20cm](https://www.switch-science.com/catalog/798/) x 1
 - [GROVE - I2C ハブ](https://www.switch-science.com/catalog/796/) x 1
-
-## 配線図
-
-![配線図](schematic.png)

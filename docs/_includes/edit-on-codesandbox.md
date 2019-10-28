@@ -1,1 +1,1 @@
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/{{ site.github.repository_nwo }}/tree/master/docs{{ page.dir }}?module=main.js)
+[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/{{ site.github.repository_nwo }}/tree/master/examples{{ page.path }}?module=main.js)
