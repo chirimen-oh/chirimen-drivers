@@ -1,1 +1,3 @@
 lang: ja
+include:
+  - CONTRIBUTING.md
