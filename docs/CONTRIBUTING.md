@@ -46,8 +46,8 @@ CHIRIMEN Drivers へのコントリビュート方法です。
 
 | ファイルパス              | 説明                                                        |
 | ------------------------- | ----------------------------------------------------------- |
-| /docs                     | [CHIRIMEN Drivers ドキュメント]({ site.url })のソースコード |
-| /docs/CONTRIBUTING.md     | [このドキュメント]({ page.url })のソースコード              |
+| /docs                     | [CHIRIMEN Drivers ドキュメント]({{ site.url }})のソースコード |
+| /docs/CONTRIBUTING.md     | [このドキュメント]({{ page.url }})のソースコード              |
 | /docs/examples            | /examples の説明のためのドキュメント                        |
 | (例) /docs/examples/hello | /examples/hello の説明                                      |
 | /examples                 | 本リポジトリのモジュールを用いたコードの例                  |
