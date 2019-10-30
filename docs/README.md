@@ -13,3 +13,7 @@
 ## 問題の報告
 
 [GitHub Issues]({{ site.github.issues_url }})
+
+## コントリビュート
+
+[Contribution Guide](CONTRIBUTING)
