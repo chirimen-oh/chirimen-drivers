@@ -2,7 +2,7 @@
 
 # Contribution Guide
 
-CHIRIMEN Drivers へのコントリビュート方法です。
+[CHIRIMEN Drivers]({{ site.github.repository_url }}) へのコントリビュート方法です。
 
 ## 行動規範
 
