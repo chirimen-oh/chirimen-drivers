@@ -2,6 +2,8 @@
 
 # CHIRIMEN Drivers ドキュメント
 
+[CHIRIMEN Drivers]({{ site.github.repository_url }}) のドキュメントです。
+
 ## サンプルコード
 
 [Examples](examples)
