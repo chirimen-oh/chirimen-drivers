@@ -35,6 +35,10 @@
 - [@chirimen/pcf8591](https://www.jsdelivr.com/package/npm/@chirimen/pcf8591)
 - [@chirimen/sht30](https://www.jsdelivr.com/package/npm/@chirimen/sht30)
 - [@chirimen/tcs34725](https://www.jsdelivr.com/package/npm/@chirimen/tcs34725)
+- [@chirimen/ina219](https://www.jsdelivr.com/package/npm/@chirimen/ina219)
+- [@chirimen/mlx90614](https://www.jsdelivr.com/package/npm/@chirimen/mlx90614)
+- [@chirimen/vl53l1x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l1x)
+
 
 ## Usage
 
