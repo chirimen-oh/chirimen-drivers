@@ -8,7 +8,7 @@
   // Long Range Laser ToF Distance Sensor
   // Ported from https://github.com/pololu/vl53l1x-arduino
   //
-  // Not VL53L1X driver
+  // Not VL53L0X driver
   // Programmed by Satoru Takagi
 
   var VL53L1X = function(i2cPort, slaveAddress) {
