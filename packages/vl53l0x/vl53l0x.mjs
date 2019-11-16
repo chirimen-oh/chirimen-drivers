@@ -252,7 +252,7 @@ VL53L0X.prototype = {
         // or (reference_spad_count) bits have already been enabled, so
         // zero this bit.
         ref_spad_map[1 + Math.floor(i / 8)] &= ~(1 << i % 8);
-      } else if ((ref_spad_map[1 + Math.floor(i / 8)] >> i % 8) & (0x1 > 0)) {
+      } else if (((ref_spad_map[1 + Math.floor(i / 8)] >> i % 8) & 0x01) > 0) {
         spads_enabled += 1;
       }
     }
@@ -449,11 +449,11 @@ VL53L0X.prototype = {
     // based on VL53L0X_GetSequenceStepEnables() from ST API
     var dc = this.devConst;
     var sequence_config = await this.i2cSlave.read8(dc._SYSTEM_SEQUENCE_CONFIG);
-    var tcc = (sequence_config >> 4) & (0x1 > 0);
-    var dss = (sequence_config >> 3) & (0x1 > 0);
-    var msrc = (sequence_config >> 2) & (0x1 > 0);
-    var pre_range = (sequence_config >> 6) & (0x1 > 0);
-    var final_range = (sequence_config >> 7) & (0x1 > 0);
+    var tcc = (sequence_config >> 4) & 0x01;
+    var dss = (sequence_config >> 3) & 0x01;
+    var msrc = (sequence_config >> 2) & 0x01;
+    var pre_range = (sequence_config >> 6) & 0x01;
+    var final_range = (sequence_config >> 7) & 0x01;
     return {
       tcc: tcc,
       dss: dss,
@@ -521,7 +521,7 @@ VL53L0X.prototype = {
     timeout_period_mclks,
     vcsel_period_pclks
   ) {
-    macro_period_ns = Math.floor(
+    var macro_period_ns = Math.floor(
       (2304 * vcsel_period_pclks * 1655 + 500) / 1000
     );
     return Math.floor(
@@ -787,7 +787,7 @@ VL53L0X.prototype = {
         period_pclks
       );
       if (enables & dc._SEQUENCE_ENABLE_PRE_RANGE) {
-        new_final_range_timeout_mclks += timeouts.pre_range_mclks;
+        new_final_range_timeout_mclks += st.pre_range_mclks;
       }
       await this._write_u16(
         dc._FINAL_RANGE_CONFIG_TIMEOUT_MACROP_HI,
