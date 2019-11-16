@@ -66,6 +66,7 @@ GROVELIGHT.prototype = {
     if (channel0 != 0) ratio1 = (channel1 << (RATIO_SCALE + 1)) / channel0;
     var ratio = (ratio1 + 1) >> 1;
 
+    var b, m;
     if (ratio >= 0 && ratio <= K1T) {
       b = B1T;
       m = M1T;
