@@ -1,0 +1,22 @@
+{
+  "name": "@chirimen/vl53l1x",
+  "version": "0.0.1",
+  "description": "Driver for VL53L1X with WebI2C",
+  "main": "vl53l1x.js",
+  "module": "vl53l1x.mjs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/vl53l1x"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "~1"
+  }
+}
