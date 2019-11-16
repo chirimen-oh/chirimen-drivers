@@ -85,7 +85,7 @@ import ADT7410 from "@chirimen/adt7410";
 ### Using Yarn
 
 ```sh
-yarn && yarn workspaces run build
+yarn && yarn build
 ```
 
 ## Release
