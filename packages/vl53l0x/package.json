@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/vl53l0x",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Driver for VL53L0X with WebI2C",
   "main": "vl53l0x.js",
   "module": "vl53l0x.mjs",
