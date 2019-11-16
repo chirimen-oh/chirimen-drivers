@@ -316,27 +316,15 @@ VL53L0X.prototype = {
     await this.i2cSlave.write8(0xff, 0x00);
     await this.i2cSlave.write8(0x80, 0x00);
     await this.i2cSlave.write8(dc._SYSRANGE_START, 0x01);
-    start = new Date().getTime();
     var ss = await this.i2cSlave.read8(dc._SYSRANGE_START);
     while ((ss & 0x01) > 0) {
       await this.sleep(30);
       ss = await this.i2cSlave.read8(dc._SYSRANGE_START);
-      /**
-            if self.io_timeout_s > 0 and \
-               (time.monotonic() - start) >= self.io_timeout_s:
-                raise RuntimeError('Timeout waiting for VL53L0X!')
-			**/
     }
-    start = new Date().getTime();
     var ris = await this.i2cSlave.read8(dc._RESULT_INTERRUPT_STATUS);
     while ((ris & 0x07) == 0) {
       await this.sleep(30);
       ris = await this.i2cSlave.read8(dc._RESULT_INTERRUPT_STATUS);
-      /**
-            if self.io_timeout_s > 0 and \
-               (time.monotonic() - start) >= self.io_timeout_s:
-                raise RuntimeError('Timeout waiting for VL53L0X!')
-			**/
     }
     // assumptions: Linearity Corrective Gain is 1000 (default)
     // fractional ranging is not enabled
@@ -352,17 +340,11 @@ VL53L0X.prototype = {
       dc._SYSRANGE_START,
       0x01 | (vhv_init_byte & 0xff)
     );
-    start = new Date().getTime();
     var ris = (await this.i2cSlave.read8(dc._RESULT_INTERRUPT_STATUS)) & 0x07;
     while (ris == 0x00) {
       await this.sleep(30);
       ris = (await this.i2cSlave.read8(dc._RESULT_INTERRUPT_STATUS)) & 0x07;
       //			console.log("ris:",ris);
-      /**
-            if self.io_timeout_s > 0 and \
-               (time.monotonic() - start) >= self.io_timeout_s:
-                raise RuntimeError('Timeout waiting for VL53L0X!')
-			**/
     }
     await this.i2cSlave.write8(dc._SYSTEM_INTERRUPT_CLEAR, 0x01);
     await this.i2cSlave.write8(dc._SYSRANGE_START, 0x00);
@@ -581,17 +563,11 @@ VL53L0X.prototype = {
     await this.i2cSlave.write8(0x94, 0x6b);
     await this.i2cSlave.write8(0x83, 0x00);
 
-    start = new Date().getTime();
     var ox83 = await this.i2cSlave.read8(0x83);
     while (ox83 == 0x00) {
       await this.sleep(30);
       ox83 = await this.i2cSlave.read8(0x83);
       // console.log("ox83:",ox83);
-      /**
-            if self.io_timeout_s > 0 and \
-               (time.monotonic() - start) >= self.io_timeout_s:
-                raise RuntimeError('Timeout waiting for VL53L0X!')
-			**/
     }
     await this.i2cSlave.write8(0x83, 0x01);
     var tmp = await this.i2cSlave.read8(0x92);
