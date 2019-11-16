@@ -111,8 +111,8 @@ GROVELIGHT.prototype = {
         if (this.ch0 / this.ch1 < 2 && this.ch0 > 4900) {
           reject("value range error");
         }
-        value = this.calculateLux(0, 0, 0);
-        //        console.log(this.ch0,this.ch1,value);
+        var value = this.calculateLux(0, 0, 0);
+        // console.log(this.ch0,this.ch1,value);
         await this.i2cSlave.write8(0x80, 0x00);
         resolve(value);
       }
