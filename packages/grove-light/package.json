@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/grove-light",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Driver for TSL2561 with WebI2C",
   "main": "grove-light.js",
   "module": "grove-light.mjs",
