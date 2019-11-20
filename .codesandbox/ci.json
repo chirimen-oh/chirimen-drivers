@@ -1,0 +1,18 @@
+{
+  "sandboxes": [
+    "/examples/ads1015",
+    "/examples/adt7410",
+    "/examples/adxl345",
+    "/examples/gp2y0e03",
+    "/examples/mpr121",
+    "/examples/multiple-devices",
+    "/examples/paj7620",
+    "/examples/pca9685",
+    "/examples/s11059",
+    "/examples/ssd1306",
+    "/examples/ssd1308",
+    "/examples/tsl2561",
+    "/examples/veml6070",
+    "/examples/vl53l0x"
+  ]
+}
