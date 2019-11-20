@@ -48,7 +48,7 @@
 | ファイルパス | 説明 |
 | ------------------------- | ------------------------------------------------------------- |
 | /docs | [CHIRIMEN Drivers ドキュメント](https://chirimen.org/chirimen-drivers/)のソースコード |
-| /docs/CONTRIBUTING.md | [このドキュメント]({{ url }})のソースコード |
+| /docs/CONTRIBUTING.md | このドキュメントのソースコード |
 | /docs/examples | /examples の説明のためのドキュメント |
 | (例) /docs/examples/hello | /examples/hello の説明 |
 | /examples | 本リポジトリのモジュールを用いたコードの例 |
