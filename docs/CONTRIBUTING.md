@@ -22,6 +22,7 @@
 
 ```
 /
+├── .codesandbox/ci.json
 ├── LICENSE
 ├── README.md
 ├── docs
@@ -47,6 +48,7 @@
 {% assign url = page.url | absolute_url %}
 | ファイルパス | 説明 |
 | ------------------------- | ------------------------------------------------------------- |
+| /.codesandbox/ci.json | CodeSandbox CI のための設定ファイル |
 | /docs | [CHIRIMEN Drivers ドキュメント](https://chirimen.org/chirimen-drivers/)のソースコード |
 | /docs/CONTRIBUTING.md | このドキュメントのソースコード |
 | /docs/examples | /examples の説明のためのドキュメント |
