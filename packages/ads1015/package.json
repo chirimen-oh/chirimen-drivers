@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/ads1015",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0",
   "description": "Driver for ADS1015 with WebI2C",
   "main": "ads1015.js",
   "module": "ads1015.mjs",
