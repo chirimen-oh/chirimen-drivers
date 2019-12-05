@@ -36,6 +36,11 @@
 │   │   ├── package.json
 │   │   └── ...
 │   └── ...
+├── node-examples
+│   ├── hello
+│   │   ├── package.json
+│   │   └── ...
+│   └── ...
 ├── lerna.json
 ├── package.json
 └── packages
@@ -53,7 +58,8 @@
 | /docs/CONTRIBUTING.md | このドキュメントのソースコード |
 | /docs/examples | /examples の説明のためのドキュメント |
 | (例) /docs/examples/hello | /examples/hello の説明 |
-| /examples | 本リポジトリのモジュールを用いたコードの例 |
+| /examples | 本リポジトリのモジュールを用いたブラウザ用コードの例 |
+| /node-examples | 本リポジトリのモジュールを用いたNode.js用コードの例 |
 | /packages | 本リポジトリのモジュールのソースコード |
 
 ## 修正の送り方
