@@ -108,7 +108,6 @@
       }
     },
     init: async function(longRangeMode) {
-      console.log("Start Init");
       this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
       var dc = this.devConst;
       var init1 = [
@@ -225,7 +224,6 @@
       var si = await this._get_spad_info(); // .spad_count, .spad_is_aperture
       var spad_count = si.spad_count;
       var spad_is_aperture = si.spad_is_aperture;
-      // console.log(si);
       // The SPAD map (RefGoodSpadMap) is read by
       // VL53L0X_get_info_from_device() in the API, but the same data seems to
       // be more easily readable from GLOBAL_CONFIG_SPAD_ENABLES_REF_0 through
@@ -237,7 +235,6 @@
           dc._GLOBAL_CONFIG_SPAD_ENABLES_REF_0 + i
         );
       }
-      // console.log(ref_spad_map);
       await this.i2cSlave.write8(0xff, 0x01);
       await this.i2cSlave.write8(dc._DYNAMIC_SPAD_REF_EN_START_OFFSET, 0x00);
       await this.i2cSlave.write8(dc._DYNAMIC_SPAD_NUM_REQUESTED_REF_SPAD, 0x2c);
@@ -261,27 +258,23 @@
         }
       }
 
-      // console.log("ref_spad_map:",ref_spad_map);
       for (var i = 1; i < 7; i++) {
         await this.i2cSlave.write8(ref_spad_map[0], ref_spad_map[i]);
       }
       for (var i = 0; i < init1.length; i++) {
         await this.i2cSlave.write8(init1[i][0], init1[i][1]);
       }
-      // console.log("long ini competed");
 
       await this.i2cSlave.write8(dc._SYSTEM_INTERRUPT_CONFIG_GPIO, 0x04);
       var gpio_hv_mux_active_high = await this.i2cSlave.read8(
         dc._GPIO_HV_MUX_ACTIVE_HIGH
       );
-      // console.log("gpio_hv_mux_active_high:",gpio_hv_mux_active_high);
       await this.i2cSlave.write8(
         dc._GPIO_HV_MUX_ACTIVE_HIGH,
         gpio_hv_mux_active_high & ~0x10
       ); // active low
       await this.i2cSlave.write8(dc._SYSTEM_INTERRUPT_CLEAR, 0x01);
       this._measurement_timing_budget_us = await this.get_measurement_timing_budget();
-      // console.log("this._measurement_timing_budget_us:",this._measurement_timing_budget_us);
       await this.i2cSlave.write8(dc._SYSTEM_SEQUENCE_CONFIG, 0xe8);
       await this.set_measurement_timing_budget(
         this._measurement_timing_budget_us
@@ -298,10 +291,8 @@
         await this.set_signal_rate_limit(0.1);
         await this.setVcselPulsePeriod("VcselPeriodPreRange", 18);
         await this.setVcselPulsePeriod("VcselPeriodFinalRange", 14);
-        console.log("LongRangeModeSet end");
       }
 
-      console.log("init done!");
     },
     getRange: async function() {
       // Perform a single reading of the range for an object in front of
@@ -334,7 +325,6 @@
       // fractional ranging is not enabled
       var range_mm = await this._read_u16(dc._RESULT_RANGE_STATUS + 10);
       await this.i2cSlave.write8(dc._SYSTEM_INTERRUPT_CLEAR, 0x01);
-      console.log("Range:", range_mm, "[mm]");
       return range_mm;
     },
     _perform_single_ref_calibration: async function(vhv_init_byte) {
@@ -348,7 +338,6 @@
       while (ris == 0x00) {
         await this.sleep(30);
         ris = (await this.i2cSlave.read8(dc._RESULT_INTERRUPT_STATUS)) & 0x07;
-        //			console.log("ris:",ris);
       }
       await this.i2cSlave.write8(dc._SYSTEM_INTERRUPT_CLEAR, 0x01);
       await this.i2cSlave.write8(dc._SYSRANGE_START, 0x00);
@@ -357,10 +346,8 @@
       // The measurement timing budget in microseconds.
       var budget_us = 1910 + 960; // Start overhead + end overhead.
       var sse = await this._get_sequence_step_enables(); // tcc, dss, msrc, pre_range, final_range
-      // console.log("_get_sequence_step_enables:",sse);
       var st = await this._get_sequence_step_timeouts(sse.pre_range);
-      // msrc_dss_tcc_us, pre_range_us, final_range_us, _, _ = step_timeouts
-      // console.log("_get_sequence_step_timeouts:",st);
+      // msrc_dss_tcc_us, pre_range_us, final_range_us, _, _ = step_timeouts;
       if (sse.tcc) {
         budget_us += st.msrc_dss_tcc_us + 590;
       }
@@ -376,14 +363,12 @@
         budget_us += st.final_range_us + 550;
       }
       this._measurement_timing_budget_us = budget_us;
-      // console.log("budget_us:",budget_us);
       return budget_us;
     },
     set_measurement_timing_budget: async function(budget_us) {
-      //		console.log("set_measurement_timing_budget:",budget_us);
       var dc = this.devConst;
       if (budget_us < 20000) {
-        console.log("ERROR :", budget_us);
+        console.error("ERROR :", budget_us);
         return;
       }
       var used_budget_us = 1320 + 960; // Start (diff from get) + end overhead
@@ -410,7 +395,7 @@
         // will be set. Otherwise the remaining time will be applied to
         // the final range."
         if (used_budget_us > budget_us) {
-          console.log("Requested timeout too big.");
+          console.error("Requested timeout too big.");
           return;
         }
         var final_range_timeout_us = budget_us - used_budget_us;
@@ -440,7 +425,7 @@
     set_signal_rate_limit: async function(val) {
       var dc = this.devConst;
       if (val => 0.0 ) ; else {
-        console.log("ERROR set_signal_rate_limit:", val);
+        console.error("ERROR set_signal_rate_limit:", val);
         return;
       }
       // Convert to 16-bit 9.7 fixed point value from a float.
@@ -569,7 +554,6 @@
       while (ox83 == 0x00) {
         await this.sleep(30);
         ox83 = await this.i2cSlave.read8(0x83);
-        // console.log("ox83:",ox83);
       }
       await this.i2cSlave.write8(0x83, 0x01);
       var tmp = await this.i2cSlave.read8(0x92);
@@ -632,7 +616,6 @@
       var enables = await this.i2cSlave.read8(dc._SYSTEM_SEQUENCE_CONFIG);
       var sse = await this._get_sequence_step_enables(); // tcc, dss, msrc, pre_range, final_range
       var st = await this._get_sequence_step_timeouts(sse.pre_range); // msrc_dss_tcc_us, pre_range_us, final_range_us, final_range_vcsel_period_pclks, pre_range_mclks
-      //		console.log("vcsel_period_reg:",vcsel_period_reg,"  period_pclks:",period_pclks);
 
       // "Apply specific settings for the requested clock period"
       // "Re-calculate and apply timeouts, in macro periods"
@@ -802,7 +785,6 @@
       }
 
       // "Finally, the timing budget must be re-applied"
-      //		console.log(vcselPeriodType, "  set_measurement_timing_budget:",this._measurement_timing_budget_us);
       await this.set_measurement_timing_budget(
         this._measurement_timing_budget_us
       );
