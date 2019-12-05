@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/vl53l0x": "^1.0.0",
+    "@chirimen/vl53l0x": "^1.0.1",
     "node-web-i2c": "^1.0.0"
   }
 }
