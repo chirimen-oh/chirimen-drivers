@@ -1,3 +1,5 @@
+import S11059 from "https://unpkg.com/@chirimen/s11059?module";
+
 main();
 
 async function main() {
