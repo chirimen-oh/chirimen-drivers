@@ -1,3 +1,6 @@
+import ADS1015 from "https://unpkg.com/@chirimen/ads1015?module";
+
+
 main();
 
 async function main() {
@@ -15,7 +18,7 @@ async function main() {
       if (error.code != 4) {
         head.innerHTML = "ERROR";
       }
-      console.log("error: code:" + error.code + " message:" + error.message);
+      console.error("error: code:" + error.code + " message:" + error.message);
     }
     await sleep(100);
   }
