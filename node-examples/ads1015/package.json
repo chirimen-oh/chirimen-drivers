@@ -1,0 +1,9 @@
+{
+  "name": "i2c-ads1015-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/ads1015": "^1.0.1-alpha.0",
+    "node-web-i2c": "^1.1.1"
+  }
+}
