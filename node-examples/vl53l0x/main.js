@@ -3,7 +3,6 @@ const VL53L0X = require("@chirimen/vl53l0x");
 const { promisify } = require("util");
 const sleep = promisify(setTimeout)
 
-
 main();
 
 async function main() {

@@ -44,12 +44,10 @@
 
           await this.i2cSlave.writeByte(0x03);
           this.i2cSlave.readBytes(8).then((v)=>{
-  //          console.log("RH:"+v[0]+" RL:"+v[1]+" GH:"+v[2]+" GL:"+v[3]+" BH:"+v[4]+" GL:"+v[5]);
             var red = this.compose(v[0], v[1]);
             var green = this.compose(v[2], v[3]);
             var blue = this.compose(v[4], v[5]);
             var ir = this.compose(v[6], v[7]);
-  //          console.log("read ok!");
             resolve([red, green, blue,ir]);
 
           },(err)=>{
@@ -73,7 +71,6 @@
 
           await this.i2cSlave.writeByte(0x03);
           this.i2cSlave.readBytes(8).then((v)=>{
-  //          console.log("RH:"+v[0]+" RL:"+v[1]+" GH:"+v[2]+" GL:"+v[3]+" BH:"+v[4]+" GL:"+v[5]);
             var red_org = this.compose(v[0], v[1]);
             var green_org = this.compose(v[2], v[3] * 1.1);
             var blue_org = this.compose(v[4], v[5] * 2.6);
@@ -96,7 +93,6 @@
             var green8 = (green_org / gain_level) & 0xff;
             var blue8 = (blue_org / gain_level) & 0xff;
 
-  //          console.log("read ok!");
             resolve([red8, green8, blue8,gain_level]);
 
           },(err)=>{
