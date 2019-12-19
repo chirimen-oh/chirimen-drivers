@@ -8,11 +8,10 @@ ADS1015.prototype = {
   init: function(){
     return new Promise((resolve, reject) => {
       this.i2cPort.open(this.slaveAddress).then((i2cSlave) => {
-        console.log("ADS1015.init OK");
         this.i2cSlave = i2cSlave;
         resolve();
       },(err) => {
-        console.log("ADS1015.init() Error: "+error.message);
+        console.error("ADS1015.init() Error: "+error.message);
         reject(err);
       });
     });
@@ -21,7 +20,7 @@ ADS1015.prototype = {
     return new Promise((resolve, reject)=>{
       if(this.i2cSlave){
         if((channel > 3)||(channel < 0)){
-          console.log("ADS1015.read: channel error"+channel);
+          console.error("ADS1015.read: channel error"+channel);
           err.code = 5;
           reject(err.message);
         }
@@ -42,18 +41,17 @@ ADS1015.prototype = {
               var value = (vH | vL) >> 4;
               resolve(value);
             },(err) => {
-              console.log("ADS1015.read: read16(0) error"+err.message);
+              console.error("ADS1015.read: read16(0) error"+err.message);
               err.code = 3;
               reject(err.message);
             });
           },10);
         }, (err) => {
-          console.log("ADS1015.read: write16(0,config) error"+err.message);
+          console.error("ADS1015.read: write16(0,config) error"+err.message);
           err.code = 2;
           reject(err.message);
         });
       }else{
-        console.log("i2cSlave is gone.....");
         err.code = 1;
         reject(err.message);
       }
