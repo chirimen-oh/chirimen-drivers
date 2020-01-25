@@ -1,6 +1,9 @@
 // Ported from https://github.com/tuupola/micropython-mpu9250/blob/master/ak8963.py
 // by Satoru Takagi
 
+/** @param {number} ms Delay for a number of milliseconds. */
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 var AK8963 = function(i2cPort,slaveAddress){
 	this.devConst={
 		_WIA : (0x00),

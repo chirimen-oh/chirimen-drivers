@@ -2,7 +2,10 @@
 // ported from https://gist.github.com/oskar456/95c66d564c58361ecf9f
 // by Satoru Takagi
 
-var BH1750 = function(i2cPort,slaveAddress){
+/** @param {number} ms Delay for a number of milliseconds. */
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+var BH1750 = function (i2cPort, slaveAddress) {
 	this.digP = [];
 	this.i2cPort = i2cPort;
 	this.i2cSlave = null;

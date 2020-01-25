@@ -3,6 +3,9 @@
 // Ported from https://github.com/chrisb2/pi_ina219
 // Programmed by Satoru Takagi
 
+/** @param {number} ms Delay for a number of milliseconds. */
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 var INA219 = function(i2cPort, slaveAddress) {
   if (!slaveAddress) {
     slaveAddress = 0x40;
@@ -220,7 +223,7 @@ INA219.prototype = {
         this.__GAIN_VOLTS[gain]
       );
       await this._configure_gain(gain);
-      sleep(1);
+      await sleep(1);
     } else {
       console.log("Device limit reach, gain cannot be increased");
       throw "DeviceRangeError: " + this.__GAIN_VOLTS[gain];
