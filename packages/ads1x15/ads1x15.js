@@ -9,6 +9,9 @@
 	// 2018/12/22 Satoru Takagi
 	// 2019/10/01 Support Differential Mode
 
+	/** @param {number} ms Delay for a number of milliseconds. */
+	const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 	var ADS1x15 = function(i2cPort,slaveAddress){
 		this.i2cPort = i2cPort;
 		this.slaveAddress = slaveAddress;
@@ -36,9 +39,9 @@
 				console.log("set amplifier to +-" + this.amplifierTable[this.amplifierConf]);
 				var i2cSlave = await this.i2cPort.open(this.slaveAddress);
 				this.i2cSlave = i2cSlave;
-			} catch(err){
+			} catch(error){
 				console.log("ADS1015.init() Error: "+error.message);
-				throw Error( err );
+				throw Error(error);
 			}
 		},
 		read: async function(channel){
