@@ -342,7 +342,6 @@ INA219.prototype = {
       if (sign) {
         register_value = 0xffff0000 | register_value;
       }
-    } else {
     }
     return register_value;
   },
