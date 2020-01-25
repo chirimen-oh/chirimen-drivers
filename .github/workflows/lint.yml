@@ -1,0 +1,14 @@
+name: lint
+on: pull_request
+jobs:
+  main:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with: { node-version: 12 }
+      - run: yarn
+      - run: yarn lint-report
+        continue-on-error: true
+      - uses: ataylorme/eslint-annotate-action@1.0.4
+        with: { repo-token: "${{ secrets.GITHUB_TOKEN }}" }
