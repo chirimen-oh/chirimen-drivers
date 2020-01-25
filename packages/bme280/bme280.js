@@ -40,11 +40,11 @@
 		getCalibParam: async function(){
 			var calib = [];
 			var dat;
-			for ( var ra = 0x88 ; ra <= 0x88+24 ; ra++ ){
+			for (let ra = 0x88; ra <= 0x88 + 24; ra++){
 				dat = await this.i2cSlave.read8(ra);
 				calib.push(dat);
 			}
-			for ( var ra = 0xE1 ; ra <= 0xE1+7 ; ra++ ){
+			for (let ra = 0xE1; ra <= 0xE1 + 7; ra++){
 				dat = await this.i2cSlave.read8(ra);
 				calib.push(dat);
 			}
@@ -94,7 +94,6 @@
 		compensate_P: function(adc_P){
 			var t_fine = this.t_fine;
 			var digP = this.digP;
-			var pressure = 0.0;
 
 			var v1 = (t_fine / 2.0) - 64000.0;
 			var v2 = (((v1 / 4.0) * (v1 / 4.0)) / 2048) * digP[5];
