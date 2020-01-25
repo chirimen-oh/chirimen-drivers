@@ -80,7 +80,6 @@
 		compensate_P: function(adc_P){
 			var t_fine = this.t_fine;
 			var digP = this.digP;
-			var pressure = 0.0;
 
 			var v1 = (t_fine / 2.0) - 64000.0;
 			var v2 = (((v1 / 4.0) * (v1 / 4.0)) / 2048) * digP[5];
