@@ -43,10 +43,10 @@ AMG8833.prototype = {
 	},
 	readData: async function(){
 		var tdata = [];
-		for ( var i =0; i<4 ;i++){
+		for (let i = 0; i < 4; i++){
 			await this.i2cSlave.writeBytes([0x80+i*0x20]);
 			var bdata = await this.i2cSlave.readBytes(32);
-			for ( var j=0;j<16;j++){
+			for (let j = 0; j < 16; j++){
 				var tVal = bdata[j*2] +  bdata[j*2+1]*256;
 				var temperature;
 				if ( tVal > 0x200){
@@ -59,10 +59,10 @@ AMG8833.prototype = {
 		}
 
 		var ans =[];
-		for(var i=0;i<8;i++){
+		for (let i = 0; i < 8; i++){
 			var msg="";
 			var ansR =[];
-			for(var j=0;j<8;j++){
+			for (let j = 0; j < 8; j++){
 				msg = msg +","+tdata[i*8+j].toFixed(2);
 				ansR.push(tdata[i*8+j]);
 			}
