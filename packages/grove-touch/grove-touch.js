@@ -4,7 +4,9 @@
   (global = global || self, global.GroveTouch = factory());
 }(this, (function () { 'use strict';
 
-  function GroveTouch(i2cPort,address){
+  // @ts-check
+
+  function GroveTouch(i2cPort, address) {
     this.i2cPort=i2cPort;
     this.i2cSlave= null;
     this.slaveAddress= address;
@@ -24,9 +26,7 @@
           await this.i2cSlave.write8(0x31,0xff);
           await this.i2cSlave.write8(0x32,0x02);
           for(var i=0;i<12*2;i+=2){
-  //          console.log(i);
             var address = 0x41+i;
-  //          console.log(address);
             await this.i2cSlave.write8(address,0x0f);
             await this.i2cSlave.write8(address+1,0x0a);
           }
@@ -42,7 +42,6 @@
           reject("i2cSlave Address does'nt yet open!");
         }else{
           this.i2cSlave.read16(0x00).then((v)=>{
-  //          console.log(v);
             var array = [];
             for(var cnt = 0;cnt < 12;cnt ++){
               array.push(((v & (1 << cnt))!=0)?true:false);

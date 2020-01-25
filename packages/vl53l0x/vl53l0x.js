@@ -587,12 +587,8 @@
       var data = ((MSB << 8) + LSB) / 128.0;
       return data;
     },
-    getSVal: function(val) {
-      if (val & 0x8000) {
-        return (-val ^ 0xffff) + 1;
-      } else {
-        return val;
-      }
+    getSVal: function (val) {
+      return new Int16Array([val])[0];
     },
     setVcselPulsePeriod: async function(vcselPeriodType, period_pclks) {
       // for longRangeMode init()

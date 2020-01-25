@@ -118,7 +118,6 @@
             reject("value range error");
           }
           var value = this.calculateLux(0, 0, 0);
-          // console.log(this.ch0,this.ch1,value);
           await this.i2cSlave.write8(0x80, 0x00);
           resolve(value);
         }
