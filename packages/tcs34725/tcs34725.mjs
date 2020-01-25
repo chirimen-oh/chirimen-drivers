@@ -44,11 +44,9 @@ TCS34725.prototype = {
 		this._active = false;
 		this.integration_time(2.4);
 		var sensor_id = await this.sensor_id();
-		console.log("TCS34725 sensor_id: 0x",sensor_id.toString(16));
 	},
 
 	active: async function(value){
-//		console.log("active:",value);
 		if (value == undefined ){
 			return this._active;
 		}
@@ -93,11 +91,11 @@ TCS34725.prototype = {
 				break;
 			}
 		}
-		if ( index == -1 ){
-			console.log("gain must be 1, 4, 16 or 60");
-			return ( false );
+		if (index == -1) {
+			console.error("gain must be 1, 4, 16 or 60");
+			return false;
 		}
-        this.i2cSlave.write8(this._REGISTER_CONTROL | this._COMMAND_BIT, index);
+    await this.i2cSlave.write8(this._REGISTER_CONTROL | this._COMMAND_BIT, index);
 	},
 	_valid: async function(){
 		var v = await this.i2cSlave.read8(this._REGISTER_STATUS | this._COMMAND_BIT);
@@ -139,24 +137,6 @@ TCS34725.prototype = {
 			lux: y
 		};
 	},
-	/**
-	readData: async function(){
-		await this.i2cSlave.write8(0x2C, 0x06); // High repeatability measurement
-		await sleep(100); // wait for measurement?
-		var mdata = await this.i2cSlave.readBytes(6); // prev data..
-		console.log("rawData:",mdata);
-		// cTemp MSB, cTemp LSB, cTemp CRC, Humididty MSB, Humidity LSB, Humidity CRC
-		cTemp = ((((mdata[0] * 256.0) + mdata[1]) * 175) / 65535.0) - 45; // celsius
-		fTemp = cTemp * 1.8 + 32; // f
-		humidity = 100 * (mdata[3] * 256 + mdata[4]) / 65535.0;
-//		console.log("t:",cTemp," h:",humidity);
-		return {
-			humidity: humidity,
-			temperature: cTemp
-		}
-
-	}
-	**/
 };
 
 export default TCS34725;

@@ -19,15 +19,10 @@ var AMG8833 = function(i2cPort,slaveAddress){
 AMG8833.prototype = {
 	init: async function(){
 		this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-		console.log("init ok:"+this.i2cSlave);
 		await this.setup();
 	},
-	getSVal: function(val){
-		if ( val & 0x8000 ){
-			return (( -val ^ 0xFFFF) + 1);
-		} else {
-			return ( val );
-		}
+	getSVal: function (val) {
+		return new Int16Array([val])[0];
 	},
 	setup: async function(){
 
@@ -44,9 +39,7 @@ AMG8833.prototype = {
 		await this.i2cSlave.write8(0x1F,0x00);
 
 		// get sensorTemperature
-		var sensorTemp = await this.i2cSlave.read16(0x0E);
-
-		console.log("sensorTemperature[deg]:",sensorTemp*0.0625);
+		await this.i2cSlave.read16(0x0E);
 	},
 	readData: async function(){
 		var tdata = [];
@@ -74,7 +67,6 @@ AMG8833.prototype = {
 				ansR.push(tdata[i*8+j]);
 			}
 			ans.push(ansR);
-//			console.log(msg);
 		}
 
 		return ( ans );

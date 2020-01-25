@@ -19,7 +19,6 @@ var BME280 = function(i2cPort,slaveAddress){
 BME280.prototype = {
 	init: async function(){
 		this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-		console.log("init ok:"+this.i2cSlave);
 		await this.setup();
 		await this.getCalibParam();
 	},
@@ -43,7 +42,6 @@ BME280.prototype = {
 			dat = await this.i2cSlave.read8(ra);
 			calib.push(dat);
 		}
-//		console.log(calib);
 		var digT = this.digT;
 		var digP = this.digP;
 		var digH = this.digH;
@@ -66,15 +64,9 @@ BME280.prototype = {
 		digH.push(getSVal((calib[28]<< 4) | (0x0F & calib[29])));
 		digH.push(getSVal((calib[30]<< 4) | ((calib[29] >> 4) & 0x0F)));
 		digH.push(getSVal( calib[31] ));
-		console.log(digT,digP,digH);
-//		console.log(getSVal(digT[1]),getSVal(digT[2]),getSVal(digP[1]),getSVal(digP[2]),getSVal(digP[3]),getSVal(digP[4]),getSVal(digP[5]),getSVal(digP[6]),getSVal(digP[7]),getSVal(digP[8]));
 	},
-	getSVal: function(val){
-		if ( val & 0x8000 ){
-			return (( -val ^ 0xFFFF) + 1);
-		} else {
-			return ( val );
-		}
+	getSVal: function (val) {
+		return new Int16Array([val])[0];
 	},
 	setup: async function(){
 		var osrs_t = 1; //Temperature oversampling x 1
@@ -117,8 +109,6 @@ BME280.prototype = {
 		v1 = (digP[8] * (((pressure / 8.0) * (pressure / 8.0)) / 8192.0)) / 4096;
 		v2 = ((pressure / 4.0) * digP[7]) / 8192.0;
 		pressure = pressure + ((v1 + v2 + digP[6]) / 16.0)  ;
-
-//		console.log( "pressure : ", (pressure/100)," hPa");
 		return (pressure);
 	},
 	compensate_T: function(adc_T){
@@ -128,7 +118,6 @@ BME280.prototype = {
 		var v2 = (adc_T / 131072.0 - digT[0] / 8192.0) * (adc_T / 131072.0 - digT[0] / 8192.0) * digT[2];
 		t_fine = v1 + v2;
 		var temperature = t_fine / 5120.0;
-//		console.log( "temperature : ",(temperature)," degrees celsius" );
 		return (temperature);
 	},
 	compensate_H: function(adc_H){
@@ -146,7 +135,6 @@ BME280.prototype = {
 		} else if ( var_h < 0.0){
 			var_h = 0.0;
 		}
-//		console.log( "humidity : ", (var_h)," %");
 		return ( var_h );
 	},
 	readData: async function(){
