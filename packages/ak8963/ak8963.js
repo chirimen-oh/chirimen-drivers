@@ -67,11 +67,9 @@
 
 			this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 			var whoamiVal = await this.i2cSlave.read8(cs._WIA);
-			if ( whoamiVal ==0x48){
-				console.log("This device is AK8963 magnetometer");
-			} else {
-				console.log("This device is NOT Supported...");
-				return(null);
+			if (whoamiVal !== 0x48) {
+				console.error("This device is NOT Supported...");
+				return null;
 			}
 
 			// Sensitivity adjustement values
@@ -96,8 +94,6 @@
 			} else {
 				this._so = cs._SO_14BIT;
 			}
-			console.log("init AK8963 ok:  this._adjustement :",this._adjustement ,"  this._so:",this._so ,"  this.cs:",cs);
-
 		},
 		readData: async function(){
 			var cs = this.devConst;
@@ -105,7 +101,6 @@
 			var mx = this.getVal(await this.i2cSlave.read16(cs._HXL)); // read16 is little endian
 			var my = this.getVal(await this.i2cSlave.read16(cs._HYL));
 			var mz = this.getVal(await this.i2cSlave.read16(cs._HZL));
-			console.log(mx,my,mz);
 			await this.i2cSlave.read8(cs._ST2); // Enable updating readings again
 
 			//Apply factory axial sensitivy adjustements
@@ -135,28 +130,15 @@
 				z: mz
 			}
 		},
-		getVal: function( w ){
-			// Convert to signed integer while maintaining endianness
-			//  console.log("getVal:",w.toString(16),"   :" , w);
-			//  console.log("getVal:",w);
-			// var l = w >>> 8;
-			// var b = w & 0xff;
-			// var v = l + ( b << 8 );
-			var v = w;
-	//		console.log("Val:",w.toString(16),b.toString(16),l.toString(16),v.toString(16),b,l,v);
-			if ( v >= 0x8000 ){
-				return ( - ((65535 - v ) + 1 ) );
-			} else {
-				return(v);
-			}
+		getVal: function (val) {
+			return new Int16Array([val])[0];
 		},
 		calibrate: async function (count, delay){
-			console.log("start calibrate: ");
-			if ( !count){
-				count=128;
+			if (!count) {
+				count = 128;
 			}
-			if ( !delay){
-				delay=100;
+			if (!delay) {
+				delay = 100;
 			}
 
 			this._offset = [0, 0, 0];
@@ -180,7 +162,6 @@
 				minz = Math.min(minz, reading.z);
 				maxz = Math.max(maxz, reading.z);
 				count -= 1;
-				console.log(count," : " , reading);
 			}
 
 			// Hard iron correction
@@ -202,11 +183,7 @@
 			var scale_z = avg_delta / avg_delta_z;
 
 			this._scale = [scale_x, scale_y, scale_z];
-
-			console.log("end calibrate: offset:",this._offset,"  scale:",this._scale );
-	//		return self._offset, self._scale
 		}
-
 	};
 
 	return AK8963;

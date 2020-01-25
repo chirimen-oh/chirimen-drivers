@@ -17,12 +17,7 @@
 
   ADS1015.prototype = {
     init: async function () {
-      try {
-        this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-      } catch (error) {
-        console.error("ADS1015.init() Error: " + error.message);
-        throw error;
-      }
+      this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
     },
     read: async function (channel) {
       if (this.i2cSlave == null) {
@@ -42,19 +37,9 @@
       var confL = config >> 8;
       var confH = config & 0x00ff;
       var data = confH | confL;
-
-      try {
-        await this.i2cSlave.write16(0x01, data);
-      } catch (error) {
-        throw new Error("ADS1015.read: write16(0,config) error" + error.message);
-      }
+      await this.i2cSlave.write16(0x01, data);
       await sleep(10);
-      var v;
-      try {
-        v = await this.i2cSlave.read16(0);
-      } catch (error) {
-        throw new Error("ADS1015.read: read16(0) error" + error.message);
-      }
+      var v = await this.i2cSlave.read16(0);
       var vH = (v & 0x00ff) << 8;
       var vL = (v >> 8) & 0x00ffff;
       var value = (vH | vL) >> 4;

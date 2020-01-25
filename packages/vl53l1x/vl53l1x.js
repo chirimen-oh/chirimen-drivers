@@ -1224,9 +1224,7 @@
       this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
       await sleep(10);
       if ((await this.readReg16Bit(this.IDENTIFICATION__MODEL_ID)) != 0xeacc) {
-        throw "Failed to find expected ID register values. Check wiring!";
-      } else {
-        console.log("OK! Is VL53L1X");
+        throw new Error("Failed to find expected ID register values. Check wiring!");
       }
 
       // VL53L1_software_reset() begin
@@ -1265,7 +1263,6 @@
       this.osc_calibrate_val = await this.readReg16Bit(
         this.RESULT__OSC_CALIBRATE_VAL
       );
-      //		console.log(this.fast_osc_frequency,this.osc_calibrate_val);
 
       // VL53L1_DataInit() end
 
@@ -1364,8 +1361,6 @@
         (await this.readReg16Bit(this.MM_CONFIG__OUTER_OFFSET_MM)) * 4
       );
 
-      console.log("VL53L1X Init completed : ");
-
       return true;
     },
 
@@ -1428,7 +1423,6 @@
   	  }
   		**/
       await this.readResults();
-      //		console.log("readResults end:",this.results);
       if (!this.calibrated) {
         this.setupManualCalibration();
         this.calibrated = true;
@@ -1439,7 +1433,6 @@
       await this.getRangingData();
 
       await this.writeReg(this.SYSTEM__INTERRUPT_CLEAR, 0x01); // sys_interrupt_clear_range
-      //console.log("STAT:",this.ranging_data.range_status);
 
       return this.ranging_data.range_mm;
     },
@@ -1452,7 +1445,6 @@
 
       switch (mode) {
         case "short":
-          console.log("ShortMode");
           // from VL53L1_preset_mode_standard_ranging_short_range()
           // timing config
           await this.writeReg(this.RANGE_CONFIG__VCSEL_PERIOD_A, 0x07);
@@ -1465,7 +1457,6 @@
           await this.writeReg(this.SD_CONFIG__INITIAL_PHASE_SD1, 6); // tuning parm default
           break;
         case "medium":
-          console.log("MediumMode");
           // from VL53L1_preset_mode_standard_ranging()
           // timing config
           await this.writeReg(this.RANGE_CONFIG__VCSEL_PERIOD_A, 0x0b);
@@ -1478,7 +1469,6 @@
           await this.writeReg(this.SD_CONFIG__INITIAL_PHASE_SD1, 10); // tuning parm default
           break;
         case "long": // long
-          console.log("LongMode");
           // from VL53L1_preset_mode_standard_ranging_long_range()
           // timing config
           await this.writeReg(this.RANGE_CONFIG__VCSEL_PERIOD_A, 0x0f);
@@ -1496,7 +1486,6 @@
       }
       // reapply timing budget
       await this.setMeasurementTimingBudget(budget_us);
-      //		console.log("budget_us:",budget_us);
       // save mode so it can be returned by getDistanceMode()
       this.distance_mode = mode;
       return true;
@@ -1623,15 +1612,12 @@
     checkForDataReady: async function() {
       var IntPol = await this.getInterruptPolarity();
       var Temp = await this.readReg(this.GPIO__TIO_HV_STATUS);
-      //		console.log("IntPol,GPIO__TIO_HV_STATUS : ",IntPol,Temp);
       var isDataReady = (Temp & 1) == IntPol ? 1 : 0;
       return isDataReady;
     },
     getInterruptPolarity: async function() {
       var Temp = await this.readReg(this.GPIO_HV_MUX__CTRL);
       Temp = Temp & 0x10;
-      //		console.log("getInterruptPolarity:",Temp);
-      //		return( !(Temp>>4));
       var ans;
       if (Temp >> 4 == 0) {
         ans = 1;
@@ -1674,14 +1660,11 @@
     },
     // read measurement results into buffer
     readResults: async function() {
-      //console.log("readResults:",(this.RESULT__RANGE_STATUS >>> 8).toString(16), (this.RESULT__RANGE_STATUS & 0xFF).toString(16));
       await this.i2cSlave.writeBytes([
         this.RESULT__RANGE_STATUS >>> 8,
         this.RESULT__RANGE_STATUS & 0xff
       ]);
       var readData = await this.i2cSlave.readBytes(17);
-
-      //console.log("readData:",readData);
 
       //  last_status = Wire.endTransmission();
 
@@ -1891,22 +1874,18 @@
     readReg: async function(addr16) {
       await this.i2cSlave.writeBytes([addr16 >>> 8, addr16 & 0xff]);
       var dat = await this.i2cSlave.readBytes(1);
-      //		console.log("readReg16Bit:",addr16.toString(16),ans.toString(16),":",(addr16 >>> 8).toString(16), (addr16 & 0xFF).toString(16), (dat[0]).toString(16), (dat[1]).toString(16));
       return dat;
     },
     readReg16Bit: async function(addr16) {
       await this.i2cSlave.writeBytes([addr16 >>> 8, addr16 & 0xff]);
       var dat = await this.i2cSlave.readBytes(2);
       var ans = (dat[0] << 8) + dat[1];
-      //		console.log("readReg16Bit:",addr16.toString(16),ans.toString(16),":",(addr16 >>> 8).toString(16), (addr16 & 0xFF).toString(16), (dat[0]).toString(16), (dat[1]).toString(16));
       return ans;
     },
     writeReg: async function(addr16, dat8) {
-      //		console.log("writeReg8Bit:",addr16.toString(16),dat16.toString(16),":",(addr16 >>> 8).toString(16), (addr16 & 0xFF).toString(16), (dat16>>>8).toString(16), (dat16 & 0xFF).toString(16));
       await this.i2cSlave.writeBytes([addr16 >>> 8, addr16 & 0xff, dat8 & 0xff]);
     },
     writeReg16Bit: async function(addr16, dat16) {
-      //		console.log("writeReg16Bit:",addr16.toString(16),dat16.toString(16),":",(addr16 >>> 8).toString(16), (addr16 & 0xFF).toString(16), (dat16>>>8).toString(16), (dat16 & 0xFF).toString(16));
       await this.i2cSlave.writeBytes([
         addr16 >>> 8,
         addr16 & 0xff,
@@ -1915,7 +1894,6 @@
       ]);
     },
     writeReg32Bit: async function(addr16, dat32) {
-      //		console.log("writeReg32Bit:",addr16.toString(16),dat32.toString(16),":",(addr16 >>> 8).toString(16), (addr16 & 0xFF).toString(16), (dat32>>>24).toString(16), (dat32>>>16 & 0xFF).toString(16) , (dat32>>>8 & 0xFF).toString(16), (dat32 & 0xFF).toString(16));
       await this.i2cSlave.writeBytes([
         addr16 >>> 8,
         addr16 & 0xff,

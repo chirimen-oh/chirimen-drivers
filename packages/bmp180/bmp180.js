@@ -20,13 +20,11 @@
 		} else {
 			this.slaveAddress = 0x77;
 		}
-		console.log("this.slaveAddress:",this.slaveAddress);
 	};
 
 	BMP180.prototype = {
 		init: async function(){
 			this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-			console.log("init ok:"+this.i2cSlave);
 			await this.getCalibParam();
 		},
 		getSVal: function(val){
@@ -40,7 +38,6 @@
 			var calib = [];
 			var dat;
 			var getSVal = this.getSVal;
-			console.log("getCalibParam");
 			for ( var ra = 0xAA ; ra <= 0xAA+21 ; ra++ ){
 				dat = await this.i2cSlave.read8(ra);
 				calib.push(dat);
@@ -59,7 +56,6 @@
 			M.push(getSVal((calib[16] << 8) | calib[17])); // MB M[0]
 			M.push(getSVal((calib[18] << 8) | calib[19])); // MC
 			M.push(getSVal((calib[20] << 8) | calib[21])); // MD
-			console.log(AC,B,M);
 		},
 		readAndCalcB5: async function(){
 			var AC = this.AC;
@@ -97,7 +93,6 @@
 				dat = await this.i2cSlave.read8(ra);
 				data.push(dat);
 			}
-			console.log("data:",data);
 			var UP = (( (data[0]<<16 ) | (data[1] << 8 ) | data[2]) >> (8 - mode) ) ;
 
 			// Calibration for Pressure

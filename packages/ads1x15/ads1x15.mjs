@@ -17,26 +17,18 @@ var ADS1x15 = function(i2cPort,slaveAddress){
 
 ADS1x15.prototype = {
 	init: async function(isAds1115, amplifierSelection){
-		try{
-			if ( isAds1115 ){
-				this.convertDelay = 80; // 測定が安定するには・・・
-				this.bitShift = 0;
-				console.log("ADS1115.init (16bitADC) OK");
-			} else {
-				this.convertDelay = 10; // 本来は1ms?
-				this.bitShift = 4;
-				console.log("ADS1015.init (12bitADC) OK");
-			}
-			if ( amplifierSelection != undefined  && amplifierSelection>=0 && amplifierSelection < 8){
-				this.amplifierConf = amplifierSelection;
-			}
-			console.log("set amplifier to +-" + this.amplifierTable[this.amplifierConf]);
-			var i2cSlave = await this.i2cPort.open(this.slaveAddress);
-			this.i2cSlave = i2cSlave;
-		} catch(error){
-			console.log("ADS1015.init() Error: "+error.message);
-			throw Error(error);
+		if (isAds1115) {
+			this.convertDelay = 80; // 測定が安定するには・・・
+			this.bitShift = 0;
+		} else {
+			this.convertDelay = 10; // 本来は1ms?
+			this.bitShift = 4;
 		}
+		if (amplifierSelection != undefined && amplifierSelection >= 0 && amplifierSelection < 8) {
+			this.amplifierConf = amplifierSelection;
+		}
+		var i2cSlave = await this.i2cPort.open(this.slaveAddress);
+		this.i2cSlave = i2cSlave;
 	},
 	read: async function(channel){
 		var config;
@@ -50,25 +42,23 @@ ADS1x15.prototype = {
 			config= 0x3000;
 		} else{
 			channel = Number(channel);
-			if((channel > 3)||(channel < 0)){
-				console.log("ADS1x15.read: channel error "+channel);
-				throw Error("ADS1x15.read: channel error "+channel);
+			if ((channel < 0) || (3 < channel)) {
+				throw new Error("ADS1x15.read: channel error " + channel);
 			} else {
 				channel = Number(channel);
 				config = 0x4000 + (channel * 0x1000); // ADC channel
 			}
 		}
-		if(!this.i2cSlave){
-			console.log("i2cSlave is gone.....");
-			throw Error("i2cSlave is gone.....");
+
+		if (this.i2cSlave == null) {
+			throw new Error("i2cSlave is gone.....");
 		}
-//      	console.log((config).toString(16));
+
 		config |= 0x8000; // Set 'start single-conversion' bit
 		config |= 0x0003; // Disable the comparator (default val)
 		config |= 0x0080; // 1600SPS(samples per second)(ADS1015),128SPS(ADS1115)  (default)
 		config |= 0x0100; // Power-down single-shot mode (default)
 		config |= (this.amplifierConf << 9);  // 0x0200; // +/-4.096V range = Gain 1
-//      	console.log((this.amplifierConf << 9).toString(16));
 		var confL = config >> 8;
 		var confH = config & 0x00ff;
 		var data = confH | confL;
@@ -84,22 +74,10 @@ ADS1x15.prototype = {
 		var vL = (v >> 8)& 0x00ffff;
 		var value = (vH | vL) >> this.bitShift;
 		this.prevCh = channel;
-		return ( value );
+		return value;
 	},
-	getSignedVal: function( w ){
-		// Convert 16bit two's complement data to signed integer while maintaining endianness
-		//  console.log("getSignedVal:",w.toString(16),"   :" , w);
-		//  console.log("getSignedVal:",w);
-		// var l = w >>> 8;
-		// var b = w & 0xff;
-		// var v = l + ( b << 8 );
-		var v = w;
-//		console.log("Val:",w.toString(16),b.toString(16),l.toString(16),v.toString(16),b,l,v);
-		if ( v >= 0x8000 ){
-			return ( - ((65535 - v ) + 1 ) );
-		} else {
-			return(v);
-		}
+	getSignedVal: function (val) {
+		return new Int16Array([val])[0];
 	},
 	getVoltage: function(rawVal){
 		return ( this.amplifierTable[this.amplifierConf] * 2 * this.getSignedVal(rawVal) / ( this.bitShift == 4 ? 0x0fff : 0xffff ) );
