@@ -4,10 +4,14 @@
   (global = global || self, global.MLX90614 = factory());
 }(this, (function () { 'use strict';
 
+  // @ts-check
   // MLX90614 pyro termometer driver for CHIRIMEN raspberry pi3
   // Temperature and Humidity I2C Sensor
   // based on https://github.com/CRImier/python-MLX90614/blob/master/mlx90614.py
   // Programmed by Satoru Takagi
+
+  /** @param {number} ms Delay for a number of milliseconds. */
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   var MLX90614 = function(i2cPort, slaveAddress) {
     if (!slaveAddress) {

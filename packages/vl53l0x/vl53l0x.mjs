@@ -84,7 +84,7 @@ var VL53L0X = function(i2cPort, slaveAddress, io_timeout_s) {
 
 VL53L0X.prototype = {
   _decode_timeout: function(val) {
-    return (val & 0xff) * math.pow(2.0, (val & 0xff00) >> 8) + 1;
+    return (val & 0xff) * Math.pow(2.0, (val & 0xff00) >> 8) + 1;
   },
   _encode_timeout: function(timeout_mclks) {
     var timeout_mclks = timeout_mclks & 0xffff;
@@ -526,10 +526,6 @@ VL53L0X.prototype = {
       Math.floor(timeout_period_us * 1000 + Math.floor(macro_period_ns / 2)) /
       macro_period_ns
     );
-  },
-  _decode_timeout: function(val) {
-    // format: "(LSByte * 2^MSByte) + 1"
-    return (val & 0xff) * Math.pow(2.0, (val & 0xff00) >> 8) + 1;
   },
   _get_spad_info: async function() {
     // # Get reference SPAD count and type, returned as a 2-tuple of

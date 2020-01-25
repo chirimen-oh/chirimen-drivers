@@ -4,6 +4,7 @@
   (global = global || self, global.OledDisplay = factory());
 }(this, (function () { 'use strict';
 
+  // @ts-check
   // Source : http://wiki.seeedstudio.com/wiki/Grove_-_OLED_Display_128*64
 
   const OLED_CONST = {
@@ -184,12 +185,12 @@
       this.registerQueue(OLED_CONST.commandMode,Brightness);
     },
     setHorizontalModeQ: function(){
-      this.addressingMode = horizontalMode;
+      this.addressingMode = OLED_CONST.horizontalMode;
       this.registerQueue(OLED_CONST.commandMode,0x20);
       this.registerQueue(OLED_CONST.commandMode,0);
     },
     setPageModeQ: function(){
-      this.addressingMode = pageMode;
+      this.addressingMode = OLED_CONST.pageMode;
       this.registerQueue(OLED_CONST.commandMode,0x20);
       this.registerQueue(OLED_CONST.commandMode,0x02);
     },
