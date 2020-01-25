@@ -1339,8 +1339,7 @@ VL53L1X.prototype = {
       mode = "medium";
     } else {
       mode = mode.toLowerCase();
-      if (mode == "long" || mode == "medium" || mode == "short") {
-      } else {
+      if (!(mode == "long" || mode == "medium" || mode == "short")) {
         mode = "medium";
       }
     }
