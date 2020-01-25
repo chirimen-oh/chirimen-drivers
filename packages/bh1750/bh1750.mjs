@@ -81,16 +81,16 @@ BH1750.prototype = {
         await this._set_mode(0x60 | (this.mtreg & 0x1f));
         await this.power_down();
 	},
-    get_result: async function(){
-        // Return current measurement result in lx.
-        var data = await this.i2cSlave.readBytes(2);
-        var count = data[1]  | data[0]<<8;
-        var mode2coeff =  1;
-    	if (this.mode  == this.ONE_TIME_HIGH_RES_MODE_2 || this.mode  == this.CONTINUOUS_HIGH_RES_MODE_2){
-    		mode2coeff = 2;
-    	}
-        var ratio = 1/(1.2 * (this.mtreg/69.0) * mode2coeff);
-    	return (ratio*count);
+	get_result: async function () {
+		// Return current measurement result in lx.
+		var data = await this.i2cSlave.readBytes(2);
+		var count = data[1] | data[0] << 8;
+		var mode2coeff =  1;
+		if (this.mode == this.ONE_TIME_HIGH_RES_MODE_2 || this.mode == this.CONTINUOUS_HIGH_RES_MODE_2) {
+			mode2coeff = 2;
+		}
+		var ratio = 1 / (1.2 * (this.mtreg / 69.0) * mode2coeff);
+		return (ratio * count);
 	},
 	wait_for_result: async function(additional){
 		if ( !additional ){
