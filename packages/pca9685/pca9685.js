@@ -54,7 +54,11 @@
         });
       });
     },
-    setServo: function(servoPort,angle){
+    setServo: async function (servoPort, angle) {
+      if (this.i2cSlave == null) {
+        throw new Error("i2cSlave is not open yet.");
+      }
+
       const portStart = 8;
       const portInterval = 4;
       const freq = 61; // Hz
@@ -86,16 +90,9 @@
       var tickH = (( ticks >> 8 ) & 0x0f);
       var tickL = (ticks & 0xff);
 
-      return new Promise(async (resolve, reject)=>{
-        if(this.i2cSlave == null){
-          reject("i2cSlave Address does'nt yet open!");
-        }else{
-          var pwm = Math.round(portStart + servoPort * portInterval);
-          await this.i2cSlave.write8( pwm + 1, tickH);
-          await this.i2cSlave.write8( pwm, tickL);
-          resolve();
-        }
-      });
+      var pwm = Math.round(portStart + servoPort * portInterval);
+      await this.i2cSlave.write8(pwm + 1, tickH);
+      await this.i2cSlave.write8(pwm, tickL);
     }
   };
 
