@@ -10,7 +10,6 @@ var INA219 = function(i2cPort, slaveAddress) {
   if (!slaveAddress) {
     slaveAddress = 0x40;
   }
-  console.log("slaveAddress:", slaveAddress);
   this.i2cPort = i2cPort;
   this.i2cSlave = null;
   this.slaveAddress = slaveAddress;
@@ -93,7 +92,6 @@ var INA219 = function(i2cPort, slaveAddress) {
 INA219.prototype = {
   init: async function(shunt_ohms, max_expected_amps) {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-    console.log("i2cSlave:", this.i2cSlave);
     if (shunt_ohms) {
       this._shunt_ohms = shunt_ohms;
     } else {
@@ -138,13 +136,6 @@ INA219.prototype = {
         this._gain = this.GAIN_1_40MV;
       }
     }
-
-    console.log(
-      "gain set to ",
-      this.__GAIN_VOLTS[this._gain],
-      " auto_gain_enabled:",
-      this._auto_gain_enabled
-    );
 
     await this._calibrate(
       this.__BUS_RANGE[voltage_range],
@@ -202,7 +193,6 @@ INA219.prototype = {
   },
   _determine_gain: function(max_expected_amps) {
     var shunt_v = max_expected_amps * this._shunt_ohms;
-    console.log("_determine_gain:", shunt_v, this.__GAIN_VOLTS[3]);
     if (shunt_v > this.__GAIN_VOLTS[3]) {
       throw " ValueError: " + this.__RNG_ERR_MSG + "," + max_expected_amps;
     }
@@ -210,11 +200,9 @@ INA219.prototype = {
     while (this.__GAIN_VOLTS[gainIndex] > shunt_v) {
       --gainIndex;
     }
-    //		console.log("gain:",gainIndex+1);
     return gainIndex + 1; // 多分これで良いと思うんだけど・・・
   },
   _increase_gain: async function() {
-    console.log(this.__LOG_MSG_3);
     var gain = await this._read_gain();
     if (gain < this.__GAIN_VOLTS.length - 1) {
       gain = gain + 1;
@@ -225,8 +213,7 @@ INA219.prototype = {
       await this._configure_gain(gain);
       await sleep(1);
     } else {
-      console.log("Device limit reach, gain cannot be increased");
-      throw "DeviceRangeError: " + this.__GAIN_VOLTS[gain];
+      throw new Error("DeviceRangeError: " + this.__GAIN_VOLTS[gain]);
     }
   },
   _configure: async function(voltage_range, gain, bus_adc, shunt_adc) {
@@ -243,51 +230,33 @@ INA219.prototype = {
     shunt_volts_max,
     max_expected_amps
   ) {
-    console.log(
-      this.__LOG_MSG_2,
-      bus_volts_max,
-      shunt_volts_max,
-      max_expected_amps
-    );
     var max_possible_amps = shunt_volts_max / this._shunt_ohms;
-    console.log("max possible current:", max_possible_amps);
 
     this._current_lsb = this._determine_current_lsb(
       max_expected_amps,
       max_possible_amps
     );
-    console.log("current LSB: [A/bit]:", this._current_lsb);
 
     this._power_lsb = this._current_lsb * 20;
-    console.log("power LSB: [W/bit]", this._power_lsb);
-
     var max_current = this._current_lsb * 32767;
-    console.log("max current before overflow: ", max_current);
 
     var max_shunt_voltage = max_current * this._shunt_ohms;
-    console.log(
-      "max shunt voltage before overflow: mV ;",
-      max_shunt_voltage * 1000
-    );
 
     var calibration = Math.trunc(
       this.__CALIBRATION_FACTOR / (this._current_lsb * this._shunt_ohms)
     );
-    console.log("calibration: ", calibration);
     await this._calibration_register(calibration);
   },
   _determine_current_lsb: function(max_expected_amps, max_possible_amps) {
-    //		console.log("_determine_current_lsb:",max_expected_amps, max_possible_amps);
     var current_lsb;
     if (max_expected_amps) {
       if (max_expected_amps > max_possible_amps) {
-        throw "ValueError: " +
+        throw new Error("ValueError: " +
           this.__AMP_ERR_MSG +
           " : " +
           max_expected_amps +
           " : " +
-          max_possible_amps;
-        console.log("max expected current: ", max_expected_amps);
+          max_possible_amps);
       }
       if (max_expected_amps < max_possible_amps) {
         current_lsb = max_expected_amps / this.__CURRENT_LSB_FACTOR;
@@ -304,7 +273,6 @@ INA219.prototype = {
     return current_lsb;
   },
   _configuration_register: async function(register_value) {
-    console.log("configuration: ", register_value);
     await this.__write_register(this.__REG_CONFIG, register_value);
   },
   _read_configuration: async function() {
@@ -319,7 +287,6 @@ INA219.prototype = {
   _read_gain: async function() {
     var configuration = await this._read_configuration();
     var gain = (configuration & 0x1800) >> this.__PG0;
-    console.log("gain is currently: V", this.__GAIN_VOLTS[gain]);
     return gain;
   },
   _configure_gain: async function(gain) {
@@ -327,10 +294,8 @@ INA219.prototype = {
     configuration = configuration & 0xe7ff;
     await this._configuration_register(configuration | (gain << this.__PG0));
     this._gain = gain;
-    console.log("gain set to: V:", this.__GAIN_VOLTS[gain]);
   },
   _calibration_register: async function(register_value) {
-    console.log("calibration: ", register_value);
     await this.__write_register(this.__REG_CALIBRATION, register_value);
   },
   _has_current_overflow: async function() {
@@ -359,13 +324,6 @@ INA219.prototype = {
     }
   },
   __write_register: async function(register, register_value) {
-    var register_bytes = this.__to_bytes(register_value);
-    console.log(
-      "write register :",
-      register,
-      register_value,
-      register_value.toString(2)
-    );
     // write16 is little endian
     var bl = register_value & 0xff;
     var bh = register_value >>> 8;
@@ -386,7 +344,6 @@ INA219.prototype = {
       }
     } else {
     }
-    //		console.log("read register :", register, register_value,register_value.toString(2));
     return register_value;
   },
   __to_bytes: function(register_value) {
