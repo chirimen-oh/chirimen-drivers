@@ -4,6 +4,7 @@
 	(global = global || self, global.MPU6500 = factory());
 }(this, (function () { 'use strict';
 
+	// @ts-check
 	// MPU 6500 driver
 	// Ported from
 	// https://raw.githubusercontent.com/tuupola/micropython-mpu9250/master/mpu6500.py
@@ -97,44 +98,28 @@
 
 			this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 			var whoamiVal = await this.i2cSlave.read8(cs._WHO_AM_I);
-			if ( whoamiVal ==0x70){
-				console.log("This device is MPU6500");
-			} else if ( whoamiVal ==0x71){
-				console.log("This device is MPU9250");
-			} else if ( whoamiVal ==0x73){
-				// https://github.com/kriswiner/MPU9250/issues/47
-				console.log("This device is MPU9255");
-			} else {
-				console.log("This device is NOT Supported...");
-				return(null);
+			if (whoamiVal == 0x70) ; else if (whoamiVal == 0x71) ; else if (whoamiVal == 0x73) ; else {
+				console.error("This device is NOT Supported...");
+				return null;
 			}
 
 			cs._accel_so = await this._accel_fs(accel_fs);
 			cs._gyro_so = await this._gyro_fs(gyro_fs);
 			cs._accel_sf = accel_sf;
 			cs._gyro_sf = gyro_sf;
-			console.log("init ok:"+this.i2cSlave+ "  constant:",cs);
-
-	//		await this.i2cSlave.write8(0x6B, 0x00); // clear power management
 
 			// # Enable I2C bypass to access for MPU9250 magnetometer access.
 			var chr = await this.i2cSlave.read8(cs._INT_PIN_CFG);
-			console.log("bypass:",chr);
 			chr &= ~cs._I2C_BYPASS_MASK; //# clear I2C bits
 			chr |= cs._I2C_BYPASS_EN;
-			console.log("bypass_:",chr);
 			await this.i2cSlave.write8(cs._INT_PIN_CFG, chr);
-			console.log("init2 ok:");
-
 		},
 
 		_accel_fs: async function(value){
 			var cs = this.devConst;
 			await this.i2cSlave.write8(cs._ACCEL_CONFIG, value);
-			console.log("_accel_fs:",value);
 			//# Return the sensitivity divider
 			if (cs.ACCEL_FS_SEL_2G == value){
-				console.log("ACCEL_FS_SEL_2G::sel");
 				return cs._ACCEL_SO_2G;
 			} else if (cs.ACCEL_FS_SEL_4G == value){
 				return cs._ACCEL_SO_4G;
@@ -175,7 +160,6 @@
 			var x = this.getVal(await this.i2cSlave.read16(cs._ACCEL_XOUT_H));
 			var y = this.getVal(await this.i2cSlave.read16(cs._ACCEL_YOUT_H));
 			var z = this.getVal(await this.i2cSlave.read16(cs._ACCEL_ZOUT_H));
-			console.log("acc:",x,y,z,"  addr:",cs._ACCEL_XOUT_H,"  sosf:",so,sf);
 			return {
 				x: x / so * sf,
 				y: y / so * sf,
@@ -194,7 +178,6 @@
 			var x = this.getVal(await this.i2cSlave.read16(cs._GYRO_XOUT_H));
 			var y = this.getVal(await this.i2cSlave.read16(cs._GYRO_YOUT_H));
 			var z = this.getVal(await this.i2cSlave.read16(cs._GYRO_ZOUT_H));
-			console.log("gyr:",x,y,z,"  addr:",cs._GYRO_XOUT_H,"  sosf:",so,sf);
 			return {
 				x: x / so * sf,
 				y: y / so * sf,
@@ -205,12 +188,7 @@
 			var l = w >>> 8;
 			var b = w & 0xff;
 			var v = l + ( b << 8 );
-	//		console.log("Val:",w.toString(16),b.toString(16),l.toString(16),v.toString(16),b,l,v);
-			if ( v >= 0x8000 ){
-				return ( - ((65535 - v ) + 1 ) );
-			} else {
-				return(v);
-			}
+			return new Int16Array([v])[0];
 		}
 	};
 

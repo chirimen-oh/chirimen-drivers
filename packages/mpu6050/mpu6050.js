@@ -20,16 +20,13 @@
 	MPU6050.prototype = {
 		init: async function(){
 			this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-	//        console.log("init ok:"+this.i2cSlave);
 			await this.i2cSlave.write8(0x6b,0x00);
-			console.log("init ok:"+this.i2cSlave);
 		},
 		readTemp: async function(){
 			if(this.i2cSlave == null){
 				throw Error("i2cSlave Address does'nt yet open!");
 			}
 			var ans = await this.i2cSlave.read16(0x41);
-			console.log(ans);
 	//         var data = ((MSB << 8) + LSB)/128.0;
 			var temp = ans / 340 + 36.53;
 			return(temp);
@@ -39,7 +36,6 @@
 				throw Error("i2cSlave Address does'nt yet open!");
 			}
 			var ans = await this.i2cSlave.read16(0x41);
-	//		console.log("tmpW:",ans);
 			var temp = this.getVal(ans) / 340 + 36.53;
 			ans = await this.i2cSlave.read16(0x43);
 			var rx = this.getVal(ans) / 131;
@@ -53,7 +49,6 @@
 			var gy = this.getVal(ans) / 16384;
 			ans = await this.i2cSlave.read16(0x3f);
 			var gz = this.getVal(ans) / 16384;
-			console.log("t:",temp,"  rxyz:",rz,ry,rz,"  gxyz:",gx,gy,gz);
 			return({
 				temperature: temp,
 				gx: gx,
@@ -79,13 +74,8 @@
 		getVal: function( w ){
 			var l = w >>> 8;
 			var b = w & 0xff;
-			var v = l + ( b << 8 );
-	//		console.log("Val:",w.toString(16),b.toString(16),l.toString(16),v.toString(16),b,l,v);
-			if ( v >= 0x8000 ){
-				return ( - ((65535 - v ) + 1 ) );
-			} else {
-				return(v);
-			}
+			var v = l + (b << 8);
+			return new Int16Array([v])[0];
 		}
 	};
 

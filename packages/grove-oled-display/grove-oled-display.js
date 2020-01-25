@@ -209,9 +209,9 @@
         }
       }
     },
-    registerQueue: function(mode,param){
-      if(this.sequence != null){
-        console.log("OledDisplay.registerQueue(): error! (now playing)");
+    registerQueue: function (mode, param) {
+      if (this.sequence != null) {
+        console.error("OledDisplay.registerQueue(): error! (now playing)");
         return;
       }
       var obj = {mode: mode, param: param};
@@ -221,7 +221,6 @@
       return new Promise((resolve, reject) => {
         this.i2cPort.open(OLED_CONST.address).then((i2cSlave) =>{
           this.i2cSlave = i2cSlave;
-          console.log("i2cPort.open");
           this.initQ();
           this.playSequence().then(() => {resolve();});
         });
@@ -233,7 +232,7 @@
           reject("i2cSlave Address does'nt yet open!");
         }else{
   　　     if(this.sequence != null){
-     　      console.log("OledDisplay.playSequence(): error! (multiple call)");
+     　      console.error("OledDisplay.playSequence(): error! (multiple call)");
       　　　  reject();
       　   }
           this.sequence = setInterval(() => {
@@ -262,7 +261,6 @@
         if(this.i2cSlave == null){
           reject("i2cSlave Address does'nt yet open!");
         }else{
-          console.log("start clearDisplay");
           this.clearDisplayQ();
           this.playSequence().then(() => {resolve();});
         }
@@ -273,7 +271,6 @@
         if(this.i2cSlave == null){
           reject("i2cSlave Address does'nt yet open!");
         }else{
-          console.log("start drawString");
           this.drawStringQ(row,col);
           this.playSequence().then(() => {resolve();});
         }

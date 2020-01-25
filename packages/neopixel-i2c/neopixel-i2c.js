@@ -4,6 +4,7 @@
 	(global = global || self, global.NEOPIXEL_I2C = factory());
 }(this, (function () { 'use strict';
 
+	// @ts-check
 	// Driver for https://github.com/usedbytes/neopixel_i2c
 	// Programmed by Satoru Takagi
 
