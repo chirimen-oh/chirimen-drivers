@@ -11,6 +11,9 @@
   // Not VL53L0X driver
   // Programmed by Satoru Takagi
 
+  /** @param {number} ms Delay for a number of milliseconds. */
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
   var VL53L1X = function(i2cPort, slaveAddress) {
     if (!slaveAddress) {
       slaveAddress = 0x29;
@@ -1219,7 +1222,7 @@
   VL53L1X.prototype = {
     init: async function(mode, io_2v8) {
       this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-      sleep(10);
+      await sleep(10);
       if ((await this.readReg16Bit(this.IDENTIFICATION__MODEL_ID)) != 0xeacc) {
         throw "Failed to find expected ID register values. Check wiring!";
       } else {
@@ -1250,8 +1253,8 @@
       // VL53L1_DataInit() begin
       if (io_2v8) {
         await this.writeReg(
-          PAD_I2C_HV__EXTSUP_CONFIG,
-          (await this.readReg(PAD_I2C_HV__EXTSUP_CONFIG)) | 0x01
+          this.PAD_I2C_HV__EXTSUP_CONFIG,
+          (await this.readReg(this.PAD_I2C_HV__EXTSUP_CONFIG)) | 0x01
         );
       }
 
@@ -1495,7 +1498,7 @@
       await this.setMeasurementTimingBudget(budget_us);
       //		console.log("budget_us:",budget_us);
       // save mode so it can be returned by getDistanceMode()
-      distance_mode = mode;
+      this.distance_mode = mode;
       return true;
     },
 
@@ -1621,11 +1624,7 @@
       var IntPol = await this.getInterruptPolarity();
       var Temp = await this.readReg(this.GPIO__TIO_HV_STATUS);
       //		console.log("IntPol,GPIO__TIO_HV_STATUS : ",IntPol,Temp);
-      if ((Temp & 1) == IntPol) {
-        isDataReady = 1;
-      } else {
-        isDataReady = 0;
-      }
+      var isDataReady = (Temp & 1) == IntPol ? 1 : 0;
       return isDataReady;
     },
     getInterruptPolarity: async function() {
