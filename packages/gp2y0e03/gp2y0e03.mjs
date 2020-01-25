@@ -29,7 +29,7 @@ GP2Y0E03.prototype = {
         break;
       case 2:
         val = ((dist_h << 4) + dist_l) /64;
-	      break;
+      break;
       default:
         break;
       }
@@ -43,10 +43,10 @@ GP2Y0E03.prototype = {
       if(this.i2cSlave == null){
         reject("i2cSlave Address does'nt yet open!");
       }else{
-	      var shift = await this.i2cSlave.read8(0x35);  // Shift Bit
+        var shift = await this.i2cSlave.read8(0x35);  // Shift Bit
         var dist_h = await this.i2cSlave.read8(0x5e); // Distance[11:4]
         var dist_l = await this.i2cSlave.read8(0x5f); // Distance[3:0]
-	      var distance = this.compose(shift,dist_h,dist_l);
+        var distance = this.compose(shift,dist_h,dist_l);
         resolve(distance);
       }
     });
