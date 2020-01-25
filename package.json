@@ -8,10 +8,12 @@
     "packages/*"
   ],
   "devDependencies": {
+    "eslint": "~6",
     "lerna": "~3"
   },
   "scripts": {
     "build": "yarn workspaces run build",
-    "release": "lerna publish"
+    "release": "lerna publish",
+    "lint": "eslint --ext .mjs packages"
   }
 }
