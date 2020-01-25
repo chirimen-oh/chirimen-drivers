@@ -19,7 +19,6 @@ var BMP280 = function(i2cPort,slaveAddress){
 BMP280.prototype = {
 	init: async function(){
 		this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-		console.log("init ok:"+this.i2cSlave);
 		await this.setup();
 		await this.getCalibParam();
 	},
@@ -39,7 +38,6 @@ BMP280.prototype = {
 			dat = await this.i2cSlave.read8(ra);
 			calib.push(dat);
 		}
-//		console.log(calib);
 		var digT = this.digT;
 		var digP = this.digP;
 		var getSVal = this.getSVal;
@@ -55,15 +53,9 @@ BMP280.prototype = {
 		digP.push(getSVal((calib[19]<< 8) | calib[18]));
 		digP.push(getSVal((calib[21]<< 8) | calib[20]));
 		digP.push(getSVal((calib[23]<< 8) | calib[22]));
-		console.log(digT,digP);
-//		console.log(getSVal(digT[1]),getSVal(digT[2]),getSVal(digP[1]),getSVal(digP[2]),getSVal(digP[3]),getSVal(digP[4]),getSVal(digP[5]),getSVal(digP[6]),getSVal(digP[7]),getSVal(digP[8]));
 	},
-	getSVal: function(val){
-		if ( val & 0x8000 ){
-			return (( -val ^ 0xFFFF) + 1);
-		} else {
-			return ( val );
-		}
+	getSVal: function (val) {
+		return new Int16Array([val])[0];
 	},
 	setup: async function(){
 		var osrs_t = 1; //Temperature oversampling x 1
@@ -104,7 +96,6 @@ BMP280.prototype = {
 		v2 = ((pressure / 4.0) * digP[7]) / 8192.0;
 		pressure = pressure + ((v1 + v2 + digP[6]) / 16.0)  ;
 
-//		console.log( "pressure : ", (pressure/100)," hPa");
 		return (pressure);
 	},
 	compensate_T: function(adc_T){
@@ -113,8 +104,6 @@ BMP280.prototype = {
 		var v1 = (adc_T / 16384.0 - digT[0] / 1024.0) * digT[1];
 		var v2 = (adc_T / 131072.0 - digT[0] / 8192.0) * (adc_T / 131072.0 - digT[0] / 8192.0) * digT[2];
 		t_fine = v1 + v2;
-		var temperature = t_fine / 5120.0;
-//		console.log( "temperature : ",(temperature)," degrees celsius" );
 		return (temperature);
 	},
 	readData: async function(){

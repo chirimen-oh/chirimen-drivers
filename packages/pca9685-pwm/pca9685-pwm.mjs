@@ -20,7 +20,7 @@ PCA9685_PWM.prototype = {
     // angleRange : -angleRange to +angleRange degrees
 
     if (this.frequency) {
-      console.log("alredy initialised");
+      console.error("alredy initialised");
     }
     if (frequency) {
       this.frequency = frequency;
@@ -30,7 +30,7 @@ PCA9685_PWM.prototype = {
     var freq = Math.floor(25000000 / (4096 * this.frequency) - 1);
 
     if (freq < 0x03 || freq > 0xff) {
-      throw Error("Frequency should be between 24Hz to 1526Hz");
+      throw new Error("Frequency should be between 24Hz to 1526Hz");
     }
 
     var i2cSlave = await this.i2cPort.open(this.slaveAddress);
@@ -52,17 +52,16 @@ PCA9685_PWM.prototype = {
   },
   setPWM: async function(pwmPort, dutyRatio) {
     // dutyRatio : 0.0(OFF) .. 1.0(ON)
-    // console.log(pwmPort,angle)
     const portStart = 8;
     const portInterval = 4;
     if (this.i2cSlave == null) {
-      throw Error("i2cSlave Address does'nt yet open!");
+      throw new Error("i2cSlave Address does'nt yet open!");
     }
     if (pwmPort < 0 || pwmPort > 15) {
-      throw Error("PWM Port should be between 0 to 15");
+      throw new Error("PWM Port should be between 0 to 15");
     }
     if (dutyRatio < 0 || dutyRatio > 1) {
-      throw Error("dutyRatio should be between 0.0 to 1.0");
+      throw new Error("dutyRatio should be between 0.0 to 1.0");
     }
     var ticks = Math.floor(4095 * dutyRatio);
     var tickH = (ticks >> 8) & 0x0f;

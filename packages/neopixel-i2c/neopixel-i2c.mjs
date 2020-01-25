@@ -1,3 +1,4 @@
+// @ts-check
 // Driver for https://github.com/usedbytes/neopixel_i2c
 // Programmed by Satoru Takagi
 

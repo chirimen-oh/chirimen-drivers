@@ -30,7 +30,6 @@ var BH1750 = function (i2cPort, slaveAddress) {
 BH1750.prototype = {
 	init: async function(){
 		this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-		console.log("init ok:"+this.i2cSlave);
 		await this.power_down();
 		await this.set_sensitivity();
 	},
@@ -81,18 +80,15 @@ BH1750.prototype = {
         await this._set_mode(0x40 | (this.mtreg >> 5));
         await this._set_mode(0x60 | (this.mtreg & 0x1f));
         await this.power_down();
-//		console.log("mtreg:",this.mtreg);
 	},
     get_result: async function(){
         // Return current measurement result in lx.
         var data = await this.i2cSlave.readBytes(2);
         var count = data[1]  | data[0]<<8;
-//    	console.log("count:",count);
         var mode2coeff =  1;
     	if (this.mode  == this.ONE_TIME_HIGH_RES_MODE_2 || this.mode  == this.CONTINUOUS_HIGH_RES_MODE_2){
     		mode2coeff = 2;
     	}
-//    	console.log("mode2coeff:",mode2coeff);
         var ratio = 1/(1.2 * (this.mtreg/69.0) * mode2coeff);
     	return (ratio*count);
 	},
@@ -107,7 +103,6 @@ BH1750.prototype = {
 			basetime= 0.03;
 		}
 
-//		console.log("delay:",basetime * (this.mtreg/69.0) + additional,  ":  mode:",(this.mode).toString(16));
         await sleep(1000*(basetime * (this.mtreg/69.0) + additional));
 	},
 	do_measurement: async function(mode, additional_delay){

@@ -68,22 +68,18 @@ PAJ7620.prototype = {
     return new Promise((resolve, reject)=>{
       this.i2cPort.open(this.slaveAddress).then(async (i2cSlave)=>{
         this.i2cSlave = i2cSlave;
-        console.log("i2cPort.open");
         await this.i2cSlave.write8(0xef,0);  // BankSelect=0
         await this.i2cSlave.write8(0xef,0);  // BankSelect=0
 
         var v0 = await this.i2cSlave.read8(0,true);
         var v1 = await this.i2cSlave.read8(1,true);
         if((v0 != 0x20)||(v1 != 0x76)){
-          console.log("read error!");
           reject("init error :v0["+v0+"] v1["+v1+"]");
         }else{
           for(var cnt = 0;cnt <this.initRegisterArray.length;cnt ++){
-//          console.log("thread."+cnt);
             await this.i2cSlave.write8(this.initRegisterArray[cnt][0],this.initRegisterArray[cnt][1]);
           }
           await this.i2cSlave.write8(0xef,0);  // BankSelect=0
-//          console.log("thread2 end");
           resolve();
         }
       });
@@ -125,7 +121,6 @@ PAJ7620.prototype = {
             res = "----";
             break;
           } // switch(v)
-          console.log("res:"+res+" v:"+v);
           resolve(res);
         }).catch(reject);
       }

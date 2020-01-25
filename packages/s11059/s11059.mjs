@@ -1,4 +1,6 @@
-var S11059 = function(i2cPort,slaveAddress) {
+// @ts-check
+
+var S11059 = function (i2cPort, slaveAddress) {
   this.i2cPort = i2cPort;
   this.i2cSlave = null;
   this.slaveAddress = slaveAddress;

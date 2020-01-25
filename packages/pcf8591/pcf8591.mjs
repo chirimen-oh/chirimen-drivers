@@ -1,3 +1,4 @@
+// @ts-check
 // PCF8591 driver for CHIRIMEN raspberry pi3
 // 4ch 8bit ADC, 1ch 8bit DAC
 // CDS, Thermister, VR and a LED
@@ -28,9 +29,8 @@ PCF8591.prototype = {
 		}
 	},
 	setDAC: async function(vl){
-		var dav = Math.floor( 0xff * vl / this.refV ) & 0xff;
-		console.log("setDAC:",dav);
-		await this.i2cSlave.write8( 0x40, dav );
+		var dav = Math.floor(0xff * vl / this.refV) & 0xff;
+		await this.i2cSlave.write8(0x40, dav);
 	}
 };
 
