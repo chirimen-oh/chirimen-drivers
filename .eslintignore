@@ -1,0 +1,6 @@
+node_modules/
+# NOTE: UMDフォーマットのファイルなので無視
+/packages/**/*.js
+# TODO: CommonJSに対応するかCommonJSを取り除く
+/examples/
+/node-examples/

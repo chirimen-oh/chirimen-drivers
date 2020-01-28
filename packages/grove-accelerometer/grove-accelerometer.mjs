@@ -20,39 +20,33 @@ GROVEACCELEROMETER.prototype = {
       });
     });
   },
-  read: function(){
-    return new Promise(async (resolve, reject)=>{
-      if(this.i2cSlave == null){
-        reject("i2cSlave Address does'nt yet open!");
-      }else{
-        await this.i2cSlave.writeByte(0x32);
-        this.i2cSlave.readBytes(6).then((v)=>{
-          var x = v[0] + (v[1] << 8);
-          if(x & (1 << 16 - 1)){x = x - (1<<16);}
-          var y = v[2] + (v[3] << 8);
-          if(y & (1 << 16 - 1)){y = y - (1<<16);}
-          var z = v[4] + (v[5] << 8);
-          if(z & (1 << 16 - 1)){z = z - (1<<16);}
+  read: async function () {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
 
-          x = x*this.SCALE_MULTIPLIER;
-          y = y*this.SCALE_MULTIPLIER;
-          z = z*this.SCALE_MULTIPLIER;
-          x = x*this.EARTH_GRAVITY_MS2;
-          y = y*this.EARTH_GRAVITY_MS2;
-          z = z*this.EARTH_GRAVITY_MS2;
+    await this.i2cSlave.writeByte(0x32);
+    var v = await this.i2cSlave.readBytes(6);
+    var x = v[0] + (v[1] << 8);
+    if(x & (1 << 16 - 1)){x = x - (1<<16);}
+    var y = v[2] + (v[3] << 8);
+    if(y & (1 << 16 - 1)){y = y - (1<<16);}
+    var z = v[4] + (v[5] << 8);
+    if(z & (1 << 16 - 1)){z = z - (1<<16);}
 
-          x=Math.round(x*10000)/10000;
-          y=Math.round(y*10000)/10000;
-          z=Math.round(z*10000)/10000;
+    x = x*this.SCALE_MULTIPLIER;
+    y = y*this.SCALE_MULTIPLIER;
+    z = z*this.SCALE_MULTIPLIER;
+    x = x*this.EARTH_GRAVITY_MS2;
+    y = y*this.EARTH_GRAVITY_MS2;
+    z = z*this.EARTH_GRAVITY_MS2;
 
-          var values = {"x": x, "y": y, "z": z};
-          resolve(values);
-        },(err)=>{
-          reject(err);
+    x = Math.round(x * 10000) / 10000;
+    y = Math.round(y * 10000) / 10000;
+    z = Math.round(z * 10000) / 10000;
 
-        });
-      }
-    });
+    var values = {"x": x, "y": y, "z": z};
+    return values;
   }
 };
 

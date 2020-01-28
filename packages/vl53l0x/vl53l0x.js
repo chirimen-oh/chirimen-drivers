@@ -92,8 +92,8 @@
     _decode_timeout: function(val) {
       return (val & 0xff) * Math.pow(2.0, (val & 0xff00) >> 8) + 1;
     },
-    _encode_timeout: function(timeout_mclks) {
-      var timeout_mclks = timeout_mclks & 0xffff;
+    _encode_timeout: function(mclks) {
+      var timeout_mclks = mclks & 0xffff;
       var ls_byte = 0;
       var ms_byte = 0;
       if (timeout_mclks > 0) {
@@ -230,7 +230,7 @@
       // _6, so read it from there.
       var ref_spad_map = Array(7);
       ref_spad_map[0] = dc._GLOBAL_CONFIG_SPAD_ENABLES_REF_0;
-      for (var i = 0; i < 6; i++) {
+      for (let i = 0; i < 6; i++) {
         ref_spad_map[i + 1] = await this.i2cSlave.read8(
           dc._GLOBAL_CONFIG_SPAD_ENABLES_REF_0 + i
         );
@@ -247,7 +247,7 @@
       }
       var spads_enabled = 0;
 
-      for (var i = 0; i < 48; i++) {
+      for (let i = 0; i < 48; i++) {
         if (i < first_spad_to_enable || spads_enabled == spad_count) {
           // This bit is lower than the first one that should be enabled,
           // or (reference_spad_count) bits have already been enabled, so
@@ -258,10 +258,10 @@
         }
       }
 
-      for (var i = 1; i < 7; i++) {
+      for (let i = 1; i < 7; i++) {
         await this.i2cSlave.write8(ref_spad_map[0], ref_spad_map[i]);
       }
-      for (var i = 0; i < init1.length; i++) {
+      for (let i = 0; i < init1.length; i++) {
         await this.i2cSlave.write8(init1[i][0], init1[i][1]);
       }
 
@@ -424,7 +424,7 @@
     },
     set_signal_rate_limit: async function(val) {
       var dc = this.devConst;
-      if (val => 0.0 ) ; else {
+      if (0.0 <= val && val <= 511.99) ; else {
         console.error("ERROR set_signal_rate_limit:", val);
         return;
       }

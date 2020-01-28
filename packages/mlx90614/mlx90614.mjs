@@ -43,7 +43,6 @@ MLX90614.prototype = {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
   },
   read_reg: async function(reg_addr) {
-    var err = null;
     for (var i = 0; i < this.comm_retries; i++) {
       try {
         // read16 is little endian too
@@ -51,7 +50,6 @@ MLX90614.prototype = {
         return rdata;
         //				return this.bus.read_word_data(this.address, reg_addr)
       } catch (e) {
-        var err = e;
         // "Rate limiting" - sleeping to prevent problems with sensor
         // when requesting data too quickly
         await sleep(this.comm_sleep_amount);

@@ -4,12 +4,14 @@
   (global = global || self, global.GROVELIGHT = factory());
 }(this, (function () { 'use strict';
 
-  var GROVELIGHT = function(i2cPort, slaveAddress) {
+  // @ts-check
+
+  var GROVELIGHT = function (i2cPort, slaveAddress) {
     this.i2cPort = i2cPort;
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
+    this.ch0 = null;
     this.ch1 = null;
-    this.ch2 = null;
   };
 
   GROVELIGHT.prototype = {
@@ -35,7 +37,7 @@
         );
       });
     },
-    calculateLux: function(iGain, tInt, iType) {
+    calculateLux: function() {
       const chScale = 0x7517 << 4;
       const LUX_SCALE = 14;
       const CH_SCALE = 10;
@@ -105,23 +107,21 @@
       var lux = temp >> LUX_SCALE;
       return lux;
     },
-    read: function() {
-      return new Promise(async (resolve, reject) => {
-        if (this.i2cSlave == null) {
-          reject("i2cSlave Address does'nt yet open!");
-        } else {
-          await this.i2cSlave.write8(0x80, 0x03);
-          await this.sleep(14);
-          this.ch0 = await this.i2cSlave.read16(0xac);
-          this.ch1 = await this.i2cSlave.read16(0xae);
-          if (this.ch0 / this.ch1 < 2 && this.ch0 > 4900) {
-            reject("value range error");
-          }
-          var value = this.calculateLux(0, 0, 0);
-          await this.i2cSlave.write8(0x80, 0x00);
-          resolve(value);
-        }
-      });
+    read: async function () {
+      if (this.i2cSlave == null) {
+        throw new Error("i2cSlave is not open yet.");
+      }
+
+      await this.i2cSlave.write8(0x80, 0x03);
+      await this.sleep(14);
+      this.ch0 = await this.i2cSlave.read16(0xac);
+      this.ch1 = await this.i2cSlave.read16(0xae);
+      if (this.ch0 / this.ch1 < 2 && this.ch0 > 4900) {
+        throw new Error("value range error");
+      }
+      var value = this.calculateLux();
+      await this.i2cSlave.write8(0x80, 0x00);
+      return (value);
     }
   };
 

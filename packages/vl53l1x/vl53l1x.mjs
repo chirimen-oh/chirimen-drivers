@@ -1339,8 +1339,7 @@ VL53L1X.prototype = {
       mode = "medium";
     } else {
       mode = mode.toLowerCase();
-      if (mode == "long" || mode == "medium" || mode == "short") {
-      } else {
+      if (!(mode == "long" || mode == "medium" || mode == "short")) {
         mode = "medium";
       }
     }
@@ -1398,7 +1397,7 @@ VL53L1X.prototype = {
   // Returns a range reading in millimeters when continuous mode is active
   // (readRangeSingleMillimeters() also calls this function after starting a
   // single-shot range measurement)
-  read: async function(blocking) {
+  read: async function () {
     /**
 	  if (blocking)
 	  {

@@ -147,7 +147,7 @@ MPU6500.prototype = {
 		}
 	},
 
-	getAcceleration: async function(self){
+	getAcceleration: async function () {
 		/**
 		Acceleration measured by the sensor. By default will return a
 		3-tuple of X, Y, Z axis acceleration values in m/s^2 as floats. Will
@@ -168,7 +168,7 @@ MPU6500.prototype = {
 		}
 	},
 
-	getGyro: async function(self){
+	getGyro: async function () {
 		/**
 		X, Y, Z radians per second as floats.
 		**/
@@ -185,7 +185,7 @@ MPU6500.prototype = {
 			z: z / so * sf
 		}
 	},
-	getVal: function( w ){
+	getVal: function (w) {
 		var l = w >>> 8;
 		var b = w & 0xff;
 		var v = l + ( b << 8 );

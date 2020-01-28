@@ -85,46 +85,44 @@ PAJ7620.prototype = {
       });
     });
   },
-  read : function(){
-    return new Promise(async (resolve, reject)=>{
-      if(this.i2cSlave == null){
-        reject("i2cSlave Address does'nt yet open!");
-      }else{
-        this.i2cSlave.read8(0x43).then((v)=>{
-          var res;
-          switch(v){
-          case this.GES_RIGHT_FLAG:
-            res = "right";
-            break;
-          case this.GES_LEFT_FLAG:
-            res = "left";
-            break;
-          case this.GES_UP_FLAG:
-            res = "up";
-            break;
-          case this.GES_DOWN_FLAG:
-            res = "down";
-            break;
-          case this.GES_FORWARD_FLAG:
-            res = "forward";
-            break;
-          case this.GES_BACKWARD_FLAG:
-            res = "back";
-            break;
-          case this.GES_CLOCKWISE_FLAG:
-            res = "clockwise";
-            break;
-          case this.GES_COUNT_CLOCKWISE_FLAG:
-            res = "count clockwise";
-            break;
-          default:
-            res = "----";
-            break;
-          } // switch(v)
-          resolve(res);
-        }).catch(reject);
-      }
-    });
+  read: async function () {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
+
+    var v = await this.i2cSlave.read8(0x43);
+    var res;
+    switch (v) {
+      case this.GES_RIGHT_FLAG:
+        res = "right";
+        break;
+      case this.GES_LEFT_FLAG:
+        res = "left";
+        break;
+      case this.GES_UP_FLAG:
+        res = "up";
+        break;
+      case this.GES_DOWN_FLAG:
+        res = "down";
+        break;
+      case this.GES_FORWARD_FLAG:
+        res = "forward";
+        break;
+      case this.GES_BACKWARD_FLAG:
+        res = "back";
+        break;
+      case this.GES_CLOCKWISE_FLAG:
+        res = "clockwise";
+        break;
+      case this.GES_COUNT_CLOCKWISE_FLAG:
+        res = "count clockwise";
+        break;
+      default:
+        res = "----";
+        break;
+    } // switch(v)
+    return res;
+
   }
 };
 
