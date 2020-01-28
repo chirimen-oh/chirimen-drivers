@@ -222,22 +222,28 @@ OledDisplay.prototype = {
   },
   playSequence: function(){
     return new Promise((resolve, reject) => {
-      if(this.i2cSlave == null){
+      if (this.i2cSlave == null) {
         reject("i2cSlave Address does'nt yet open!");
-      }else{
-　　     if(this.sequence != null){
-   　      console.error("OledDisplay.playSequence(): error! (multiple call)");
-    　　　  reject();
-    　   }
+      } else {
+        if (this.sequence != null) {
+          console.error("OledDisplay.playSequence(): error! (multiple call)");
+          reject();
+        }
         this.sequence = setInterval(() => {
-          for(var cnt=0;cnt < OLED_CONST.packetSize;cnt ++){
-            if(this.funcQueue[this.index].mode === OLED_CONST.commandMode){
-              this.i2cSlave.write8(OLED_CONST.commandMode,this.funcQueue[this.index].param);
-            }else{
-              this.i2cSlave.write16(OLED_CONST.dataMode,this.funcQueue[this.index].param);
+          for (var cnt = 0; cnt < OLED_CONST.packetSize; cnt++) {
+            if (this.funcQueue[this.index].mode === OLED_CONST.commandMode) {
+              this.i2cSlave.write8(
+                OLED_CONST.commandMode,
+                this.funcQueue[this.index].param
+              );
+            } else {
+              this.i2cSlave.write16(
+                OLED_CONST.dataMode,
+                this.funcQueue[this.index].param
+              );
             }
-            this.index ++;
-            if(this.index >= this.funcQueue.length){
+            this.index++;
+            if (this.index >= this.funcQueue.length) {
               clearInterval(this.sequence);
               this.sequence = null;
               this.index = 0;
@@ -246,7 +252,7 @@ OledDisplay.prototype = {
               break;
             }
           }
-        },1);
+        }, 1);
       }
     });
   },
