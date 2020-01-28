@@ -238,9 +238,6 @@ INA219.prototype = {
     );
 
     this._power_lsb = this._current_lsb * 20;
-    var max_current = this._current_lsb * 32767;
-
-    var max_shunt_voltage = max_current * this._shunt_ohms;
 
     var calibration = Math.trunc(
       this.__CALIBRATION_FACTOR / (this._current_lsb * this._shunt_ohms)
