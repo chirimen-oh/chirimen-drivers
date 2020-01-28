@@ -420,7 +420,7 @@ VL53L0X.prototype = {
   },
   set_signal_rate_limit: async function(val) {
     var dc = this.devConst;
-    if (val => 0.0 && val <= 511.99) {
+    if (0.0 <= val && val <= 511.99) {
       // OK
     } else {
       console.error("ERROR set_signal_rate_limit:", val);
