@@ -4,7 +4,9 @@
   (global = global || self, global.VEML6070 = factory());
 }(this, (function () { 'use strict';
 
-  var VEML6070 = function(i2cPort){
+  // @ts-check
+
+  var VEML6070 = function (i2cPort) {
     this.i2cPort = i2cPort;
     this.slaveAddressLSB = 0x38;
     this.slaveAddressMSB = 0x39;
@@ -14,7 +16,7 @@
 
   VEML6070.prototype = {
     init:function(){
-      return new Promise((resolve, reject)=>{
+      return new Promise((resolve) => {
         this.i2cPort.open(this.slaveAddressLSB).then((i2cSlaveLSB)=>{
           this.i2cSlaveLSB = i2cSlaveLSB;
           this.i2cPort.open(this.slaveAddressMSB).then((i2cSlaveMSB)=>{

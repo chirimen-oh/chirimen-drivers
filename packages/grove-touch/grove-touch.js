@@ -14,7 +14,7 @@
 
   GroveTouch.prototype = {
     init: function(){
-      return new Promise((resolve, reject)=>{
+      return new Promise((resolve)=>{
         this.i2cPort.open(this.slaveAddress).then(async i2cSlave => {
           this.i2cSlave = i2cSlave;
           await this.i2cSlave.write8(0x2b,0x01);

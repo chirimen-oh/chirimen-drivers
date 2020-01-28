@@ -46,7 +46,7 @@
           await this.sleep(300);
           if ( !noSetZero ){
             for ( var servoPort = 0 ; servoPort < 16 ; servoPort ++ ){
-              this.setServo(servoPort , 0 ).then(()=>resolve(),(err)=>reject());
+              this.setServo(servoPort, 0).then(() => resolve(), () => reject());
             }
           }
         },(err)=>{

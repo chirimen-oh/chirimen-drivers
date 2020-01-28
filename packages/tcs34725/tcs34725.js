@@ -9,6 +9,9 @@
 	// based on https://github.com/adafruit/micropython-adafruit-tcs34725/blob/master/tcs34725.py
 	// Programmed by Satoru Takagi
 
+	/** @param {number} ms Delay for a number of milliseconds. */
+	const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 	var TCS34725 = function(i2cPort,slaveAddress){
 		if (!slaveAddress){
 			slaveAddress = 0x29;
@@ -45,11 +48,10 @@
 	// 工事中・・・
 
 	TCS34725.prototype = {
-		init: async function(){
+		init: async function () {
 			this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 			this._active = false;
 			this.integration_time(2.4);
-			var sensor_id = await this.sensor_id();
 		},
 
 		active: async function(value){
@@ -117,20 +119,14 @@
 			var g = await this.i2cSlave.read16(this._REGISTER_GDATA | this._COMMAND_BIT);
 			var b = await this.i2cSlave.read16(this._REGISTER_BDATA | this._COMMAND_BIT);
 			var c = await this.i2cSlave.read16(this._REGISTER_CDATA | this._COMMAND_BIT);
-
 			await this.active(was_active);
 			if (!t_lux){
-				return {
-					r:r,
-					g:g,
-					b:b,
-					c:c
-				};
+				return { r, g, b, c };
 			} else {
-				return (this._temperature_and_lux(r,g,b,c));
+				return this._temperature_and_lux(r, g, b, c);
 			}
 		},
-		_temperature_and_lux: function(r,g,b,c){
+		_temperature_and_lux: function (r, g, b) {
 			var x = -0.14282 * r + 1.54924 * g + -0.95641 * b;
 			var y = -0.32466 * r + 1.57837 * g + -0.73191 * b;
 			var z = -0.68202 * r + 0.77073 * g +  0.56332 * b;
