@@ -424,7 +424,7 @@
     },
     set_signal_rate_limit: async function(val) {
       var dc = this.devConst;
-      if (val => 0.0 ) ; else {
+      if (0.0 <= val && val <= 511.99) ; else {
         console.error("ERROR set_signal_rate_limit:", val);
         return;
       }
