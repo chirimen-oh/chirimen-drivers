@@ -127,7 +127,7 @@ const OLED_CONST = {
   packetSize : 16
 };
 
-var OledDisplay = function(i2cPort,slaveAddress){
+var OledDisplay = function (i2cPort) {
   this.i2cPort = i2cPort;
   this.i2cSlave = null;
   this.funcQueue = new Array();
@@ -212,7 +212,7 @@ OledDisplay.prototype = {
     this.funcQueue.push(obj);
   },
   init: function(){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.i2cPort.open(OLED_CONST.address).then((i2cSlave) =>{
         this.i2cSlave = i2cSlave;
         this.initQ();
@@ -260,7 +260,7 @@ OledDisplay.prototype = {
       }
     });
   },
-  drawString: function(row,col,string){
+  drawString: function (row, col) {
     return new Promise((resolve, reject) => {
       if(this.i2cSlave == null){
         reject("i2cSlave Address does'nt yet open!");

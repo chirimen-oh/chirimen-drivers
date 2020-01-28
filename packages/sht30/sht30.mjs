@@ -26,7 +26,6 @@ SHT30.prototype = {
 		var mdata = await this.i2cSlave.readBytes(6); // prev data..
 		// cTemp MSB, cTemp LSB, cTemp CRC, Humididty MSB, Humidity LSB, Humidity CRC
 		var cTemp = ((((mdata[0] * 256.0) + mdata[1]) * 175) / 65535.0) - 45; // celsius
-		var fTemp = cTemp * 1.8 + 32; // f
 		var humidity = 100 * (mdata[3] * 256 + mdata[4]) / 65535.0;
 		return {
 			humidity: humidity,

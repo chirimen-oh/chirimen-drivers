@@ -21,7 +21,7 @@ PCF8591.prototype = {
 	},
 	readADC: async function(ch){
 		if ( ch >=0 && ch < 4 ){
-			var prev = await this.i2cSlave.read8(ch + 0x40); // prev data..
+			await this.i2cSlave.read8(ch + 0x40); // prev data..
 			var ans  = await this.i2cSlave.read8(ch + 0x40);
 			return( this.refV * ans / 0xff );
 		} else {
