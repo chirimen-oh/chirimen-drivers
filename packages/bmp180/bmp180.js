@@ -4,6 +4,7 @@
 	(global = global || self, global.BMP180 = factory());
 }(this, (function () { 'use strict';
 
+	// @ts-check
 	// BMP180 driver for CHIRIMEN WebI2C
 	// ported from hhttps://qiita.com/uchino-tama/items/efccfe871ab3abc782f3
 	// by Satoru Takagi
@@ -59,7 +60,6 @@
 		},
 		readAndCalcB5: async function(){
 			var AC = this.AC;
-			var B = this.B;
 			var M = this.M;
 
 			await this.i2cSlave.write8(0xF4,0x2E); // read temp.
@@ -79,8 +79,6 @@
 		readPressure : async function(){
 			var AC = this.AC;
 			var B = this.B;
-			var M = this.M;
-			var getSVal = this.getSVal;
 			var mode = 1; // standard mode      0:ULPW,1:STD,2:HIRES,3:UHIRES
 			await this.i2cSlave.write8(0xF4,(0x34 + (mode << 6))); // read pressure standard mode
 

@@ -133,7 +133,7 @@
     packetSize : 16
   };
 
-  var OledDisplay = function(i2cPort,slaveAddress){
+  var OledDisplay = function (i2cPort) {
     this.i2cPort = i2cPort;
     this.i2cSlave = null;
     this.funcQueue = new Array();
@@ -218,7 +218,7 @@
       this.funcQueue.push(obj);
     },
     init: function(){
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         this.i2cPort.open(OLED_CONST.address).then((i2cSlave) =>{
           this.i2cSlave = i2cSlave;
           this.initQ();
@@ -228,22 +228,28 @@
     },
     playSequence: function(){
       return new Promise((resolve, reject) => {
-        if(this.i2cSlave == null){
+        if (this.i2cSlave == null) {
           reject("i2cSlave Address does'nt yet open!");
-        }else{
-  　　     if(this.sequence != null){
-     　      console.error("OledDisplay.playSequence(): error! (multiple call)");
-      　　　  reject();
-      　   }
+        } else {
+          if (this.sequence != null) {
+            console.error("OledDisplay.playSequence(): error! (multiple call)");
+            reject();
+          }
           this.sequence = setInterval(() => {
-            for(var cnt=0;cnt < OLED_CONST.packetSize;cnt ++){
-              if(this.funcQueue[this.index].mode === OLED_CONST.commandMode){
-                this.i2cSlave.write8(OLED_CONST.commandMode,this.funcQueue[this.index].param);
-              }else{
-                this.i2cSlave.write16(OLED_CONST.dataMode,this.funcQueue[this.index].param);
+            for (var cnt = 0; cnt < OLED_CONST.packetSize; cnt++) {
+              if (this.funcQueue[this.index].mode === OLED_CONST.commandMode) {
+                this.i2cSlave.write8(
+                  OLED_CONST.commandMode,
+                  this.funcQueue[this.index].param
+                );
+              } else {
+                this.i2cSlave.write16(
+                  OLED_CONST.dataMode,
+                  this.funcQueue[this.index].param
+                );
               }
-              this.index ++;
-              if(this.index >= this.funcQueue.length){
+              this.index++;
+              if (this.index >= this.funcQueue.length) {
                 clearInterval(this.sequence);
                 this.sequence = null;
                 this.index = 0;
@@ -252,7 +258,7 @@
                 break;
               }
             }
-          },1);
+          }, 1);
         }
       });
     },
@@ -266,7 +272,7 @@
         }
       });
     },
-    drawString: function(row,col,string){
+    drawString: function (row, col) {
       return new Promise((resolve, reject) => {
         if(this.i2cSlave == null){
           reject("i2cSlave Address does'nt yet open!");

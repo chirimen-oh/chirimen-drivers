@@ -1,3 +1,4 @@
+// @ts-check
 // BMP280 driver for CHIRIMEN WebI2C
 // ported from https://github.com/SWITCHSCIENCE/BME280/blob/master/Python27/bme280_sample.py
 // Note: BMP280 is backward compatible with BME 280 except atmospheric pressure
@@ -74,7 +75,6 @@ BMP280.prototype = {
 	compensate_P: function(adc_P){
 		var t_fine = this.t_fine;
 		var digP = this.digP;
-		var pressure = 0.0;
 
 		var v1 = (t_fine / 2.0) - 64000.0;
 		var v2 = (((v1 / 4.0) * (v1 / 4.0)) / 2048) * digP[5];
@@ -99,12 +99,12 @@ BMP280.prototype = {
 		return (pressure);
 	},
 	compensate_T: function(adc_T){
-		var  t_fine = this.t_fine;
 		var digT = this.digT;
 		var v1 = (adc_T / 16384.0 - digT[0] / 1024.0) * digT[1];
 		var v2 = (adc_T / 131072.0 - digT[0] / 8192.0) * (adc_T / 131072.0 - digT[0] / 8192.0) * digT[2];
-		t_fine = v1 + v2;
-		return (temperature);
+		this.t_fine = v1 + v2;
+		var temperature = this.t_fine / 5120.0;
+		return temperature;
 	},
 	readData: async function(){
 		var data = [];
