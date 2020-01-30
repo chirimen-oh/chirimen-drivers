@@ -1,9 +1,7 @@
 const { requestI2CAccess } = require("node-web-i2c");
 const ADS1015 = require("@chirimen/ads1015");
 const { promisify } = require("util");
-const sleep = promisify(setTimeout)
-
-
+const sleep = promisify(setTimeout);
 
 main();
 
