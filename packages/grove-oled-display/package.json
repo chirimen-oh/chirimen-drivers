@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/grove-oled-display",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Driver for SSD1308/SSD1306 with WebI2C",
   "main": "grove-oled-display.js",
   "module": "grove-oled-display.mjs",

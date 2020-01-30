@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/mpu6050",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Driver for MPU6050 with WebI2C",
   "main": "mpu6050.js",
   "module": "mpu6050.mjs",

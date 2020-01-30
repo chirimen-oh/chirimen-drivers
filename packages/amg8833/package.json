@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/amg8833",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Driver for AMG8833 with WebI2C",
   "main": "amg8833.js",
   "module": "amg8833.mjs",
