@@ -3,16 +3,16 @@ import GROVEACCELEROMETER from "https://unpkg.com/@chirimen/grove-accelerometer?
 main();
 
 async function main() {
-  var ax = document.getElementById("ax");
-  var ay = document.getElementById("ay");
-  var az = document.getElementById("az");
-  var i2cAccess = await navigator.requestI2CAccess();
-  var port = i2cAccess.ports.get(1);
-  var groveaccelerometer = new GROVEACCELEROMETER(port, 0x53);
+  const ax = document.getElementById("ax");
+  const ay = document.getElementById("ay");
+  const az = document.getElementById("az");
+  const i2cAccess = await navigator.requestI2CAccess();
+  const port = i2cAccess.ports.get(1);
+  const groveaccelerometer = new GROVEACCELEROMETER(port, 0x53);
   await groveaccelerometer.init();
   for (;;) {
     try {
-      var values = await groveaccelerometer.read();
+      const values = await groveaccelerometer.read();
       ax.innerHTML = values.x ? values.x : ax.innerHTML;
       ay.innerHTML = values.y ? values.y : ay.innerHTML;
       az.innerHTML = values.z ? values.z : az.innerHTML;
