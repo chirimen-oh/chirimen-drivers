@@ -1,3 +1,5 @@
+import GROVEACCELEROMETER from "https://unpkg.com/@chirimen/grove-accelerometer?module";
+
 main();
 
 async function main() {
@@ -15,7 +17,7 @@ async function main() {
       ay.innerHTML = values.y ? values.y : ay.innerHTML;
       az.innerHTML = values.z ? values.z : az.innerHTML;
     } catch (err) {
-      console.log("READ ERROR:" + err);
+      console.error("READ ERROR:" + err);
     }
     await sleep(1000);
   }
