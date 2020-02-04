@@ -1,3 +1,5 @@
+import GROVELIGHT from "https://unpkg.com/@chirimen/grove-light?module";
+
 main();
 
 async function main() {
@@ -12,7 +14,7 @@ async function main() {
 
       head.innerHTML = value ? value : head.innerHTML;
     } catch (error) {
-      console.log(" Error : ", error);
+      console.error(" Error : ", error);
     }
     await sleep(200);
   }
