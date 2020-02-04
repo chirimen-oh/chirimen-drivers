@@ -1,0 +1,10 @@
+{
+  "name": "i2c-grove-gesture-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/grove-gesture": "^1.0.0-alpha.1",
+    "node-web-i2c": "^1.1.1"
+  }
+}
+
