@@ -1,12 +1,14 @@
+import OledDisplay from "https://unpkg.com/@chirimen/grove-oled-display?module";
+
 main();
 
 async function main() {
-  var head = document.getElementById("head");
+  const head = document.getElementById("head");
   head.innerHTML = "started";
-  var i2cAccess = await navigator.requestI2CAccess();
+  const i2cAccess = await navigator.requestI2CAccess();
   head.innerHTML = "initializing...";
-  var port = i2cAccess.ports.get(1);
-  var display = new OledDisplay(port);
+  const port = i2cAccess.ports.get(1);
+  const display = new OledDisplay(port);
   await display.init();
   display.clearDisplayQ();
   await display.playSequence();
