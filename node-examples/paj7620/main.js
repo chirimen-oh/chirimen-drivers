@@ -1,7 +1,7 @@
 const { requestI2CAccess } = require("node-web-i2c");
 const PAJ7620 = require("@chirimen/grove-gesture");
 const { promisify } = require("util");
-const sleep = promisify(setTimeout)
+const sleep = promisify(setTimeout);
 
 main();
 
