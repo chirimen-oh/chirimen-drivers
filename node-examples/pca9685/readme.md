@@ -1,3 +1,5 @@
-# 回路図
+# PCA9685 16 チャンネルサーボモーター PWM ドライバー
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")
