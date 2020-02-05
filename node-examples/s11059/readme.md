@@ -1,3 +1,5 @@
-# 回路図
+# S11059 デジタルカラーセンサー
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")

@@ -1,3 +1,5 @@
-# 回路図
+# ADS1015 12 ビット AD コンバータ
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")
