@@ -2,4 +2,4 @@
 
 ## 回路図
 
-![回路図1](./schematic.png "schematic")
+![回路図](./schematic.png "schematic")
