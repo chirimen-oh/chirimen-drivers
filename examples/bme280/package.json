@@ -1,0 +1,5 @@
+{
+  "name": "i2c-bme280",
+  "version": "1.0.0",
+  "private": true
+}
