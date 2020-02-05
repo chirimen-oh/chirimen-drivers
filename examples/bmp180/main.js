@@ -3,8 +3,6 @@ import BMP180 from "https://unpkg.com/@chirimen/bmp180?module";
 main();
 
 async function main() {
-  const readInterval = 1000;
-
   const head = document.getElementById("head");
   const i2cAccess = await navigator.requestI2CAccess();
   const port = i2cAccess.ports.get(1);
@@ -13,9 +11,7 @@ async function main() {
   for (;;) {
     const pressure = await bmp180.readPressure();
     const temperature = await bmp180.readTemperature();
-    head.innerHTML = `Pressure: ${pressure.toFixed(
-      2
-    )} Pa, Temperature: ${temperature} degree`;
-    await sleep(readInterval);
+    head.innerHTML = `Pressure: ${pressure.toFixed(2)} hPa, Temperature: ${temperature} degree`;
+    await sleep(1000);
   }
 }
