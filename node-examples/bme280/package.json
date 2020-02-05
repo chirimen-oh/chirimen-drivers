@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/bme280": "1.0.0-alpha.1",
-    "node-web-i2c": "1.1.1"
+    "@chirimen/bme280": "^1.0.0-alpha.1",
+    "node-web-i2c": "^1.1.1"
   }
 }
