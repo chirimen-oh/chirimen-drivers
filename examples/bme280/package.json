@@ -1,5 +1,5 @@
 {
-  "name": "i2c-bme280",
+  "name": "i2c-bme280-example",
   "version": "1.0.0",
   "private": true
 }
