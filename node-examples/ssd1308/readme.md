@@ -1,3 +1,5 @@
-# 回路図
+# SSD1308 Grove OLED ディスプレイ
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")

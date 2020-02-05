@@ -1,5 +1,5 @@
 # BMP180 大気圧温度センサー
 
-## 回路図
+## 配線図
 
-![回路図](./schematic.png "schematic")
+![配線図](./schematic.png "schematic")

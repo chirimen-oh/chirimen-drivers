@@ -1,3 +1,5 @@
-# 回路図
+# PAJ7620 Grove Gesture ジェスチャー認識センサー
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")

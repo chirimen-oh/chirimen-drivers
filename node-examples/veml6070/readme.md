@@ -1,3 +1,5 @@
-# 回路図
+# VEML6070 UV センサー
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")

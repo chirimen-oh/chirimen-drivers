@@ -1,3 +1,5 @@
-# 回路図
+# TSL2561 Grove Digital Light Sensor 光センサー
 
-![回路図](./schematic.png "schematic")
+## 配線図
+
+![配線図](./schematic.png "schematic")
