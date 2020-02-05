@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/bmp180": "^1.0.0-alpha.1",
-    "node-web-i2c": "^1.1.1"
+    "@chirimen/bmp180": "latest",
+    "node-web-i2c": "latest"
   }
 }

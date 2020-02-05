@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/s11059": "^1.0.2-alpha.0",
-    "node-web-i2c": "^1.1.1"
+    "@chirimen/s11059": "latest",
+    "node-web-i2c": "latest"
   }
 }
