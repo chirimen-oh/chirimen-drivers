@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/adt7410": "^1.0.1-alpha.0",
-    "node-web-i2c": "^1.1.1"
+    "@chirimen/adt7410": "latest",
+    "node-web-i2c": "latest"
   }
 }
