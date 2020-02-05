@@ -11,7 +11,10 @@ async function main() {
   for (;;) {
     const pressure = await bmp180.readPressure();
     const temperature = await bmp180.readTemperature();
-    head.innerHTML = `Pressure: ${pressure.toFixed(2)} hPa, Temperature: ${temperature} degree`;
-    await sleep(1000);
+    head.innerHTML = [
+      `Pressure: ${pressure.toFixed(2)} hPa`,
+      `Temperature: ${temperature} degree`
+    ].join(", ");
+    await sleep(500);
   }
 }
