@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/grove-touch",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "Driver for MPR121 with WebI2C",
   "main": "grove-touch.js",
   "module": "grove-touch.mjs",
