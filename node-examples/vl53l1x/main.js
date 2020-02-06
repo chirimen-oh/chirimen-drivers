@@ -17,8 +17,8 @@ async function main() {
   await vl53l1x.startContinuous();
 
   while (true) {
-    const data = await vl53l1x.read();
-    console.log(data.toFixed(2) + " mm");
+    const distance = await vl53l1x.read();
+    console.log(distance.toFixed(2) + " mm");
     await sleep(500);
   }
 }
