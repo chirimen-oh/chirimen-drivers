@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/mpu6500": "^1.0.0-alpha.1",
-    "@chirimen/ak8963": "^1.0.0-alpha.1",
-    "node-web-i2c": "^1.1.1"
+    "@chirimen/mpu6500": "latest",
+    "@chirimen/ak8963": "latest",
+    "node-web-i2c": "latest"
   }
 }
