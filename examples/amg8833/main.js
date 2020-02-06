@@ -23,7 +23,6 @@ async function main() {
   while (true) {
     const data = await amg8833.readData();
     heatMap(data);
-    //console.log(data);
     sleep(500);
   }
 }
@@ -48,12 +47,9 @@ function heatMap(tImage) {
     for (let j = 0; j < 8; j++) {
       const tId = "img" + j + "_" + i;
       const td = document.getElementById(tId);
-      //			console.log(tId,td);
       const rgb = hsvToRgb(temperature2hue(tImage[i][j]), 1, 1);
       const colorCode = "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
-      //			const colorCode = "#"+rgb[0].toString(16)+rgb[1].toString(16)+rgb[2].toString(16)
       td.style.backgroundColor = colorCode;
-      //			console.log("colorCode:",colorCode);
     }
   }
 }

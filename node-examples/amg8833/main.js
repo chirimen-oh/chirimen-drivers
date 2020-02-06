@@ -20,6 +20,7 @@ async function main() {
       }
       console.log(data[i].join(" "));
     }
+
     console.log();
     sleep(500);
   }
