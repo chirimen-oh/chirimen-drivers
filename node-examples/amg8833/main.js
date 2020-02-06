@@ -13,13 +13,9 @@ async function main() {
 
   while (true) {
     const data = await amg8833.readData();
-    let output = "";
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].length; j++) {
-        data[i][j] = data[i][j].toFixed(2);
-      }
-      console.log(data[i].join(" "));
-    }
+    data.forEach(row => {
+      console.log(row.map(value => value.toFixed(2)).join(" "));
+    });
 
     console.log();
     sleep(500);
