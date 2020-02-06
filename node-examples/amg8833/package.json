@@ -1,0 +1,9 @@
+{
+  "name": "i2c-amg8833-node-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/amg8833": "latest",
+    "node-web-i2c": "latest"
+  }
+}
