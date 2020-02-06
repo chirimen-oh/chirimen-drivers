@@ -1,6 +1,6 @@
 const { requestI2CAccess } = require("node-web-i2c");
 const OledDisplay = require("@chirimen/grove-oled-display");
-const { promisify } = require("util");
+// const { promisify } = require("util");
 // const sleep = promisify(setTimeout);
 
 main();
