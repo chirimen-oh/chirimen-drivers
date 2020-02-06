@@ -13,7 +13,7 @@ async function main() {
   // Mode: short, medium, long
   await vl53l1x.init("short");
 
-  // Necessary to start mesurement
+  // Necessary to start measurement
   await vl53l1x.startContinuous();
 
   while (true) {
