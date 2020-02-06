@@ -1,6 +1,5 @@
 node_modules/
 # NOTE: UMDフォーマットのファイルなので無視
 /packages/**/*.js
-# TODO: CommonJSに対応するかCommonJSを取り除く
+# TODO: sleepが定義されておらず大量にエラー
 /examples/
-/node-examples/
