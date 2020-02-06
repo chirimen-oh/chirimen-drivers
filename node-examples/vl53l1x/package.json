@@ -1,0 +1,9 @@
+{
+  "name": "i2c-vl53l1x-node-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/vl53l1x": "latest",
+    "node-web-i2c": "latest"
+  }
+}
