@@ -9,9 +9,7 @@ async function main() {
   const vl53l1x = new VL53L1X(port, 0x29);
 
   // Mode: short, medium, long
-  const mode = "short";
-  await vl53l1x.init(mode);
-  document.getElementById("mode").innerHTML = "Measurement mode: " + mode;
+  await vl53l1x.init("short");
 
   // Necessary to start measurement
   await vl53l1x.startContinuous();
