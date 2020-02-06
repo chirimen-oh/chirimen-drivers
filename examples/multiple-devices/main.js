@@ -24,6 +24,6 @@ async function main() {
     } catch (error) {
       console.log("adt7410 error:" + error);
     }
-    sleep(500);
+    await sleep(500);
   }
 }
