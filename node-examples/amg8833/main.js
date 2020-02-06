@@ -18,6 +18,6 @@ async function main() {
     });
 
     console.log();
-    sleep(500);
+    await sleep(500);
   }
 }
