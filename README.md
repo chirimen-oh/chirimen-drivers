@@ -28,21 +28,21 @@
 - [@chirimen/bmp180](https://www.jsdelivr.com/package/npm/@chirimen/bmp180)
 - [@chirimen/bmp280](https://www.jsdelivr.com/package/npm/@chirimen/bmp280)
 - [@chirimen/canzasi](https://www.jsdelivr.com/package/npm/@chirimen/canzasi)
+- [@chirimen/ina219](https://www.jsdelivr.com/package/npm/@chirimen/ina219)
+- [@chirimen/mlx90614](https://www.jsdelivr.com/package/npm/@chirimen/mlx90614)
 - [@chirimen/mpu6050](https://www.jsdelivr.com/package/npm/@chirimen/mpu6050)
 - [@chirimen/mpu6500](https://www.jsdelivr.com/package/npm/@chirimen/mpu6500)
 - [@chirimen/neopixel-i2c](https://www.jsdelivr.com/package/npm/@chirimen/neopixel-i2c)
 - [@chirimen/pca9685-pwm](https://www.jsdelivr.com/package/npm/@chirimen/pca9685-pwm)
 - [@chirimen/pcf8591](https://www.jsdelivr.com/package/npm/@chirimen/pcf8591)
 - [@chirimen/sht30](https://www.jsdelivr.com/package/npm/@chirimen/sht30)
+- [@chirimen/tca9548a](https://www.jsdelivr.com/package/npm/@chirimen/tca9548a)
 - [@chirimen/tcs34725](https://www.jsdelivr.com/package/npm/@chirimen/tcs34725)
-- [@chirimen/ina219](https://www.jsdelivr.com/package/npm/@chirimen/ina219)
-- [@chirimen/mlx90614](https://www.jsdelivr.com/package/npm/@chirimen/mlx90614)
 - [@chirimen/vl53l1x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l1x)
-
 
 ## Usage
 
-### In a browser
+### CHIRIMEN (browser)
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@chirimen/adt7410"></script>
@@ -50,23 +50,13 @@
 
 Using ES Modules:
 
-```js
-import ADT7410 from "https://unpkg.com/@chirimen/adt7410?module";
+```html
+<script type="module">
+  import ADT7410 from "https://unpkg.com/@chirimen/adt7410?module";
+</script>
 ```
 
-### Using Yarn
-
-```sh
-yarn add @chirimen/adt7410
-```
-
-### Using npm
-
-```sh
-npm i @chirimen/adt7410
-```
-
-### In Node.js
+### Node.js
 
 ```js
 const ADT7410 = require("@chirimen/adt7410");
