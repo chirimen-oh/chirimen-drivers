@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "~3",
+    "@types/i2c-bus": "~5",
     "node-web-i2c": "latest",
     "npm-run-all": "~4",
     "rollup": "~1",

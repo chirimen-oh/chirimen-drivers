@@ -40,6 +40,7 @@ export function TCA9548A(bus: I2CPort, address: TCA9548AAddress = 0x70) {
     async read(): Promise<TCA9548AChannel | null> {
       try {
         if (this.i2cSlave == null) await this.init();
+        if (this.i2cSlave == null) throw "internal error";
       } catch (error) {
         throw new TCA9548ANotFoundError(error.stack || error);
       }
@@ -51,6 +52,7 @@ export function TCA9548A(bus: I2CPort, address: TCA9548AAddress = 0x70) {
     async write(channel: TCA9548AChannel = 0) {
       try {
         if (this.i2cSlave == null) await this.init();
+        if (this.i2cSlave == null) throw "internal error";
       } catch (error) {
         throw new TCA9548ANotFoundError(error.stack || error);
       }
