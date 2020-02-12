@@ -1,0 +1,9 @@
+{
+  "name": "i2c-ads1x15-node-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/ads1x15": "latest",
+    "node-web-i2c": "latest"
+  }
+}
