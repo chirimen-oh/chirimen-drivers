@@ -17,9 +17,12 @@ async function main() {
   while (true) {
     const data = await tcs34725.read();
     console.log(
-      [`R: ${data.r}`, `G: ${data.g}`, `B: ${data.b}`, `C: ${data.c}`].join(
-        ", "
-      )
+      [
+        `R: ${data.r}`,
+        `G: ${data.g}`,
+        `B: ${data.b}`,
+        `Clear Light: ${data.c}`
+      ].join(", ")
     );
 
     await sleep(500);
