@@ -8,6 +8,8 @@ async function main() {
   const port = i2cAccess.ports.get(1);
   const tcs34725 = new TCS34725(port, 0x29);
   await tcs34725.init();
+
+  // You can select the value of gain from 1, 4, 16 or 60.
   await tcs34725.gain(4);
 
   while (true) {
