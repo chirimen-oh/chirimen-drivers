@@ -1,0 +1,9 @@
+{
+  "name": "i2c-tcs34725-node-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/tcs34725": "latest",
+    "node-web-i2c": "latest"
+  }
+}
