@@ -2,17 +2,19 @@ import PCF8591 from "https://unpkg.com/@chirimen/pcf8591?module";
 
 main();
 
-let pcf8591;
-let dacVoltage;
-
 async function main() {
-  const value = document.getElementById("value");
+  const adcDisplay = document.getElementById("adcDisplay");
+  const dacVoltage = document.getElementById("dacVoltage");
   const i2cAccess = await navigator.requestI2CAccess();
   const port = i2cAccess.ports.get(1);
-  pcf8591 = new PCF8591(port, 0x48);
+  const pcf8591 = new PCF8591(port, 0x48);
   await pcf8591.init();
-  dacVoltage = document.getElementById("voltage").value;
-  await pcf8591.setDAC(dacVoltage);
+  await pcf8591.setDAC(3.3);
+
+  //DAC control
+  document
+    .getElementById("dacSetButton")
+    .addEventListener("click", () => pcf8591.setDAC(dacVoltage.value));
 
   while (true) {
     let output = "";
@@ -22,14 +24,8 @@ async function main() {
       const voltage = await pcf8591.readADC(channel);
       output += `CH${channel}: ${voltage.toFixed(3)}V<br>`;
     }
-    value.innerHTML = output;
+    adcDisplay.innerHTML = output;
 
     await sleep(500);
   }
 }
-
-async function setDACVoltage() {
-  dacVoltage = document.getElementById("voltage").value;
-  await pcf8591.setDAC(dacVoltage);
-}
-document.getElementById("setVoltage").addEventListener("click", setDACVoltage);
