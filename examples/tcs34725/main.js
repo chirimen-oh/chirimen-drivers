@@ -18,7 +18,7 @@ async function main() {
       `R: ${data.r}`,
       `G: ${data.g}`,
       `B: ${data.b}`,
-      `C: ${data.c}`
+      `Clear Light: ${data.c}`
     ].join("<br>");
 
     await sleep(500);
