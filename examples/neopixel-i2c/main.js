@@ -1,4 +1,4 @@
-import NEOPIXEL from "https://unpkg.com/@chirimen/neopixel-i2c?module";
+import Neopixel from "https://unpkg.com/@chirimen/neopixel-i2c?module";
 
 main();
 
@@ -7,7 +7,7 @@ async function main() {
   const color = document.getElementById("colorPicker");
   const i2cAccess = await navigator.requestI2CAccess();
   const port = i2cAccess.ports.get(1);
-  const neopixel = new NEOPIXEL(port, 0x41);
+  const neopixel = new Neopixel(port, 0x41);
   await neopixel.init();
   initDisplay.remove();
   await neopixel.setGlobal(0x10, 0x10, 0x10);
