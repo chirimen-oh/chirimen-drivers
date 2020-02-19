@@ -1,0 +1,10 @@
+{
+  "name": "i2c-pca9685-pwm-node-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@chirimen/pca9685-pwm": "latest",
+    "node-web-i2c": "latest",
+    "node-web-gpio": "latest"
+  }
+}
