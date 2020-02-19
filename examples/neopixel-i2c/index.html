@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1"
+    />
+    <title>i2c-NEOPIXEL_LED</title>
+    <script src="https://r.chirimen.org/polyfill.js"></script>
+    <script src="./main.js" type="module"></script>
+    <style>
+      p {
+        color: blue;
+        text-align: center;
+        font-size: 24px;
+      }
+
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      form {
+        color: blue;
+        text-align: center;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      <a>NEOPIXEL_LED</a>
+    </p>
+    <img src="./schematic.png" height="400px" />
+    <img src="./schematic_with_dedicated_breadboard.png" height="400px" />
+    <p id="init">initializing...</p>
+    <p><form id="colorPicker">
+      <label
+        >R
+        <input
+          type="range"
+          name="red"
+          min="0"
+          max="255"
+          step="1"
+          value="0"
+      /></label>
+      <label
+        >G
+        <input
+          type="range"
+          name="green"
+          min="0"
+          max="255"
+          step="1"
+          value="0"
+      /></label>
+      <label
+        >B
+        <input
+          type="range"
+          name="blue"
+          min="0"
+          max="255"
+          step="1"
+          value="0"
+      /></label>
+      <input type="button" name="set" value="Set" />
+    </form></p>
+  </body>
+</html>
