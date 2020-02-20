@@ -1,5 +1,7 @@
 # CHIRIMEN Drivers
 
+![build](https://github.com/chirimen-oh/chirimen-drivers/workflows/build/badge.svg?branch=master)
+
 ## Download
 
 ### Verified official drivers
