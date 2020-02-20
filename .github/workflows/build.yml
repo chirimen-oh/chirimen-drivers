@@ -17,3 +17,10 @@ jobs:
             yarn-
       - run: yarn
       - run: yarn build
+      - name: The working tree is clean.
+        run: "[[ -z $(git status --porcelain) ]]"
+      - name: Show the working tree status.
+        if: failure()
+        run: |
+          git status
+          git diff
