@@ -17,6 +17,7 @@ ADT7410.prototype = {
     const LSB = await this.i2cSlave.read8(0x01);
     const binaryTemperature = ((MSB << 8) + LSB) >> 3;
     const sign = MSB & 0x10;
+    // Under 13bit resolution mode. (sign + 12bit)
     if (sign === 0) {
       // Positive value
       return binaryTemperature / 16.0;
