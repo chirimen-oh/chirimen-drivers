@@ -1,7 +1,7 @@
 const { requestI2CAccess } = require("node-web-i2c");
 const ADT7410 = require("@chirimen/adt7410");
 const { promisify } = require("util");
-const sleep = promisify(setTimeout)
+const sleep = promisify(setTimeout);
 
 main();
 
@@ -13,7 +13,7 @@ async function main() {
   for (;;) {
     // 無限ループ
     const value = await adt7410.read();
-    console.log(value ? `${value} degree` : "Measurement failure");
+    console.log(`${value} degree`);
     await sleep(1000);
   }
 }
