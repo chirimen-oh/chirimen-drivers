@@ -1,6 +1,5 @@
 import ADT7410 from "https://unpkg.com/@chirimen/adt7410?module";
 
-
 main();
 
 async function main() {
@@ -12,7 +11,7 @@ async function main() {
   for (;;) {
     // 無限ループ
     const value = await adt7410.read();
-    head.innerHTML = value ? `${value} degree` : "Measurement failure";
+    head.innerHTML = `${value} degree`;
     await sleep(1000);
   }
 }
