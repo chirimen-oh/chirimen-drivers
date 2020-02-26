@@ -1,5 +1,8 @@
-{% include translate.md %}
-{% include edit-on-codesandbox.md %}
+{% include translate.md %}  
+ブラウザ版
+{% include edit-on-codesandbox.md %}  
+Node.js 版
+https://github.com/chirimen-oh/chirimen-drivers/tree/master/packages/grove-accelerometer
 
 # ADXL345 Grove Accelerometer 3 軸加速度センサー
 
@@ -12,3 +15,7 @@ Grove-Accelerometer で使用されているチップは、ADXL345 です。適�
 
 - [GROVE - I2C 三軸加速度センサ ADXL345 搭載](https://www.switch-science.com/catalog/972/) x 1
 - [GROVE - 4 ピン-ジャンパメスケーブル](https://www.switch-science.com/catalog/1048/) x 1
+
+## 詳細な使い方・センサー仕様
+
+ドライバの[リポジトリ](https://github.com/chirimen-oh/chirimen-drivers/tree/master/packages/grove-accelerometer)(Github)を参照してください。
