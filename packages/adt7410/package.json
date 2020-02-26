@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/adt7410",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Driver for ADT7410 with WebI2C",
   "main": "adt7410.js",
   "module": "adt7410.mjs",
