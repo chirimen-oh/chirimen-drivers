@@ -38,7 +38,7 @@ acceleration = await groveaccelerometer.read();
 ```
 
 加速度を測定します。  
-返り値はオブジェクト型です
+返り値は１軸毎の値が格納されたオブジェクトです
 |返り値|型|説明|
 |:---|:---|:---|
 |acceleration.x|Number|x 軸方向の加速度です。単位は G（重力加速度）です。|
