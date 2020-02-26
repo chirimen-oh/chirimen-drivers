@@ -1,3 +1,5 @@
+[データシート]: https://www.analog.com/media/en/technical-documentation/data-sheets/ADT7410.pdf
+
 # ADT7410
 
 ## センサー仕様
@@ -9,9 +11,9 @@
 - 温度解像度
   - 0.0625℃
 - I2C スレーブアドレス
-  - 0x48（ジャンパにより変更可能。）
+  - 0x48(デフォルト), 0x49, 0x4A, 0x4B（ジャンパにより変更可能。詳しくは[データシート][]の P17, Table20 を参照）
 
-詳細な仕様は[データシート](https://www.analog.com/media/en/technical-documentation/data-sheets/ADT7410.pdf)を参照してください。（ANALOG DEVICES 社のサイトにリンクします。）
+詳細な仕様は[データシート][]を参照してください。（ANALOG DEVICES 社のサイトにリンクします。）
 
 ## ドライバ
 
@@ -26,8 +28,8 @@ I2C ポートの取得とセンサーの初期化をします。
 センサーを使う前に必ず一回実行してください。  
 |引数|型|説明|
 |:---|:---|:---|
-|i2cPort|Number|使用する I2C ポートの番号です。必ず１番を使用してください。|
-|slaveAddress|Number|センサーの I2C スレーブアドレスです。デフォルトでは 0x48 に設定されています。|
+|i2cPort|I2CSlaveDevice|使用する I2C ポートの port オブジェクトです。|
+|slaveAddress|Number|センサーの I2C スレーブアドレスです。[センサー仕様](#センサー仕様)を参照してください。|
 
 ### 温度の読み取り read()
 
