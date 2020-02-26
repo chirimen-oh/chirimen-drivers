@@ -16,7 +16,8 @@ ADT7410.prototype = {
     const MSB = await this.i2cSlave.read8(0x00);
     const LSB = await this.i2cSlave.read8(0x01);
     const rawData = ((MSB << 8) + LSB) >> 3;
-    if (MSB < 16) {
+    const sign = MSB & 0x10;
+    if (sign === 0) {
       // Positive value
       return rawData / 16.0;
     } else {
