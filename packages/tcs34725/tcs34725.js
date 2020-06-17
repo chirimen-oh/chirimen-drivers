@@ -67,7 +67,7 @@
 				await this.i2cSlave.write8(this._REGISTER_ENABLE | this._COMMAND_BIT, enable | this._ENABLE_PON);
 				sleep(3);
 				await this.i2cSlave.write8(this._REGISTER_ENABLE | this._COMMAND_BIT, enable | this._ENABLE_PON | this._ENABLE_AEN);
-			} else{
+			} else {
 				await this.i2cSlave.write8(this._REGISTER_ENABLE | this._COMMAND_BIT, enable & ~(this._ENABLE_PON | this._ENABLE_AEN));
 			}
 		},
