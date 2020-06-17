@@ -26,7 +26,7 @@
     "build:umd": "rollup -c"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "~3",
+    "@rollup/plugin-typescript": "~4.1.0",
     "@types/i2c-bus": "~5",
     "node-web-i2c": "latest",
     "npm-run-all": "~4",
