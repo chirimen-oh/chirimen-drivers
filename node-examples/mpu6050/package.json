@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@chirimen/mpu6050": "^1.0.0-alpha.1",
+    "@chirimen/mpu6050": "1.0.0-alpha.1",
     "node-web-i2c": "latest"
   }
 }
