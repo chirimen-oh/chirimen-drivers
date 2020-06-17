@@ -40,7 +40,7 @@
       return new Promise((resolve, reject)=>{
         if(this.i2cSlave == null){
           reject("i2cSlave Address does'nt yet open!");
-        }else{
+        }else {
           this.i2cSlave.read16(0x00).then((v)=>{
             var array = [];
             for(var cnt = 0;cnt < 12;cnt ++){

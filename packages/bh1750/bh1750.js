@@ -79,7 +79,7 @@
 	            this.mtreg = 31;
 			} else if(sensitivity > 254){
 	            this.mtreg = 254;
-			}else{
+			}else {
 	            this.mtreg = sensitivity;
 			}
 	        await this.power_on();

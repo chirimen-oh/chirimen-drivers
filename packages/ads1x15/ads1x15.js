@@ -46,7 +46,7 @@
 				config= 0x2000;
 			} else if (channel=="2,3"){// Differential Mode p2,p3
 				config= 0x3000;
-			} else{
+			} else {
 				channel = Number(channel);
 				if ((channel < 0) || (3 < channel)) {
 					throw new Error("ADS1x15.read: channel error " + channel);

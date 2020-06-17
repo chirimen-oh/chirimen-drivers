@@ -57,7 +57,7 @@
 					var temperature;
 					if ( tVal > 0x200){
 						temperature = (-tVal +  0xfff) * -0.25;
-					}else{
+					}else {
 						temperature = tVal * 0.25;
 					}
 					tdata.push(temperature);

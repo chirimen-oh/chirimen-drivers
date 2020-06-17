@@ -70,7 +70,7 @@
         maxPulse = this.maxPulse;
         pulseRange = maxPulse - minPulse;
         angleRange = this.angleRange;
-      }else{
+      }else {
         throw new Error("wrong param.");
       }
       if (angle < -angleRange) {

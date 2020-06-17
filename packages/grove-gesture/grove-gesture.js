@@ -81,7 +81,7 @@
           var v1 = await this.i2cSlave.read8(1,true);
           if((v0 != 0x20)||(v1 != 0x76)){
             reject("init error :v0["+v0+"] v1["+v1+"]");
-          }else{
+          }else {
             for(var cnt = 0;cnt <this.initRegisterArray.length;cnt ++){
               await this.i2cSlave.write8(this.initRegisterArray[cnt][0],this.initRegisterArray[cnt][1]);
             }
