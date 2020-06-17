@@ -21,13 +21,15 @@
 
       const MSB = await this.i2cSlave.read8(0x00);
       const LSB = await this.i2cSlave.read8(0x01);
-      const rawData = ((MSB << 8) + LSB) >> 3;
-      if (MSB < 16) {
+      const binaryTemperature = ((MSB << 8) | LSB) >> 3;
+      const sign = MSB & 0x10;
+      // Under 13bit resolution mode. (sign + 12bit)
+      if (sign === 0) {
         // Positive value
-        return rawData / 16.0;
+        return binaryTemperature / 16.0;
       } else {
         // Negative value
-        return (rawData - 8192) / 16.0;
+        return (binaryTemperature - 8192) / 16.0;
       }
     }
   };
