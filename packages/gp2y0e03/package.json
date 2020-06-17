@@ -17,6 +17,6 @@
     "build": "rollup -c"
   },
   "devDependencies": {
-    "rollup": "~2.16.0"
+    "rollup": "~2.17.0"
   }
 }
