@@ -24,8 +24,8 @@ const groveaccelerometer = new GROVEACCELEROMETER(i2cPort, slaveAddress);
 await groveaccelerometer.init();
 ```
 
-I2C ポートの取得とセンサーの初期化をします。  
-センサーを使う前に必ず一回実行してください。  
+I2C ポートの取得とセンサーの初期化をします。
+センサーを使う前に必ず一回実行してください。
 |引数|型|説明|
 |:---|:---|:---|
 |i2cPort|I2CSlaveDevice|使用する I2C ポートの port オブジェクトです。|
@@ -37,7 +37,7 @@ I2C ポートの取得とセンサーの初期化をします。
 acceleration = await groveaccelerometer.read();
 ```
 
-加速度を測定します。  
+加速度を測定します。
 返り値は１軸毎の値が格納されたオブジェクトです
 |返り値|型|説明|
 |:---|:---|:---|
