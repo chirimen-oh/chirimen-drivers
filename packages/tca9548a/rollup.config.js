@@ -6,7 +6,8 @@ export default {
   output: {
     file: outputFile,
     format: "umd",
-    name: "TCA9548A"
+    name: "TCA9548A",
+    exports: "named",
   },
-  plugins: [typescript()]
+  plugins: [typescript()],
 };
