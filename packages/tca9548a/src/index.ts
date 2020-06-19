@@ -22,7 +22,7 @@ export const TCA9548AChannels: ReadonlyArray<TCA9548AChannel> = [
   4,
   5,
   6,
-  7
+  7,
 ];
 
 export class TCA9548ANotFoundError extends Error {
@@ -44,7 +44,7 @@ export function TCA9548A(bus: I2CPort, address: TCA9548AAddress = 0x70) {
       } catch (error) {
         throw new TCA9548ANotFoundError(error.stack || error);
       }
-      const index = TCA9548AChannels.map(channel => 1 << channel).indexOf(
+      const index = TCA9548AChannels.map((channel) => 1 << channel).indexOf(
         await this.i2cSlave.readByte()
       );
       return index in TCA9548AChannels ? TCA9548AChannels[index] : null;
@@ -57,7 +57,7 @@ export function TCA9548A(bus: I2CPort, address: TCA9548AAddress = 0x70) {
         throw new TCA9548ANotFoundError(error.stack || error);
       }
       await this.i2cSlave.writeByte(1 << channel);
-    }
+    },
   };
 }
 
