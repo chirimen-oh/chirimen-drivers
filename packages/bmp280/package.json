@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/bmp280",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "Driver for BMP280 with WebI2C",
   "main": "bmp280.js",
   "module": "bmp280.mjs",

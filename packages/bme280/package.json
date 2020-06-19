@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/bme280",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "Driver for BME280 with WebI2C",
   "main": "bme280.js",
   "module": "bme280.mjs",
