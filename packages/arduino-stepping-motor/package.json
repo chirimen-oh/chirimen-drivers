@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/arduino-stepping-motor",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "Driver for stepping motor with Arduino/WebI2C",
   "main": "arduino-stepping-motor.js",
   "module": "arduino-stepping-motor.mjs",
