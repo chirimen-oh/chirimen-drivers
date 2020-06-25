@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/mlx90614",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for MLX90614 with WebI2C",
   "main": "mlx90614.js",
   "module": "mlx90614.mjs",
