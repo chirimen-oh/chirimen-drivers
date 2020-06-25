@@ -1,0 +1,22 @@
+{
+  "name": "@chirimen/apds9960",
+  "version": "0.0.0",
+  "description": "Driver for APDS9960 with WebI2C",
+  "main": "apds9960.js",
+  "module": "apds9960.mjs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/apds9960"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^2.18.0"
+  }
+}
