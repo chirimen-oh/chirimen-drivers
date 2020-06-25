@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/pca9685-pwm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for PCA9685 using PWM with WebI2C",
   "main": "pca9685-pwm.js",
   "module": "pca9685-pwm.mjs",

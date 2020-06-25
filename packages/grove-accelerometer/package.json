@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/grove-accelerometer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Driver for ADXL345 with WebI2C",
   "main": "grove-accelerometer.js",
   "module": "grove-accelerometer.mjs",
