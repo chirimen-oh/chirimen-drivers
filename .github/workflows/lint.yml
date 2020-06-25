@@ -4,7 +4,7 @@ jobs:
   main:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with: { node-version: 14 }
       - run: echo "::set-env name=YARN_CACHE_DIR::$(yarn cache dir)"
