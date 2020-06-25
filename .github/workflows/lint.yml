@@ -11,10 +11,8 @@ jobs:
       - uses: actions/cache@v1
         with:
           path: ${{ env.YARN_CACHE_DIR }}
-          key: yarn-${{ hashFiles('package.json') }}-${{ hashFiles('packages/**/package.json') }}
-          restore-keys: |
-            yarn-${{ hashFiles('package.json') }}-
-            yarn-
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: yarn-
       - run: yarn
       - run: yarn lint-report
         continue-on-error: true
