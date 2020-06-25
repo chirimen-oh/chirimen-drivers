@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/apds9960",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Driver for APDS9960 with WebI2C",
   "main": "apds9960.js",
   "module": "apds9960.mjs",
