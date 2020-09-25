@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/seesaw",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Driver for Seesaw with WebI2C",
   "main": "seesaw.js",
   "module": "seesaw.mjs",
