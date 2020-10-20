@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v1
         with: { node-version: 14 }
       - run: echo "::set-env name=YARN_CACHE_DIR::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ${{ env.YARN_CACHE_DIR }}
           key: yarn-${{ hashFiles('yarn.lock') }}
