@@ -191,7 +191,7 @@ Seesaw.prototype = {
     //            return self.digital_read_bulk_b((1 << (pin - 32))) != 0
     return (await this.digital_read_bulk(1 << pin)) != 0;
   },
-  digital_read_bulk: async function (pins, delay) {
+  digital_read_bulk: async function (pins) {
     var buf = await this.readReg32(this._GPIO_BASE, this._GPIO_BULK);
     //		console.log("digital_read_bulk0:",buf.toString(16));
     buf = buf & 0x3fffffff;
