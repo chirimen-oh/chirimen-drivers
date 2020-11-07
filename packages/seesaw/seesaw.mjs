@@ -106,7 +106,7 @@ var Seesaw = function (i2cPort, slaveAddress) {
   };
 };
 
-seesaw.prototype = {
+Seesaw.prototype = {
   init: async function () {
     console.log("seesaw init: Slave Addr:", this.slaveAddress.toString(16));
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
