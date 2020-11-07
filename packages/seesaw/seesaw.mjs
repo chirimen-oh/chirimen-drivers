@@ -397,7 +397,6 @@ Seesaw.prototype = {
     var c = this.getColor(r, g, b);
 
     var ca = [];
-    var ofs = 0;
     for (var i = 0; i < this._n; i++) {
       ca.push(c);
     }
