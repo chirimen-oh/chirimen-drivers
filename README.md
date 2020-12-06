@@ -94,3 +94,6 @@ yarn release
 ```sh
 npm run release
 ```
+
+### notes
+https://github.com/chirimen-oh/chirimen-micro-bit/issues/25#issuecomment-734010161
