@@ -1,6 +1,6 @@
 {% include translate.md %}
 
-# Contribution Guide
+# Contributing Guidelines
 
 [CHIRIMEN Drivers]({{ site.github.repository_url }}) へのコントリビュート方法です。
 
@@ -59,7 +59,7 @@
 | /docs/examples | /examples の説明のためのドキュメント |
 | (例) /docs/examples/hello | /examples/hello の説明 |
 | /examples | 本リポジトリのモジュールを用いたブラウザ用コードの例 |
-| /node-examples | 本リポジトリのモジュールを用いたNode.js用コードの例 |
+| /node-examples | 本リポジトリのモジュールを用いた Node.js 用コードの例 |
 | /packages | 本リポジトリのモジュールのソースコード |
 
 ## 修正の送り方
@@ -116,13 +116,13 @@ ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD �
 }
 ```
 
-## 全てのモジュールをビルドする方法
+## すべてのモジュールをビルドする方法
 
 packages ディレクトリ以下のそれぞれのモジュールの `npm run build` を実行するには、[Yarn](https://yarnpkg.com/) を使用します。
 リポジトリのルートディレクトリで次のコマンドを実行してください。
 
 ```sh
-yarn && yarn workspaces run build
+yarn && yarn build
 ```
 
 ## リリース方法
@@ -144,3 +144,11 @@ packages ディレクトリ以下のそれぞれのモジュールをリリー�
 ```sh
 yarn release
 ```
+
+`https://www.npmjs.com/package/{パッケージ名}` にアクセスして新しいバージョンに更新されていれば成功です。
+
+### jsDelivr
+
+npmjs.com に登録されれば自動的に [jsDelivr](https://www.jsdelivr.com/) など他の npm と連携している CDN サービスにも自動的にホスティングされるはずです。
+具体的には `https://www.jsdelivr.com/package/npm/{パッケージ名}` が新しいバージョンで更新されていれば成功です。
+もし、jsDelivr にホスティングしているファイルが更新されていない場合、`https://purge.jsdelivr.net/npm/{パッケージ名}` にアクセスしてキャシュを削除することによって新しいバージョンに更新します。
