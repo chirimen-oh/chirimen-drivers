@@ -7,10 +7,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with: { node-version: 14 }
-      - run: echo "::set-env name=YARN_CACHE_DIR::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - id: yarn_cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
         with:
-          path: ${{ env.YARN_CACHE_DIR }}
+          path: ${{ steps.yarn_cache.outputs.dir }}
           key: yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: yarn-
       - run: yarn
