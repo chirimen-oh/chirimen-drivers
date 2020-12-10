@@ -73,27 +73,6 @@ import ADT7410 from "@chirimen/adt7410";
 - [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
 - [Web I2C API](https://browserobo.github.io/WebI2C/)
 
-## Build all packages
+## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
 
-### Using Yarn
-
-```sh
-yarn && yarn build
-```
-
-## Release
-
-### Using Yarn
-
-```sh
-yarn release
-```
-
-### Using npm
-
-```sh
-npm run release
-```
-
-### notes
-https://github.com/chirimen-oh/chirimen-micro-bit/issues/25#issuecomment-734010161
+- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
