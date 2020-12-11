@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.PCA9685 = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.PCA9685 = factory());
 }(this, (function () { 'use strict';
 
   var PCA9685 = function(i2cPort,slaveAddress){

@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.NEOPIXEL_I2C = factory());
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.NEOPIXEL_I2C = factory());
 }(this, (function () { 'use strict';
 
 	// @ts-check
