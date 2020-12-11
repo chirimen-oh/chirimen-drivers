@@ -30,7 +30,7 @@
 │   └── examples
 │        ├── hello.md
 │        └── ...
-├── examples
+├── raspi-examples
 │   ├── hello
 │   │   ├── package.json
 │   │   └── ...
@@ -49,15 +49,14 @@
     └── ...
 ```
 
-| ファイルパス              | 説明                                                  |
-| ------------------------- | ----------------------------------------------------- |
-| /docs                     | CHIRIMEN Drivers ドキュメントのソースコード           |
-| /docs/CONTRIBUTING.md     | このドキュメントのソースコード                        |
-| /docs/examples            | /examples の説明のためのドキュメント                  |
-| (例) /docs/examples/hello | /examples/hello の説明                                |
-| /examples                 | 本リポジトリのモジュールを用いたブラウザ用コードの例  |
-| /node-examples            | 本リポジトリのモジュールを用いた Node.js 用コードの例 |
-| /packages                 | 本リポジトリのモジュールのソースコード                |
+| ファイルパス          | 説明                                                                            |
+| --------------------- | ------------------------------------------------------------------------------- |
+| /docs                 | CHIRIMEN Drivers ドキュメントのソースコード                                     |
+| /docs/CONTRIBUTING.md | このドキュメントのソースコード                                                  |
+| /docs/examples        | サンプルコードの説明のためのドキュメント                                        |
+| /raspi-examples       | 本リポジトリのモジュールを用いた CHIRIMEN for Raspberry Pi ブラウザ用コードの例 |
+| /node-examples        | 本リポジトリのモジュールを用いた Node.js 用コードの例                           |
+| /packages             | 本リポジトリのモジュールのソースコード                                          |
 
 ## 修正の送り方
 
