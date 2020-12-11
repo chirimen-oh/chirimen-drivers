@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/bh1750",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Driver for BH1750 with WebI2C",
   "main": "bh1750.js",
   "module": "bh1750.mjs",

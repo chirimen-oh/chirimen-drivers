@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/sht30",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Driver for SHT30 with WebI2C",
   "main": "sht30.js",
   "module": "sht30.mjs",
