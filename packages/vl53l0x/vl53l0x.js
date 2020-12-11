@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.VL53L0X = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.VL53L0X = factory());
 }(this, (function () { 'use strict';
 
   // VL53L0X driver for CHIRIMEN WebI2C

@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.AK8963 = factory());
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.AK8963 = factory());
 }(this, (function () { 'use strict';
 
 	// Ported from https://github.com/tuupola/micropython-mpu9250/blob/master/ak8963.py

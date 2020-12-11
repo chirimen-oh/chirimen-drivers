@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.AMG8833 = factory());
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.AMG8833 = factory());
 }(this, (function () { 'use strict';
 
 	// AMG8833 driver for CHIRIMEN WebI2C
