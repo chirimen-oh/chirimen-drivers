@@ -1,4 +1,4 @@
-import TCS34725 from "https://unpkg.com/@chirimen/tcs34725?module";
+import TCS34725 from "https://esm.run/@chirimen/tcs34725";
 
 main();
 
@@ -18,7 +18,7 @@ async function main() {
       `R: ${data.r}`,
       `G: ${data.g}`,
       `B: ${data.b}`,
-      `Clear Light: ${data.c}`
+      `Clear Light: ${data.c}`,
     ].join("<br>");
 
     await sleep(500);

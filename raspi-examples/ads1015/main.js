@@ -1,4 +1,4 @@
-import ADS1015 from "https://unpkg.com/@chirimen/ads1015?module";
+import ADS1015 from "https://esm.run/@chirimen/ads1015";
 
 main();
 

@@ -1,4 +1,4 @@
-import BMP180 from "https://unpkg.com/@chirimen/bmp180?module";
+import BMP180 from "https://esm.run/@chirimen/bmp180";
 
 main();
 
@@ -13,7 +13,7 @@ async function main() {
     const temperature = await bmp180.readTemperature();
     head.innerHTML = [
       `Pressure: ${pressure.toFixed(2)} hPa`,
-      `Temperature: ${temperature} degree`
+      `Temperature: ${temperature} degree`,
     ].join(", ");
     await sleep(500);
   }

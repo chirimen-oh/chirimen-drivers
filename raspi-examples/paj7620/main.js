@@ -1,4 +1,4 @@
-import PAJ7620 from "https://unpkg.com/@chirimen/grove-gesture?module";
+import PAJ7620 from "https://esm.run/@chirimen/grove-gesture";
 
 main();
 

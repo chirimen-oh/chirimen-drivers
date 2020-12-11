@@ -1,4 +1,4 @@
-import MLX90614 from "https://unpkg.com/@chirimen/mlx90614?module";
+import MLX90614 from "https://esm.run/@chirimen/mlx90614";
 
 main();
 
@@ -17,7 +17,7 @@ async function main() {
 
     temperatureDisplay.innerHTML = [
       `Object temperature: ${objectTemperature.toFixed(2)} degree`,
-      `Ambient temperature: ${ambientTemperature.toFixed(2)} degree`
+      `Ambient temperature: ${ambientTemperature.toFixed(2)} degree`,
     ].join("<br>");
 
     await sleep(500);

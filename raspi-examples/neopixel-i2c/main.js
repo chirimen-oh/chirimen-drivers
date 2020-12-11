@@ -1,4 +1,4 @@
-import Neopixel from "https://unpkg.com/@chirimen/neopixel-i2c?module";
+import Neopixel from "https://esm.run/@chirimen/neopixel-i2c";
 
 main();
 
@@ -16,7 +16,7 @@ async function main() {
     console.log([
       parseInt(color.red.value, 10),
       color.green.value,
-      color.blue.value
+      color.blue.value,
     ]);
     await neopixel.setGlobal(
       parseInt(color.red.value, 10),

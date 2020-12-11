@@ -1,4 +1,4 @@
-import PCF8591 from "https://unpkg.com/@chirimen/pcf8591?module";
+import PCF8591 from "https://esm.run/@chirimen/pcf8591";
 
 main();
 

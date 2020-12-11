@@ -1,4 +1,4 @@
-import PCA9685 from "https://unpkg.com/@chirimen/pca9685?module";
+import PCA9685 from "https://esm.run/@chirimen/pca9685";
 
 main();
 

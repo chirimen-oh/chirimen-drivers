@@ -1,4 +1,4 @@
-import OledDisplay from "https://unpkg.com/@chirimen/grove-oled-display?module";
+import OledDisplay from "https://esm.run/@chirimen/grove-oled-display";
 
 main();
 

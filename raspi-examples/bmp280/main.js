@@ -1,4 +1,4 @@
-import BMP280 from "https://unpkg.com/@chirimen/bmp280?module";
+import BMP280 from "https://esm.run/@chirimen/bmp280";
 
 main();
 
@@ -15,7 +15,7 @@ async function main() {
     const temperature = data.temperature.toFixed(2);
     value.innerHTML = [
       `Temperature: ${temperature} degree`,
-      `Pressure: ${pressure} hPa`
+      `Pressure: ${pressure} hPa`,
     ].join("<br>");
 
     await sleep(500);

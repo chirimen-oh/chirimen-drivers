@@ -1,4 +1,4 @@
-import VEML6070 from "https://unpkg.com/@chirimen/veml6070?module";
+import VEML6070 from "https://esm.run/@chirimen/veml6070";
 
 main();
 

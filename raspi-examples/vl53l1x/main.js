@@ -1,4 +1,4 @@
-import VL53L1X from "https://unpkg.com/@chirimen/vl53l1x?module";
+import VL53L1X from "https://esm.run/@chirimen/vl53l1x";
 
 main();
 

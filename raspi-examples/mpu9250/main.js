@@ -1,5 +1,5 @@
-import MPU6500 from "https://unpkg.com/@chirimen/mpu6500?module";
-import AK8963 from "https://unpkg.com/@chirimen/ak8963?module";
+import MPU6500 from "https://esm.run/@chirimen/mpu6500";
+import AK8963 from "https://esm.run/@chirimen/ak8963";
 
 main();
 
@@ -25,7 +25,7 @@ async function main() {
       `Rz: ${r.z}`,
       `Hx: ${h.x}`,
       `Hy: ${h.y}`,
-      `Hz: ${h.z}`
+      `Hz: ${h.z}`,
     ].join("<br>");
 
     await sleep(500);

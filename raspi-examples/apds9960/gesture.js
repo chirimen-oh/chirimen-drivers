@@ -1,4 +1,4 @@
-import APDS9960 from "https://unpkg.com/@chirimen/apds9960?module";
+import APDS9960 from "https://esm.run/@chirimen/apds9960";
 
 main();
 

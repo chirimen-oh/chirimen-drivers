@@ -1,4 +1,4 @@
-import MPU6050 from "https://unpkg.com/@chirimen/mpu6050?module";
+import MPU6050 from "https://esm.run/@chirimen/mpu6050";
 
 main();
 
@@ -17,7 +17,7 @@ async function main() {
     value.innerHTML = [
       `Temperature: ${temperature} degree`,
       `Gx: ${g[0]}, Gy: ${g[1]}, Gz: ${g[2]}`,
-      `Rx: ${r[0]}, Ry: ${r[1]}, Rz: ${r[2]}`
+      `Rx: ${r[0]}, Ry: ${r[1]}, Rz: ${r[2]}`,
     ].join("<br>");
 
     await sleep(500);
