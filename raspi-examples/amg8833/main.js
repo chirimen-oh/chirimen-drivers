@@ -1,4 +1,4 @@
-import AMG8833 from "https://unpkg.com/@chirimen/amg8833?module";
+import AMG8833 from "https://esm.run/@chirimen/amg8833";
 
 // in celsius
 const tMax = 40;

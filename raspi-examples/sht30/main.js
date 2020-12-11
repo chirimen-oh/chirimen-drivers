@@ -1,4 +1,4 @@
-import SHT30 from "https://unpkg.com/@chirimen/sht30?module";
+import SHT30 from "https://esm.run/@chirimen/sht30";
 
 main();
 
@@ -13,7 +13,7 @@ async function main() {
     const { humidity, temperature } = await sht30.readData();
     value.innerHTML = [
       `Humidity: ${humidity.toFixed(2)}%`,
-      `Temperature: ${temperature.toFixed(2)} degree`
+      `Temperature: ${temperature.toFixed(2)} degree`,
     ].join("<br>");
 
     await sleep(500);

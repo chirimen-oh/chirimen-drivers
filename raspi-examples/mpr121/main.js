@@ -1,4 +1,4 @@
-import GroveTouch from "https://unpkg.com/@chirimen/grove-touch?module";
+import GroveTouch from "https://esm.run/@chirimen/grove-touch";
 
 main();
 

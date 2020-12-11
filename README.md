@@ -51,7 +51,7 @@ Using ES Modules:
 
 ```html
 <script type="module">
-  import ADT7410 from "https://unpkg.com/@chirimen/adt7410?module";
+  import ADT7410 from "https://esm.run/@chirimen/adt7410";
 </script>
 ```
 

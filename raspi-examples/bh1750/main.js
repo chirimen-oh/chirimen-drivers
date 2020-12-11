@@ -1,4 +1,4 @@
-import BH1750 from "https://unpkg.com/@chirimen/bh1750?module";
+import BH1750 from "https://esm.run/@chirimen/bh1750";
 
 main();
 

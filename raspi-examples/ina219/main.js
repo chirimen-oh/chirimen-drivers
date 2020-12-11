@@ -1,4 +1,4 @@
-import INA219 from "https://unpkg.com/@chirimen/ina219?module";
+import INA219 from "https://esm.run/@chirimen/ina219";
 
 main();
 
@@ -22,7 +22,7 @@ async function main() {
       `Supply voltage: ${supplyVoltage.toFixed(3)}V`,
       `Current: ${current.toFixed(2)}mA`,
       `Power: ${power.toFixed(2)}mW`,
-      `Shunt voltage: ${shuntVoltage.toFixed(2)}mV`
+      `Shunt voltage: ${shuntVoltage.toFixed(2)}mV`,
     ].join("<br>");
 
     await sleep(500);

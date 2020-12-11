@@ -1,4 +1,4 @@
-import GROVEACCELEROMETER from "https://unpkg.com/@chirimen/grove-accelerometer?module";
+import GROVEACCELEROMETER from "https://esm.run/@chirimen/grove-accelerometer";
 
 main();
 

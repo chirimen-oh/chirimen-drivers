@@ -1,4 +1,4 @@
-import BME280 from "https://unpkg.com/@chirimen/bme280?module";
+import BME280 from "https://esm.run/@chirimen/bme280";
 
 main();
 
@@ -17,7 +17,7 @@ async function main() {
     value.innerHTML = [
       `Temperature: ${temperature} degree`,
       `Humidity: ${humidity} %`,
-      `Pressure: ${pressure} hPa`
+      `Pressure: ${pressure} hPa`,
     ].join("<br>");
     await sleep(500);
   }

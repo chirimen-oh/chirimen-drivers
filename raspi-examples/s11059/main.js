@@ -1,4 +1,4 @@
-import S11059 from "https://unpkg.com/@chirimen/s11059?module";
+import S11059 from "https://esm.run/@chirimen/s11059";
 
 main();
 

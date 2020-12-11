@@ -1,4 +1,4 @@
-import GP2Y0E03 from "https://unpkg.com/@chirimen/gp2y0e03?module";
+import GP2Y0E03 from "https://esm.run/@chirimen/gp2y0e03";
 
 main();
 

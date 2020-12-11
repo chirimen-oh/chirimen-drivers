@@ -1,4 +1,4 @@
-import GROVELIGHT from "https://unpkg.com/@chirimen/grove-light?module";
+import GROVELIGHT from "https://esm.run/@chirimen/grove-light";
 
 main();
 
