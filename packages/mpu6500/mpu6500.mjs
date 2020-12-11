@@ -54,6 +54,9 @@ var MPU6500 = function(i2cPort,slaveAddress){
 		_GYRO_SO_1000DPS : 32.8,
 		_GYRO_SO_2000DPS : 16.4,
 
+		_TEMP_SO : 333.87,
+		_TEMP_OFFSET : 21,
+
 	//	# Used for enablind and disabling the i2c bypass access
 		_I2C_BYPASS_MASK : 0b00000010,
 		_I2C_BYPASS_EN : 0b00000010,
@@ -185,6 +188,15 @@ MPU6500.prototype = {
 			z: z / so * sf
 		}
 	},
+
+	getTemperature: async function () {
+		// temperature in celcius as a float.
+		var cs = this.devConst;
+		var temp = this.getVal(await this.i2cSlave.read16(cs._TEMP_OUT_H));
+		temp = ((temp - cs._TEMP_OFFSET) / cs._TEMP_SO) + cs._TEMP_OFFSET;
+		return ( temp );
+	},
+
 	getVal: function (w) {
 		var l = w >>> 8;
 		var b = w & 0xff;
