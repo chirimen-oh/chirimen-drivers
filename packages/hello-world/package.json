@@ -1,0 +1,17 @@
+{
+  "name": "@chirimen/hello-world",
+  "version": "0.0.0",
+  "main": "index.mjs",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/hello-world"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": ":"
+  }
+}
