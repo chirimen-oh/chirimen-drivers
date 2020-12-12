@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/hello-world",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "index.mjs",
   "license": "CC0-1.0",
   "repository": {
