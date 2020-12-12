@@ -28,22 +28,20 @@
 │   ├── CONTRIBUTING.md
 │   ├── README.md
 │   └── examples
-│        ├── hello.md
 │        └── ...
 ├── raspi-examples
-│   ├── hello
-│   │   ├── package.json
+│   ├── hello-world
 │   │   └── ...
 │   └── ...
 ├── node-examples
-│   ├── hello
+│   ├── hello-world
 │   │   ├── package.json
 │   │   └── ...
 │   └── ...
 ├── lerna.json
 ├── package.json
 └── packages
-    ├── hello
+    ├── hello-world
     │   ├── package.json
     │   └── ...
     └── ...
@@ -73,6 +71,8 @@
 
 [ES Modules](https://tc39.es/ecma262/#sec-imports) または [UMD (Universal Module Definition) パターン](https://github.com/umdjs/umd)を推奨します。
 ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD のフォーマットに変換すると良いでしょう。
+
+例: [@chirimen/hello-world](https://www.npmjs.com/package/@chirimen/hello-world)
 
 ### package.json
 
@@ -119,6 +119,20 @@ packages ディレクトリ以下のそれぞれのモジュールの `npm run b
 
 ```sh
 yarn && yarn build
+```
+
+### ヒント: Yarn のインストール方法
+
+次のコマンドでインストールできます。
+
+```sh
+npm install -g yarn
+```
+
+ルート権限でインストールする場合 (`sudo` を使う例):
+
+```sh
+sudo npm install -g yarn
 ```
 
 ## リリース方法
