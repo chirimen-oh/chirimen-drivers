@@ -8,7 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-        with: { node-version: 14 }
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
       - id: yarn_cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2
@@ -21,9 +23,6 @@ jobs:
         run: |
           git config user.name release-bot
           git config user.email release-bot@example
-          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' >> .npmrc
-          npm run release
+          yarn release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - uses: mxschmitt/action-tmate@v3
-        if: failure()
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

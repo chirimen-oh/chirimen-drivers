@@ -1,4 +1,12 @@
 {
   "packages": ["packages/*"],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "fromPackage": true,
+      "preDistTag": "next",
+      "verifyAccess": false,
+      "yes": true
+    }
+  }
 }
