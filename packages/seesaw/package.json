@@ -2,7 +2,7 @@
   "name": "@chirimen/seesaw",
   "version": "1.0.2",
   "description": "Driver for Seesaw with WebI2C",
-  "main": "seesaw.js",
+  "main": "index.js",
   "module": "seesaw.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

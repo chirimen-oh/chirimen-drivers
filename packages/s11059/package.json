@@ -2,7 +2,7 @@
   "name": "@chirimen/s11059",
   "version": "1.0.5",
   "description": "Driver for S11059 with WebI2C",
-  "main": "s11059.js",
+  "main": "index.js",
   "module": "s11059.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

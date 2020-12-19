@@ -2,7 +2,7 @@
   "name": "@chirimen/ina219",
   "version": "1.0.2",
   "description": "Driver for INA219 with WebI2C",
-  "main": "ina219.js",
+  "main": "index.js",
   "module": "ina219.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

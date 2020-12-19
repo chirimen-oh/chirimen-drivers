@@ -2,7 +2,7 @@
   "name": "@chirimen/grove-gesture",
   "version": "1.0.3",
   "description": "Driver for PAJ7620 with WebI2C",
-  "main": "grove-gesture.js",
+  "main": "index.js",
   "module": "grove-gesture.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

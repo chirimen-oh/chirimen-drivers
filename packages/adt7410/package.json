@@ -2,7 +2,7 @@
   "name": "@chirimen/adt7410",
   "version": "1.0.5",
   "description": "Driver for ADT7410 with WebI2C",
-  "main": "adt7410.js",
+  "main": "index.js",
   "module": "adt7410.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

@@ -2,7 +2,7 @@
   "name": "@chirimen/vl53l0x",
   "version": "1.0.6",
   "description": "Driver for VL53L0X with WebI2C",
-  "main": "vl53l0x.js",
+  "main": "index.js",
   "module": "vl53l0x.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"
