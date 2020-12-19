@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "description": "Driver for ADT7410 with WebI2C",
   "main": "index.js",
-  "module": "adt7410.mjs",
+  "module": "adt7410.js",
   "license": "MIT",
   "repository": {
     "type": "git",

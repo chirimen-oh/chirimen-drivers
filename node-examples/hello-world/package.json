@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/hello-world-example",
   "version": "1.0.0",
-  "main": "main.mjs",
+  "main": "main.js",
   "license": "CC0-1.0",
   "dependencies": {
     "@chirimen/hello-world": "latest"

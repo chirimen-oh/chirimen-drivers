@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for tadfmac/Canzasi with WebI2C",
   "main": "index.js",
-  "module": "canzasi.mjs",
+  "module": "canzasi.js",
   "license": "MIT",
   "repository": {
     "type": "git",

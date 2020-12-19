@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Driver for PAJ7620 with WebI2C",
   "main": "index.js",
-  "module": "grove-gesture.mjs",
+  "module": "grove-gesture.js",
   "license": "MIT",
   "repository": {
     "type": "git",

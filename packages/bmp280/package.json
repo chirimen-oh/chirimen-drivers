@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for BMP280 with WebI2C",
   "main": "index.js",
-  "module": "bmp280.mjs",
+  "module": "bmp280.js",
   "license": "MIT",
   "repository": {
     "type": "git",

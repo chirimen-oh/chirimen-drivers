@@ -13,7 +13,7 @@
   },
   "scripts": {
     "release": "lerna publish from-package --yes --pre-dist-tag next",
-    "lint": "eslint --ext .js,.mjs .",
-    "lint-report": "eslint --output-file eslint_report.json --format json --ext .js,.mjs ."
+    "lint": "eslint .",
+    "lint-report": "eslint --output-file eslint_report.json --format json ."
   }
 }

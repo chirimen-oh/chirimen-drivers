@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for SHT30 with WebI2C",
   "main": "index.js",
-  "module": "sht30.mjs",
+  "module": "sht30.js",
   "license": "MIT",
   "repository": {
     "type": "git",

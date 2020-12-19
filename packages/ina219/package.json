@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for INA219 with WebI2C",
   "main": "index.js",
-  "module": "ina219.mjs",
+  "module": "ina219.js",
   "license": "MIT",
   "repository": {
     "type": "git",

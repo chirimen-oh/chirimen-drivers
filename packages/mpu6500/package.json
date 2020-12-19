@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for MPU6500 with WebI2C",
   "main": "index.js",
-  "module": "mpu6500.mjs",
+  "module": "mpu6500.js",
   "license": "MIT",
   "repository": {
     "type": "git",

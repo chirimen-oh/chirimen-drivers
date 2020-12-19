@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Driver for VEML6070 with WebI2C",
   "main": "index.js",
-  "module": "veml6070.mjs",
+  "module": "veml6070.js",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for ADS1x15 with WebI2C",
   "main": "index.js",
-  "module": "ads1x15.mjs",
+  "module": "ads1x15.js",
   "license": "MIT",
   "repository": {
     "type": "git",

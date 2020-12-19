@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for stepping motor with Arduino/WebI2C",
   "main": "index.js",
-  "module": "arduino-stepping-motor.mjs",
+  "module": "arduino-stepping-motor.js",
   "license": "MIT",
   "repository": {
     "type": "git",

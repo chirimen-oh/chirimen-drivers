@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for MLX90614 with WebI2C",
   "main": "index.js",
-  "module": "mlx90614.mjs",
+  "module": "mlx90614.js",
   "license": "MIT",
   "repository": {
     "type": "git",

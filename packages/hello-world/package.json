@@ -1,7 +1,8 @@
 {
   "name": "@chirimen/hello-world",
   "version": "0.0.1",
-  "main": "index.mjs",
+  "main": "index.js",
+  "type": "module",
   "license": "CC0-1.0",
   "repository": {
     "type": "git",
@@ -10,8 +11,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": ":"
   }
 }

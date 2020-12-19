@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Driver for ADXL345 with WebI2C",
   "main": "index.js",
-  "module": "grove-accelerometer.mjs",
+  "module": "grove-accelerometer.js",
   "license": "MIT",
   "repository": {
     "type": "git",

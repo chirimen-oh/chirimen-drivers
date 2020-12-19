@@ -16,7 +16,7 @@ cd chirimen-drivers/raspi-examples/hello-world
 パッケージ本体を取得します。
 
 ```sh
-cp ../../packages/hello-world/index.mjs ./index.mjs
+cp ../../packages/hello-world/index.js ./index.js
 ```
 
 Node.js を利用し、開発用の Web サーバーを起動します。
@@ -36,7 +36,7 @@ npx serve
 パッケージ本体に変更を反映させます。
 
 ```sh
-cp ./index.mjs ../../packages/hello-world/index.mjs
+cp ./index.js ../../packages/hello-world/index.js
 ```
 
 ## リリース
@@ -56,13 +56,13 @@ import message from "https://esm.run/@chirimen/hello-world";
 不要なファイルを取り除きます。
 
 ```sh
-rm ./index.mjs
+rm ./index.js
 ```
 
 取り除きたいファイルをすでにコミットしていた場合は、Git の管理から外します。
 
 ```sh
-git rm ./index.mjs
+git rm ./index.js
 ```
 
 ## Node.js 環境での開発
@@ -82,7 +82,7 @@ cd ../../node-examples/hello-world
 # シンボリックリンクを作ったパッケージにリンクします
 yarn link @chirimen/hello-world
 # サンプルコード本体を実行します
-yarn exec node main.mjs
+yarn exec node --input-type=module main.js
 ```
 
 ここでは [Yarn](https://classic.yarnpkg.com/) を使用しましたが [npm](https://www.npmjs.com/) でも [`npm link`](https://docs.npmjs.com/cli/v6/commands/npm-link) を使って同様に実行できると思います。
@@ -90,7 +90,7 @@ yarn exec node main.mjs
 実行結果
 
 ```log
-$ yarn exec node main.mjs
+$ yarn exec node --input-type=module main.js
 yarn exec v1.22.5
 Hello World!
 ✨  Done in 0.11s.
