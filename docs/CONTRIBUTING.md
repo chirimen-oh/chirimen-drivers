@@ -93,7 +93,7 @@ ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD �
   "name": "@chirimen/hello",
   "version": "1.0.0",
   "main": "index.js",
-  "module": "index.mjs",
+  "module": "index.esm.js",
   "license": "MIT",
   "repository": {
     "type": "git",

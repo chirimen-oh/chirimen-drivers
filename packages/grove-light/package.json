@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Driver for TSL2561 with WebI2C",
   "main": "index.js",
-  "module": "grove-light.mjs",
+  "module": "grove-light.js",
   "license": "MIT",
   "repository": {
     "type": "git",

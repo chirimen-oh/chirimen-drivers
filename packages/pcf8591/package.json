@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for PCF8591 with WebI2C",
   "main": "index.js",
-  "module": "pcf8591.mjs",
+  "module": "pcf8591.js",
   "license": "MIT",
   "repository": {
     "type": "git",

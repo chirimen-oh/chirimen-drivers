@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Driver for MPR121 with WebI2C",
   "main": "index.js",
-  "module": "grove-touch.mjs",
+  "module": "grove-touch.js",
   "license": "MIT",
   "repository": {
     "type": "git",

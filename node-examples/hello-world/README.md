@@ -15,7 +15,7 @@ yarn --cwd ../../packages/hello-world link
 # シンボリックリンクを作ったパッケージにリンクします
 yarn link @chirimen/hello-world
 # サンプルコード本体を実行します
-yarn exec node main.mjs
+yarn exec node --input-type=module main.js
 ```
 
 ここでは [Yarn](https://classic.yarnpkg.com/) を使用しましたが [npm](https://www.npmjs.com/) でも [`npm link`](https://docs.npmjs.com/cli/v6/commands/npm-link) を使って同様に実行できます。
@@ -23,7 +23,7 @@ yarn exec node main.mjs
 実行結果
 
 ```log
-$ yarn exec node main.mjs
+$ yarn exec node --input-type=module main.js
 yarn exec v1.22.5
 Hello World!
 ✨  Done in 0.11s.

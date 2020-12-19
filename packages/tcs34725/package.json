@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for TCS34725 with WebI2C",
   "main": "index.js",
-  "module": "tcs34725.mjs",
+  "module": "tcs34725.js",
   "license": "MIT",
   "repository": {
     "type": "git",

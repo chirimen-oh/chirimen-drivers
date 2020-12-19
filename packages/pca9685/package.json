@@ -3,7 +3,7 @@
   "version": "1.0.6",
   "description": "Driver for PCA9685 with WebI2C",
   "main": "index.js",
-  "module": "pca9685.mjs",
+  "module": "pca9685.js",
   "license": "MIT",
   "repository": {
     "type": "git",

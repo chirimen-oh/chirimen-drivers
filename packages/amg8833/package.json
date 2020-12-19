@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for AMG8833 with WebI2C",
   "main": "index.js",
-  "module": "amg8833.mjs",
+  "module": "amg8833.js",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -16,7 +16,7 @@ cd chirimen-drivers/raspi-examples/hello-world
 パッケージ本体を取得します。
 
 ```sh
-cp ../../packages/hello-world/index.mjs ./index.mjs
+cp ../../packages/hello-world/index.js ./index.js
 ```
 
 Node.js を利用し、開発用の Web サーバーを起動します。
@@ -36,7 +36,7 @@ npx serve
 パッケージ本体に変更を反映させます。
 
 ```sh
-cp ./index.mjs ../../packages/hello-world/index.mjs
+cp ./index.js ../../packages/hello-world/index.js
 ```
 
 ## リリース
@@ -56,11 +56,11 @@ import message from "https://esm.run/@chirimen/hello-world";
 不要なファイルを取り除きます。
 
 ```sh
-rm ./index.mjs
+rm ./index.js
 ```
 
 取り除きたいファイルをすでにコミットしていた場合は、Git の管理から外します。
 
 ```sh
-git rm ./index.mjs
+git rm ./index.js
 ```

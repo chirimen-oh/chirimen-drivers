@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for AK8963 with WebI2C",
   "main": "index.js",
-  "module": "ak8963.mjs",
+  "module": "ak8963.js",
   "license": "MIT",
   "repository": {
     "type": "git",

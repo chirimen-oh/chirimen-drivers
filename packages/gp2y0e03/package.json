@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "description": "Driver for GP2Y0E03 with WebI2C",
   "main": "index.js",
-  "module": "gp2y0e03.mjs",
+  "module": "gp2y0e03.js",
   "license": "MIT",
   "repository": {
     "type": "git",

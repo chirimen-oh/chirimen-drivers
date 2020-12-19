@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Driver for BH1750 with WebI2C",
   "main": "index.js",
-  "module": "bh1750.mjs",
+  "module": "bh1750.js",
   "license": "MIT",
   "repository": {
     "type": "git",

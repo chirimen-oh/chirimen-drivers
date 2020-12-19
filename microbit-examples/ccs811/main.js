@@ -1,6 +1,6 @@
 //import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
 import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811@1.0.0/ccs811.js";
-//import CCS811 from "./ccs811.mjs";
+//import CCS811 from "./ccs811.js";
 
 window.connect=connect;
 window.disconnect=disconnect;

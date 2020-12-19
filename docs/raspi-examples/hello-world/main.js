@@ -1,5 +1,5 @@
 // リリース前:
-// import message from "./index.mjs";
+// import message from "./index.js";
 // リリース後:
 import message from "https://esm.run/@chirimen/hello-world";
 

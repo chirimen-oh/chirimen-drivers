@@ -8,7 +8,7 @@
     "access": "public"
   },
   "main": "umd/index.js",
-  "module": "esm/index.mjs",
+  "module": "esm/index.js",
   "types": "esm/index.d.ts",
   "files": [
     "esm",

@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Driver for APDS9960 with WebI2C",
   "main": "index.js",
-  "module": "apds9960.mjs",
+  "module": "apds9960.js",
   "license": "MIT",
   "repository": {
     "type": "git",
