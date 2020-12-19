@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/pca9685",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Driver for PCA9685 with WebI2C",
   "main": "index.js",
   "module": "pca9685.js",

@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/ak8963",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Driver for AK8963 with WebI2C",
   "main": "index.js",
   "module": "ak8963.js",
