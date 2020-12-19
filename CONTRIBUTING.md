@@ -23,12 +23,11 @@
 ```
 /
 ├── LICENSE
+├── CONTRIBUTING.md
 ├── README.md
 ├── docs
-│   ├── CONTRIBUTING.md
-│   ├── README.md
-│   └── examples
-│        └── ...
+├── examples
+│   └── ...
 ├── raspi-examples
 │   ├── hello-world
 │   │   └── ...
@@ -47,14 +46,14 @@
     └── ...
 ```
 
-| ファイルパス          | 説明                                                                            |
-| --------------------- | ------------------------------------------------------------------------------- |
-| /docs                 | CHIRIMEN Drivers ドキュメントのソースコード                                     |
-| /docs/CONTRIBUTING.md | このドキュメントのソースコード                                                  |
-| /docs/examples        | サンプルコードの説明のためのドキュメント                                        |
-| /raspi-examples       | 本リポジトリのモジュールを用いた CHIRIMEN for Raspberry Pi ブラウザ用コードの例 |
-| /node-examples        | 本リポジトリのモジュールを用いた Node.js 用コードの例                           |
-| /packages             | 本リポジトリのモジュールのソースコード                                          |
+| ファイルパス       | 説明                                               |
+| ------------------ | -------------------------------------------------- |
+| /CONTRIBUTING.md   | このドキュメト                                     |
+| /docs/examples     | サンプルコードの説明のためのドキュメント           |
+| /raspi-examples    | CHIRIMEN for Raspberry Pi ブラウザ用サンプルコード |
+| /microbit-examples | CHIRIMEN with micro:bit 用サンプルコード           |
+| /node-examples     | Node.js 用サンプルコード                           |
+| /packages          | モジュールのソースコード                           |
 
 ## 修正の送り方
 
