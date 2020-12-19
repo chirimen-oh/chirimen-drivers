@@ -26,3 +26,5 @@ jobs:
           yarn release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: mxschmitt/action-tmate@v3
+        if: failure()
