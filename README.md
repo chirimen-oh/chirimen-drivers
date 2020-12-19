@@ -16,6 +16,7 @@
 - [@chirimen/bmp180](https://www.jsdelivr.com/package/npm/@chirimen/bmp180)
 - [@chirimen/bmp280](https://www.jsdelivr.com/package/npm/@chirimen/bmp280)
 - [@chirimen/canzasi](https://www.jsdelivr.com/package/npm/@chirimen/canzasi)
+- [@chirimen/ccs811](https://www.jsdelivr.com/package/npm/@chirimen/ccs811)
 - [@chirimen/gp2y0e03](https://www.jsdelivr.com/package/npm/@chirimen/gp2y0e03)
 - [@chirimen/grove-accelerometer](https://www.jsdelivr.com/package/npm/@chirimen/grove-accelerometer)
 - [@chirimen/grove-gesture](https://www.jsdelivr.com/package/npm/@chirimen/grove-gesture)
