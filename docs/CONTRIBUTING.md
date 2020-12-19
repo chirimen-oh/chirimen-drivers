@@ -112,48 +112,9 @@ ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD �
 }
 ```
 
-## すべてのモジュールをビルドする方法
-
-packages ディレクトリ以下のそれぞれのモジュールの `npm run build` を実行するには、[Yarn](https://yarnpkg.com/) を使用します。
-リポジトリのルートディレクトリで次のコマンドを実行してください。
-
-```sh
-yarn && yarn build
-```
-
-### ヒント: Yarn のインストール方法
-
-次のコマンドでインストールできます。
-
-```sh
-npm install -g yarn
-```
-
-ルート権限でインストールする場合 (`sudo` を使う例):
-
-```sh
-sudo npm install -g yarn
-```
-
 ## リリース方法
 
-[@chirimen](https://www.npmjs.com/org/chirimen) のメンバーのみリリース可能です。
-
-リリースするにはまず、npm コマンドで認証します。
-
-```sh
-npm login
-```
-
-このコマンドを実行し、認証に成功するとデプロイするための認証トークンが発行され ~/.npmrc に記録されます。
-詳しい説明は [npm-adduser のドキュメント](https://docs.npmjs.com/cli/adduser) を参照してください。
-
-発行された認証トークンを用いて、モジュールをリリースすることが可能になります。
-packages ディレクトリ以下のそれぞれのモジュールをリリースするには、リポジトリのルートディレクトリで次のコマンドを実行してください。
-
-```sh
-yarn release
-```
+デフォルトブランチの内容をもとに GitHub Actions によって自動的にリリースされます。
 
 `https://www.npmjs.com/package/{パッケージ名}` にアクセスして新しいバージョンに更新されていれば成功です。
 
