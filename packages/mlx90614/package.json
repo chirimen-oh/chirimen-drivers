@@ -2,7 +2,7 @@
   "name": "@chirimen/mlx90614",
   "version": "1.0.2",
   "description": "Driver for MLX90614 with WebI2C",
-  "main": "mlx90614.js",
+  "main": "index.js",
   "module": "mlx90614.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

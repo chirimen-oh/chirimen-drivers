@@ -2,7 +2,7 @@
   "name": "@chirimen/mpu6050",
   "version": "1.0.2",
   "description": "Driver for MPU6050 with WebI2C",
-  "main": "mpu6050.js",
+  "main": "index.js",
   "module": "mpu6050.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

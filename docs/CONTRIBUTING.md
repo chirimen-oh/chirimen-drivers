@@ -104,7 +104,8 @@ ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD �
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "~1"

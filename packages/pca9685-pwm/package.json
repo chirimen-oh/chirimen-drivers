@@ -2,7 +2,7 @@
   "name": "@chirimen/pca9685-pwm",
   "version": "1.0.2",
   "description": "Driver for PCA9685 using PWM with WebI2C",
-  "main": "pca9685-pwm.js",
+  "main": "index.js",
   "module": "pca9685-pwm.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

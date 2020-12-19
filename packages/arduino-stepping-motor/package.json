@@ -2,7 +2,7 @@
   "name": "@chirimen/arduino-stepping-motor",
   "version": "1.0.2",
   "description": "Driver for stepping motor with Arduino/WebI2C",
-  "main": "arduino-stepping-motor.js",
+  "main": "index.js",
   "module": "arduino-stepping-motor.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"

@@ -2,7 +2,7 @@
   "name": "@chirimen/canzasi",
   "version": "1.0.2",
   "description": "Driver for tadfmac/Canzasi with WebI2C",
-  "main": "canzasi.js",
+  "main": "index.js",
   "module": "canzasi.mjs",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "rollup": "^2.34.2"
