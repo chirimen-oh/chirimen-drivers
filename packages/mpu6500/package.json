@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/mpu6500",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Driver for MPU6500 with WebI2C",
   "main": "index.js",
   "module": "mpu6500.js",

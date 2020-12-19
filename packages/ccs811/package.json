@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/ccs811",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for ccs811 with WebI2C",
   "main": "ccs811.js",
   "module": "ccs811.js",

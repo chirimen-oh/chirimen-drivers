@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/s11059",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Driver for S11059 with WebI2C",
   "main": "index.js",
   "module": "s11059.js",

@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/gp2y0e03",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Driver for GP2Y0E03 with WebI2C",
   "main": "index.js",
   "module": "gp2y0e03.js",
