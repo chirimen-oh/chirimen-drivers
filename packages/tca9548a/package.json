@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/tca9548a",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Driver for TCA9548A with WebI2C",
   "author": "Kohei Watanabe <kou029w@gmail.com>",
   "license": "MIT",
