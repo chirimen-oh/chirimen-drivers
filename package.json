@@ -12,7 +12,7 @@
     "lerna": "^3.22.1"
   },
   "scripts": {
-    "release": "lerna publish",
+    "release": "lerna publish from-package",
     "lint": "eslint .",
     "lint-report": "eslint --output-file eslint_report.json --format json ."
   }
