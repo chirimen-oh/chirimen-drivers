@@ -1,0 +1,16 @@
+{
+  "name": "@chirimen/bme680",
+  "version": "1.0.0",
+  "description": "Driver for bme680 with WebI2C",
+  "main": "bme680.js",
+  "module": "bme680.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/bme680"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
