@@ -13,6 +13,7 @@
 - [@chirimen/arduino-stepping-motor](https://www.jsdelivr.com/package/npm/@chirimen/arduino-stepping-motor)
 - [@chirimen/bh1750](https://www.jsdelivr.com/package/npm/@chirimen/bh1750)
 - [@chirimen/bme280](https://www.jsdelivr.com/package/npm/@chirimen/bme280)
+- [@chirimen/bme680](https://www.jsdelivr.com/package/npm/@chirimen/bme680)
 - [@chirimen/bmp180](https://www.jsdelivr.com/package/npm/@chirimen/bmp180)
 - [@chirimen/bmp280](https://www.jsdelivr.com/package/npm/@chirimen/bmp280)
 - [@chirimen/canzasi](https://www.jsdelivr.com/package/npm/@chirimen/canzasi)
