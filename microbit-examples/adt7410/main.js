@@ -1,15 +1,12 @@
-//import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
-import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811/ccs811.js";
-//import CCS811 from "./ccs811.js";
+//import ADT7410 from "https://unpkg.com/@chirimen/adt7410?module";
+import ADT7410 from "https://cdn.jsdelivr.net/npm/@chirimen/adt7410/adt7410.js";
 
 window.connect = connect;
 window.disconnect = disconnect;
 
-console.log("Hello this is main.js");
-
 var microBitBle;
 
-var ccs;
+var adt7410;
 
 var readEnable;
 
@@ -18,8 +15,8 @@ async function connect() {
   msg.innerHTML = "micro:bit BLE接続しました。";
   var i2cAccess = await microBitBle.requestI2CAccess();
   var i2cPort = i2cAccess.ports.get(1);
-  ccs = new CCS811(i2cPort);
-  await ccs.init();
+  adt7410 = new ADT7410(i2cPort, 0x48);
+  await adt7410.init();
   readEnable = true;
   readData();
 }
@@ -31,11 +28,11 @@ async function disconnect() {
 }
 
 async function readData() {
+  var readVal;
   while (readEnable) {
-    var ccsData = await ccs.readData();
-    console.log("ccsData:", ccsData);
-    msg.innerHTML =
-      "CO2: " + ccsData.CO2 + " ppm  <br>TVOC: " + ccsData.TVOC + " ppb";
-    await sleep(1500);
+    readVal = await adt7410.read();
+    console.log("readVal:", readVal);
+    msg.innerHTML = "温度: " + readVal + "℃";
+    await sleep(1000);
   }
 }

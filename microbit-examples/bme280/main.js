@@ -1,15 +1,12 @@
-//import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
-import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811/ccs811.js";
-//import CCS811 from "./ccs811.js";
+//import BME280 from "https://unpkg.com/@chirimen/bme280?module";
+import BME280 from "https://cdn.jsdelivr.net/npm/@chirimen/bme280/bme280.js";
 
 window.connect = connect;
 window.disconnect = disconnect;
 
-console.log("Hello this is main.js");
-
 var microBitBle;
 
-var ccs;
+var bme280;
 
 var readEnable;
 
@@ -18,8 +15,8 @@ async function connect() {
   msg.innerHTML = "micro:bit BLE接続しました。";
   var i2cAccess = await microBitBle.requestI2CAccess();
   var i2cPort = i2cAccess.ports.get(1);
-  ccs = new CCS811(i2cPort);
-  await ccs.init();
+  bme280 = new BME280(i2cPort, 0x76);
+  await bme280.init();
   readEnable = true;
   readData();
 }
@@ -31,11 +28,21 @@ async function disconnect() {
 }
 
 async function readData() {
+  var readVal;
   while (readEnable) {
-    var ccsData = await ccs.readData();
-    console.log("ccsData:", ccsData);
-    msg.innerHTML =
-      "CO2: " + ccsData.CO2 + " ppm  <br>TVOC: " + ccsData.TVOC + " ppb";
-    await sleep(1500);
+    try {
+      readVal = await bme280.readData();
+      console.log("readVal:", readVal);
+      msg.innerHTML =
+        readVal.temperature +
+        "℃ " +
+        readVal.pressure +
+        "hPa " +
+        readVal.humidity +
+        "%";
+    } catch (e) {
+      console.log("Err:", e, " SKIP");
+    }
+    await sleep(1000);
   }
 }

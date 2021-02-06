@@ -1,15 +1,12 @@
-//import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
-import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811/ccs811.js";
-//import CCS811 from "./ccs811.js";
+//import SHT30 from "https://unpkg.com/@chirimen/sht30?module";
+import SHT30 from "https://cdn.jsdelivr.net/npm/@chirimen/sht30/sht30.js";
 
 window.connect = connect;
 window.disconnect = disconnect;
 
-console.log("Hello this is main.js");
-
 var microBitBle;
 
-var ccs;
+var sht;
 
 var readEnable;
 
@@ -18,8 +15,8 @@ async function connect() {
   msg.innerHTML = "micro:bit BLE接続しました。";
   var i2cAccess = await microBitBle.requestI2CAccess();
   var i2cPort = i2cAccess.ports.get(1);
-  ccs = new CCS811(i2cPort);
-  await ccs.init();
+  sht = new SHT30(i2cPort, 0x44);
+  await sht.init();
   readEnable = true;
   readData();
 }
@@ -32,10 +29,14 @@ async function disconnect() {
 
 async function readData() {
   while (readEnable) {
-    var ccsData = await ccs.readData();
-    console.log("ccsData:", ccsData);
+    var shtData = await sht.readData();
+    console.log("shtData:", shtData);
     msg.innerHTML =
-      "CO2: " + ccsData.CO2 + " ppm  <br>TVOC: " + ccsData.TVOC + " ppb";
-    await sleep(1500);
+      "temperature:" +
+      shtData.temperature +
+      "degree  <br>humidity:" +
+      shtData.humidity +
+      "%";
+    await sleep(1000);
   }
 }

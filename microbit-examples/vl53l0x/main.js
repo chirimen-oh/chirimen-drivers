@@ -1,15 +1,12 @@
-//import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
-import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811/ccs811.js";
-//import CCS811 from "./ccs811.js";
+//import VL53L0X from "https://unpkg.com/@chirimen/vl53l0x?module";
+import VL53L0X from "https://cdn.jsdelivr.net/npm/@chirimen/vl53l0x/vl53l0x.js";
 
 window.connect = connect;
 window.disconnect = disconnect;
 
-console.log("Hello this is main.js");
-
 var microBitBle;
 
-var ccs;
+var vl53;
 
 var readEnable;
 
@@ -18,8 +15,9 @@ async function connect() {
   msg.innerHTML = "micro:bit BLE接続しました。";
   var i2cAccess = await microBitBle.requestI2CAccess();
   var i2cPort = i2cAccess.ports.get(1);
-  ccs = new CCS811(i2cPort);
-  await ccs.init();
+  msg.innerHTML = "VL53L0Xを初期化しています（10秒程かかります・・）";
+  vl53 = new VL53L0X(i2cPort, 0x29);
+  await vl53.init();
   readEnable = true;
   readData();
 }
@@ -32,10 +30,9 @@ async function disconnect() {
 
 async function readData() {
   while (readEnable) {
-    var ccsData = await ccs.readData();
-    console.log("ccsData:", ccsData);
-    msg.innerHTML =
-      "CO2: " + ccsData.CO2 + " ppm  <br>TVOC: " + ccsData.TVOC + " ppb";
-    await sleep(1500);
+    var distance = await vl53.getRange();
+    console.log("distance:", distance);
+    msg.innerHTML = distance + "mm";
+    await sleep(1000);
   }
 }
