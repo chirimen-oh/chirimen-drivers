@@ -1,15 +1,8 @@
-//import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
-import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811/ccs811.js";
-//import CCS811 from "./ccs811.js";
-
 window.connect = connect;
 window.disconnect = disconnect;
-
-console.log("Hello this is main.js");
-
 var microBitBle;
 
-var ccs;
+var i2cSlaveDevice;
 
 var readEnable;
 
@@ -18,8 +11,7 @@ async function connect() {
   msg.innerHTML = "micro:bit BLE接続しました。";
   var i2cAccess = await microBitBle.requestI2CAccess();
   var i2cPort = i2cAccess.ports.get(1);
-  ccs = new CCS811(i2cPort);
-  await ccs.init();
+  i2cSlaveDevice = await i2cPort.open(0x48);
   readEnable = true;
   readData();
 }
@@ -31,11 +23,13 @@ async function disconnect() {
 }
 
 async function readData() {
+  var readVal;
   while (readEnable) {
-    var ccsData = await ccs.readData();
-    console.log("ccsData:", ccsData);
-    msg.innerHTML =
-      "CO2: " + ccsData.CO2 + " ppm  <br>TVOC: " + ccsData.TVOC + " ppb";
-    await sleep(1500);
+    var MSB = await i2cSlaveDevice.read8(0x00); // これ以下の３行が肝です
+    var LSB = await i2cSlaveDevice.read8(0x01);
+    var temperature = ((MSB << 8) | (LSB & 0xff)) / 128.0;
+    console.log("temperature:", temperature);
+    msg.innerHTML = "温度: " + temperature + "℃";
+    await sleep(1000);
   }
 }

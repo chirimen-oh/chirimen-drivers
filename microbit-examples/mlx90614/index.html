@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MLX90614 (赤外線非接触・環境温度センサー) | CHIRIMEN with micro:bit</title>
+  </head>
+
+  <script src="https://cdn.jsdelivr.net/npm/@chirimen/microbit"></script>
+
+  <script type="module" src="./main.js"></script>
+
+  <body>
+    <h1>MLX90614 (赤外線非接触・環境温度センサー) | CHIRIMEN with micro:bit<h1>
+    <form name="js">
+      <input type="button" value="Connect" onclick="connect();" />
+      <input type="button" value="Disconnect" onclick="disconnect();" />
+    </form>
+    <span id="msg"></span>
+    <hr />
+
+    <table>
+      <tr>
+        <td>Object Temperature</td>
+        <td id="obj_temperature"></td>
+      </tr>
+      <tr>
+        <td>Ambient Temperature</td>
+        <td id="amb_temperature"></td>
+      </tr>
+    </table>
+    <img src="imgs/pinbit_MLX90614.png" width="400" />
+  </body>
+</html>

@@ -1,16 +1,12 @@
-//import CCS811 from "https://unpkg.com/@chirimen/ccs811?module";
-import CCS811 from "https://cdn.jsdelivr.net/npm/@chirimen/ccs811/ccs811.js";
-//import CCS811 from "./ccs811.js";
+//import BMP180 from "https://unpkg.com/@chirimen/bmp180?module";
+import BMP180 from "https://cdn.jsdelivr.net/npm/@chirimen/bmp180/bmp180.js";
 
 window.connect = connect;
 window.disconnect = disconnect;
 
-console.log("Hello this is main.js");
-
 var microBitBle;
 
-var ccs;
-
+var bmp180;
 var readEnable;
 
 async function connect() {
@@ -18,8 +14,8 @@ async function connect() {
   msg.innerHTML = "micro:bit BLE接続しました。";
   var i2cAccess = await microBitBle.requestI2CAccess();
   var i2cPort = i2cAccess.ports.get(1);
-  ccs = new CCS811(i2cPort);
-  await ccs.init();
+  bmp180 = new BMP180(i2cPort, 0x77);
+  await bmp180.init();
   readEnable = true;
   readData();
 }
@@ -32,10 +28,10 @@ async function disconnect() {
 
 async function readData() {
   while (readEnable) {
-    var ccsData = await ccs.readData();
-    console.log("ccsData:", ccsData);
-    msg.innerHTML =
-      "CO2: " + ccsData.CO2 + " ppm  <br>TVOC: " + ccsData.TVOC + " ppb";
-    await sleep(1500);
+    var temperature = await bmp180.readTemperature();
+    temp.innerHTML = temperature;
+    var pressure = await bmp180.readPressure();
+    pres.innerHTML = pressure;
+    await sleep(500);
   }
 }
