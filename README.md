@@ -7,6 +7,7 @@
 - [@chirimen/ads1015](https://www.jsdelivr.com/package/npm/@chirimen/ads1015)
 - [@chirimen/ads1x15](https://www.jsdelivr.com/package/npm/@chirimen/ads1x15)
 - [@chirimen/adt7410](https://www.jsdelivr.com/package/npm/@chirimen/adt7410)
+- [@chirimen/aht10](https://www.jsdelivr.com/package/npm/@chirimen/aht10)
 - [@chirimen/ak8963](https://www.jsdelivr.com/package/npm/@chirimen/ak8963)
 - [@chirimen/amg8833](https://www.jsdelivr.com/package/npm/@chirimen/amg8833)
 - [@chirimen/apds9960](https://www.jsdelivr.com/package/npm/@chirimen/apds9960)
