@@ -1,4 +1,4 @@
-import { module as input, main as outputFile } from "./package.json";
+import { module as input, main as outputFile } from "./package.json" assert { type: "json" };
 
 export default {
   input,
