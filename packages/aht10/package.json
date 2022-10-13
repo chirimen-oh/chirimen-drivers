@@ -1,0 +1,23 @@
+{
+  "name": "@chirimen/aht10",
+  "version": "1.0.0",
+  "description": "Driver for AHT10 with WebI2C",
+  "main": "index.js",
+  "module": "aht10.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/aht10"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "rollup": "^3.0.0"
+  }
+}
