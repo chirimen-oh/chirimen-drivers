@@ -1,9 +1,7 @@
-import { module as input, main as outputFile } from "./package.json" assert { type: "json" };
-
 export default {
-  input,
+  input: "aht10.js",
   output: {
-    file: outputFile,
+    file: "index.js",
     format: "umd",
     name: "AHT10"
   }
