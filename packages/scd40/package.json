@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/scd40",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for SCD40 with WebI2C",
   "main": "index.js",
   "module": "scd40.js",
