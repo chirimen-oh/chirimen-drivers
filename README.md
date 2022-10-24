@@ -25,6 +25,7 @@
 - [@chirimen/grove-light](https://www.jsdelivr.com/package/npm/@chirimen/grove-light)
 - [@chirimen/grove-oled-display](https://www.jsdelivr.com/package/npm/@chirimen/grove-oled-display)
 - [@chirimen/grove-touch](https://www.jsdelivr.com/package/npm/@chirimen/grove-touch)
+- [@chirimen/htu21d](https://www.jsdelivr.com/package/npm/@chirimen/htu21d)
 - [@chirimen/ina219](https://www.jsdelivr.com/package/npm/@chirimen/ina219)
 - [@chirimen/mlx90614](https://www.jsdelivr.com/package/npm/@chirimen/mlx90614)
 - [@chirimen/mpu6050](https://www.jsdelivr.com/package/npm/@chirimen/mpu6050)
