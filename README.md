@@ -34,6 +34,7 @@
 - [@chirimen/pca9685](https://www.jsdelivr.com/package/npm/@chirimen/pca9685)
 - [@chirimen/pcf8591](https://www.jsdelivr.com/package/npm/@chirimen/pcf8591)
 - [@chirimen/s11059](https://www.jsdelivr.com/package/npm/@chirimen/s11059)
+- [@chirimen/scd40](https://www.jsdelivr.com/package/npm/@chirimen/scd40)
 - [@chirimen/seesaw](https://www.jsdelivr.com/package/npm/@chirimen/seesaw)
 - [@chirimen/sht30](https://www.jsdelivr.com/package/npm/@chirimen/sht30)
 - [@chirimen/tca9548a](https://www.jsdelivr.com/package/npm/@chirimen/tca9548a)
