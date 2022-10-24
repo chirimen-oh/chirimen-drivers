@@ -44,7 +44,6 @@ var SCD40 = function(i2cPort,slaveAddress){
 
 SCD40.prototype = {
 	init: async function(){
-		console.log("init scd40");
 		this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 		await this.stop_periodic_measurement();
 	},
@@ -76,10 +75,8 @@ SCD40.prototype = {
 	},
 	
 	_read_data: async function(){
-		console.log("_read_data: _send_command");
 		await this._send_command(this._SCD4X_READMEASUREMENT, 0.001);
 		await this._send_command(this._SCD4X_READMEASUREMENT);
-		console.log("_read_data : start readBytes");
 		var _buffer = await this.i2cSlave.readBytes(9);
 		this._co2 = (_buffer[0] << 8) | _buffer[1];
 		var temp = (_buffer[3] << 8) | _buffer[4];
@@ -91,7 +88,7 @@ SCD40.prototype = {
 	data_ready: async function(){
 		await this._send_command(this._SCD4X_DATAREADY, 0.001);
 		var _buffer = await this.i2cSlave.readBytes(3);
-		console.log("data_ready:",(_buffer[0] & 0x07) == 0, _buffer[1] == 0,!(((_buffer[0] & 0x07) == 0) && (_buffer[1] == 0)));
+		// console.log("data_ready:",(_buffer[0] & 0x07) == 0, _buffer[1] == 0,!(((_buffer[0] & 0x07) == 0) && (_buffer[1] == 0)));
 		return ( !(((_buffer[0] & 0x07) == 0) && (_buffer[1] == 0)) );
 	},
 	
