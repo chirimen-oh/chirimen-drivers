@@ -32,7 +32,7 @@ I2C ポートの取得とセンサーの初期化をします。
 |i2cPort|I2CSlaveDevice|使用する I2C ポートの port オブジェクトです。|
 |slaveAddress|Number|センサーの I2C スレーブアドレスです。[センサー仕様](#センサー仕様)を参照してください。|
 
-### 測定開始 
+### 測定開始 start_periodic_measurement()
 
 ```javascript
 await scd40.start_periodic_measurement();
@@ -63,7 +63,7 @@ data = await scd40.getData();
 |o|object|測定結果が入った下記のメンバーを含むオブジェクトです|
 |o.co2|Number|センサーが測定したCO2濃度です。単位は ppmです。|
 |o.tempeature|Number|センサーが測定した温度です。単位は ℃（セルシウス度）です。|
-|o.humidity|Number|センサーが測定した湿度です。単位は ％です。|
+|o.relative_humidity|Number|センサーが測定した湿度です。単位は ％です。|
 |o.updated|Boolean|測定値が更新されたことを示します|
 
 ## 参考リンク
