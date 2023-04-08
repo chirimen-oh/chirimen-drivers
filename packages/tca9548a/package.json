@@ -31,7 +31,7 @@
     "node-web-i2c": "latest",
     "npm-run-all": "^4.1.5",
     "rollup": "^3.0.0",
-    "typedoc": "^0.23.0",
+    "typedoc": "^0.24.0",
     "typedoc-plugin-markdown": "^3.0.0",
     "typescript": "^5.0.0"
   }
