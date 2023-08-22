@@ -12,5 +12,5 @@ jobs:
       - run: yarn
       - run: yarn lint-report
         continue-on-error: true
-      - uses: ataylorme/eslint-annotate-action@1.2.0
+      - uses: ataylorme/eslint-annotate-action@2.2.0
         with: { repo-token: "${{ secrets.GITHUB_TOKEN }}" }
