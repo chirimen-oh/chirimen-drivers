@@ -14,7 +14,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --bundleConfigAsCjs",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
