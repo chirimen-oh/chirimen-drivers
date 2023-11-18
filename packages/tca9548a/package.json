@@ -23,7 +23,7 @@
     "doc": "typedoc",
     "build": "run-p build:*",
     "build:esm": "tsc --declaration --outDir esm",
-    "build:umd": "rollup -c",
+    "build:umd": "rollup -c --bundleConfigAsCjs",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
