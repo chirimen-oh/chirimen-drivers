@@ -12,6 +12,7 @@
 - [@chirimen/amg8833](https://www.jsdelivr.com/package/npm/@chirimen/amg8833)
 - [@chirimen/apds9960](https://www.jsdelivr.com/package/npm/@chirimen/apds9960)
 - [@chirimen/arduino-stepping-motor](https://www.jsdelivr.com/package/npm/@chirimen/arduino-stepping-motor)
+- [@chirimen/as3935](https://www.jsdelivr.com/package/npm/@chirimen/as3935)
 - [@chirimen/bh1750](https://www.jsdelivr.com/package/npm/@chirimen/bh1750)
 - [@chirimen/bme280](https://www.jsdelivr.com/package/npm/@chirimen/bme280)
 - [@chirimen/bme680](https://www.jsdelivr.com/package/npm/@chirimen/bme680)
