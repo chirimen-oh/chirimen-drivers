@@ -1,14 +1,14 @@
 {
-  "name": "@chirimen/TSL2591",
+  "name": "@chirimen/icm20948",
   "version": "1.0.0",
-  "description": "Driver for TSL2591 with WebI2C",
+  "description": "Driver for ICM20948 with WebI2C",
   "main": "index.js",
-  "module": "TSL2591.js",
+  "module": "icm20948.js",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
-    "directory": "packages/TSL2591"
+    "directory": "packages/icm20948"
   },
   "publishConfig": {
     "access": "public"

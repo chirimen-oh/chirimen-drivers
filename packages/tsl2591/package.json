@@ -1,14 +1,14 @@
 {
-  "name": "@chirimen/LTR390",
+  "name": "@chirimen/tsl2591",
   "version": "1.0.0",
-  "description": "Driver for LTR390 with WebI2C",
+  "description": "Driver for TSL2591 with WebI2C",
   "main": "index.js",
-  "module": "LTR390.js",
+  "module": "tsl2591.js",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
-    "directory": "packages/LTR390"
+    "directory": "packages/tsl2591"
   },
   "publishConfig": {
     "access": "public"

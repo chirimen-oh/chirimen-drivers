@@ -1,8 +1,8 @@
 export default {
-  input: "SGP40.js",
+  input: "sgp40.js",
   output: {
     file: "index.js",
     format: "umd",
-    name: "SGP40"
+    name: "sgp40"
   }
 };
