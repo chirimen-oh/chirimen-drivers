@@ -1,8 +1,8 @@
 export default {
-  input: "TSL2591.js",
+  input: "tsl2591.js",
   output: {
     file: "index.js",
     format: "umd",
-    name: "TSL2591"
+    name: "tsl2591"
   }
 };

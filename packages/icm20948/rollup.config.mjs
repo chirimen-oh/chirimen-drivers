@@ -1,8 +1,8 @@
 export default {
-  input: "LTR390.js",
+  input: "icm20948.js",
   output: {
     file: "index.js",
     format: "umd",
-    name: "LTR390"
+    name: "icm20948"
   }
 };

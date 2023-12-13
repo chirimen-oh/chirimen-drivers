@@ -1,14 +1,14 @@
 {
-  "name": "@chirimen/SGP40",
+  "name": "@chirimen/ltr390",
   "version": "1.0.0",
-  "description": "Driver for SGP40 with WebI2C",
+  "description": "Driver for LTR390 with WebI2C",
   "main": "index.js",
-  "module": "SGP40.js",
+  "module": "ltr390.js",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
-    "directory": "packages/SGP40"
+    "directory": "packages/ltr390"
   },
   "publishConfig": {
     "access": "public"
