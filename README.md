@@ -61,7 +61,7 @@ $ npm i chirimen
 ```
 
 ```js
-import { requestI2CAccess, ADT7410 } from "chirimen";
+import { requestI2CAccess, ADT7410 } from 'chirimen';
 
 const i2cAccess = await requestI2CAccess();
 const adt7410 = new ADT7410(i2cAccess.ports.get(1), 0x48);
@@ -72,7 +72,7 @@ await adt7410.read();
 ### Deno
 
 ```js
-import { requestI2CAccess, ADT7410 } from "npm:chirimen";
+import { requestI2CAccess, ADT7410 } from 'npm:chirimen';
 ```
 
 ## Documents
@@ -81,6 +81,6 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
 - [Web I2C API](https://browserobo.github.io/WebI2C/)
 
-## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
+## [Contributing Guidelines](https://github.com/chirimen-oh/chirimen-drivers/blob/master/CONTRIBUTING.md)
 
-- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
+- [リリース方法](https://github.com/chirimen-oh/chirimen-drivers/blob/master/CONTRIBUTING.md#リリース方法)
