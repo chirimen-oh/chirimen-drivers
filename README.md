@@ -61,20 +61,20 @@ Using ES Modules:
 
 ```html
 <script type="module">
-  import ADT7410 from "https://esm.run/@chirimen/adt7410";
+  import ADT7410 from 'https://esm.run/@chirimen/adt7410';
 </script>
 ```
 
 ### Node.js
 
 ```js
-const ADT7410 = require("@chirimen/adt7410");
+const ADT7410 = require('@chirimen/adt7410');
 ```
 
 Using ES Modules:
 
 ```js
-import ADT7410 from "@chirimen/adt7410";
+import ADT7410 from '@chirimen/adt7410';
 ```
 
 ## Documents
@@ -83,6 +83,6 @@ import ADT7410 from "@chirimen/adt7410";
 - [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
 - [Web I2C API](https://browserobo.github.io/WebI2C/)
 
-## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
+## [Contributing Guidelines](https://github.com/chirimen-oh/chirimen-drivers/blob/master/CONTRIBUTING.md)
 
-- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
+- [リリース方法](https://github.com/chirimen-oh/chirimen-drivers/blob/master/CONTRIBUTING.md#リリース方法)
