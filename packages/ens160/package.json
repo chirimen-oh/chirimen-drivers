@@ -1,0 +1,16 @@
+{
+  "name": "@chirimen/ens160",
+  "version": "1.0.1",
+  "description": "Driver for ens160 with WebI2C",
+  "main": "ens160.js",
+  "module": "ens160.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/ens160"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
