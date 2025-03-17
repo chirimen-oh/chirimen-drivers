@@ -1,5 +1,15 @@
 # sht30
 
+
+
+- TBD
+
+## 使用パーツ
+
+- TBD
+
+
+
 ## 配線図
 
 ![配線図](../node-examples/sht30/schematic.png "schematic")
