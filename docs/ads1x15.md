@@ -1,5 +1,15 @@
 # ads1x15
 
+
+
+- TBD
+
+## 使用パーツ
+
+- TBD
+
+
+
 ## 配線図
 
 ![配線図](../node-examples/ads1x15/schematic.png "schematic")
