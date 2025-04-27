@@ -2,8 +2,8 @@
 
 ## 概要
 
-- TBD
+- ADS1015 使用 PGA 機能搭載 12bitAD コンバーター
 
 ## 使用パーツ
 
-- TBD
+- [ADS1015 使用 PGA 機能搭載 12bitAD コンバーター](https://akizukidenshi.com/catalog/g/g113838/) x 1 製品パッケージに付属するピンヘッダのハンダづけが必要です。
