@@ -1,29 +1,25 @@
 # neopixel-i2c
 
-
-
 - TBD
 
 ## 使用パーツ
 
 - TBD
 
-
-
 ## 配線図
 
-![配線図](../node-examples/neopixel-i2c/schematic.png "schematic")
+![配線図](./images/neopixel-i2c/schematic.png 'schematic')
 
 ## 配線図（専用ボード使用）
 
-![配線図](../node-examples/neopixel-i2c/schematic_with_dedicated_breadboard.png "schematic")
+![配線図](./images/neopixel-i2c/schematic_with_dedicated_breadboard.png 'schematic')
 
 ## サンプルコード (main.js)
 
 ```javascript
-const { requestI2CAccess } = require("node-web-i2c");
-const Neopixel = require("@chirimen/neopixel-i2c");
-const { promisify } = require("util");
+const { requestI2CAccess } = require('node-web-i2c');
+const Neopixel = require('@chirimen/neopixel-i2c');
+const { promisify } = require('util');
 const sleep = promisify(setTimeout);
 
 main();
@@ -45,6 +41,6 @@ async function main() {
 }
 ```
 
-
 ---
+
 [← 目次に戻る](./index.md)

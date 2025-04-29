@@ -1,25 +1,21 @@
 # sht30
 
-
-
 - TBD
 
-## 使用パーツ
+## SHT30 温湿度センサー
 
 - TBD
-
-
 
 ## 配線図
 
-![配線図](../node-examples/sht30/schematic.png "schematic")
+![配線図](./images/sht30/schematic.png 'schematic')
 
 ## サンプルコード (main.js)
 
 ```javascript
-const { requestI2CAccess } = require("node-web-i2c");
-const SHT30 = require("@chirimen/sht30");
-const { promisify } = require("util");
+const { requestI2CAccess } = require('node-web-i2c');
+const SHT30 = require('@chirimen/sht30');
+const { promisify } = require('util');
 const sleep = promisify(setTimeout);
 
 main();
@@ -35,8 +31,8 @@ async function main() {
     console.log(
       [
         `Humidity: ${humidity.toFixed(2)}%`,
-        `Temperature: ${temperature.toFixed(2)} degree`
-      ].join(", ")
+        `Temperature: ${temperature.toFixed(2)} degree`,
+      ].join(', ')
     );
 
     await sleep(500);
@@ -44,6 +40,6 @@ async function main() {
 }
 ```
 
-
 ---
+
 [← 目次に戻る](./index.md)

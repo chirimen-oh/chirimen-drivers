@@ -1,6 +1,5 @@
 # vl53l0x
 
-
 # VL53L0X レーザー測距センサー 30 mm - 2 m
 
 ## 概要
@@ -13,19 +12,17 @@ GP2Y0E03 よりも長距離(最長 2m)の測定ができます。（このセン
 - VL53L0X レーザー距離センサー x 1 ([Amazon.co.jp](https://www.amazon.co.jp/s/?field-keywords=VL53L0X), [秋月通商](http://akizukidenshi.com/catalog/g/gM-12590/))
 - ジャンパー（メス・メス）ケーブル x 4
 
-
-
 ## 配線図
 
-![配線図](../node-examples/vl53l0x/schematic.png "schematic")
+![配線図](./images/vl53l0x/schematic.png 'schematic')
 
 ## サンプルコード (main.js)
 
 ```javascript
-const { requestI2CAccess } = require("node-web-i2c");
-const VL53L0X = require("@chirimen/vl53l0x");
-const { promisify } = require("util");
-const sleep = promisify(setTimeout)
+const { requestI2CAccess } = require('node-web-i2c');
+const VL53L0X = require('@chirimen/vl53l0x');
+const { promisify } = require('util');
+const sleep = promisify(setTimeout);
 
 main();
 
@@ -40,10 +37,8 @@ async function main() {
     await sleep(500);
   }
 }
-
-
 ```
 
-
 ---
+
 [← 目次に戻る](./index.md)

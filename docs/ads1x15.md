@@ -8,7 +8,7 @@
 
 ## 配線図
 
-![配線図](../node-examples/ads1x15/schematic.png 'schematic')
+![配線図](./images/ads1x15/schematic.png 'schematic')
 
 ## サンプルコード (main.js)
 

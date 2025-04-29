@@ -1,6 +1,5 @@
 # adxl345
 
-
 Node.js 版
 https://github.com/chirimen-oh/chirimen-drivers/tree/master/packages/grove-accelerometer
 
@@ -20,20 +19,17 @@ Grove-Accelerometer で使用されているチップは、ADXL345 です。適�
 
 ドライバの[リポジトリ](https://github.com/chirimen-oh/chirimen-drivers/tree/master/packages/grove-accelerometer)(Github)を参照してください。
 
-
-
 ## 配線図
 
-![配線図](../node-examples/adxl345/schematic.png "schematic")
+![配線図](./images/adxl345/schematic.png 'schematic')
 
 ## サンプルコード (main.js)
 
 ```javascript
-const { requestI2CAccess } = require("node-web-i2c");
-const GROVEACCELEROMETER = require("@chirimen/grove-accelerometer");
-const { promisify } = require("util");
-const sleep = promisify(setTimeout)
-
+const { requestI2CAccess } = require('node-web-i2c');
+const GROVEACCELEROMETER = require('@chirimen/grove-accelerometer');
+const { promisify } = require('util');
+const sleep = promisify(setTimeout);
 
 main();
 
@@ -45,15 +41,15 @@ async function main() {
   for (;;) {
     try {
       const values = await groveaccelerometer.read();
-      console.log(`ax: ${values.x}, ax: ${values.y}, ax: ${values.z}`)
+      console.log(`ax: ${values.x}, ax: ${values.y}, ax: ${values.z}`);
     } catch (err) {
-      console.error("READ ERROR:" + err);
+      console.error('READ ERROR:' + err);
     }
     await sleep(1000);
   }
 }
 ```
 
-
 ---
+
 [← 目次に戻る](./index.md)
