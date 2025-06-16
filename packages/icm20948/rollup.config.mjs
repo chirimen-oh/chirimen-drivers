@@ -3,6 +3,6 @@ export default {
   output: {
     file: "index.js",
     format: "umd",
-    name: "icm20948"
+    name: "ICM20948"
   }
 };

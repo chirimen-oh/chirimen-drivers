@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/canzasi",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Driver for tadfmac/Canzasi with WebI2C",
   "main": "index.js",
   "module": "canzasi.js",

@@ -1,0 +1,85 @@
+{
+  "name": "chirimen",
+  "description": "A comprehensive collection of CHIRIMEN IoT device drivers and utilities",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/chirimen"
+  },
+  "keywords": [
+    "CHIRIMEN",
+    "IoT",
+    "drivers",
+    "hardware",
+    "sensors",
+    "actuators"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "pkgroll",
+    "prepare": "node --run=build"
+  },
+  "dependencies": {
+    "@chirimen/ads1015": "latest",
+    "@chirimen/ads1x15": "latest",
+    "@chirimen/adt7410": "latest",
+    "@chirimen/aht10": "latest",
+    "@chirimen/ak8963": "latest",
+    "@chirimen/amg8833": "latest",
+    "@chirimen/apds9960": "latest",
+    "@chirimen/arduino-stepping-motor": "latest",
+    "@chirimen/as3935": "latest",
+    "@chirimen/as5600": "latest",
+    "@chirimen/bh1750": "latest",
+    "@chirimen/bme280": "latest",
+    "@chirimen/bme680": "latest",
+    "@chirimen/bmp180": "latest",
+    "@chirimen/bmp280": "latest",
+    "@chirimen/canzasi": "latest",
+    "@chirimen/ccs811": "latest",
+    "@chirimen/gp2y0e03": "latest",
+    "@chirimen/grove-accelerometer": "latest",
+    "@chirimen/grove-gesture": "latest",
+    "@chirimen/grove-light": "latest",
+    "@chirimen/grove-oled-display": "latest",
+    "@chirimen/grove-touch": "latest",
+    "@chirimen/hello-world": "latest",
+    "@chirimen/ht16k33": "latest",
+    "@chirimen/htu21d": "latest",
+    "@chirimen/icm20948": "latest",
+    "@chirimen/ina219": "latest",
+    "@chirimen/ltr390": "latest",
+    "@chirimen/microbit": "latest",
+    "@chirimen/mlx90614": "latest",
+    "@chirimen/mpu6050": "latest",
+    "@chirimen/mpu6500": "latest",
+    "@chirimen/neopixel-i2c": "latest",
+    "@chirimen/pca9685": "latest",
+    "@chirimen/pca9685-pwm": "latest",
+    "@chirimen/pcf8591": "latest",
+    "@chirimen/s11059": "latest",
+    "@chirimen/scd40": "latest",
+    "@chirimen/seesaw": "latest",
+    "@chirimen/sgp40": "latest",
+    "@chirimen/sht30": "latest",
+    "@chirimen/tca9548a": "latest",
+    "@chirimen/tcs34725": "latest",
+    "@chirimen/tsl2591": "latest",
+    "@chirimen/veml6070": "latest",
+    "@chirimen/vl53l0x": "latest",
+    "@chirimen/vl53l1x": "latest",
+    "node-web-gpio": "latest",
+    "node-web-i2c": "latest"
+  },
+  "devDependencies": {
+    "pkgroll": "^2.13.1"
+  }
+}

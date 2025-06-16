@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/ltr390",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for LTR390 with WebI2C",
   "main": "index.js",
   "module": "ltr390.js",

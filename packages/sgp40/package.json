@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/sgp40",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for SGP40 with WebI2C",
   "main": "index.js",
   "module": "sgp40.js",
