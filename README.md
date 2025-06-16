@@ -1,6 +1,6 @@
 # CHIRIMEN Drivers
 
-![release](https://github.com/chirimen-oh/chirimen-drivers/workflows/release/badge.svg?branch=master)
+[![release](https://github.com/chirimen-oh/chirimen-drivers/actions/workflows/release.yml/badge.svg)](https://github.com/chirimen-oh/chirimen-drivers/actions/workflows/release.yml)
 
 ## Download
 
