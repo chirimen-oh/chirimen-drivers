@@ -3,6 +3,6 @@ export default {
   output: {
     file: "index.js",
     format: "umd",
-    name: "sgp40"
+    name: "SGP40"
   }
 };

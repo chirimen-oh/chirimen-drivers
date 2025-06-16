@@ -3,6 +3,6 @@ export default {
   output: {
     file: "index.js",
     format: "umd",
-    name: "tsl2591"
+    name: "TSL2591"
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/tsl2591",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for TSL2591 with WebI2C",
   "main": "index.js",
   "module": "tsl2591.js",

@@ -5,6 +5,6 @@ export default {
   output: {
     file: outputFile,
     format: "umd",
-    name: "canzasi"
+    name: "Canzasi"
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/icm20948",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for ICM20948 with WebI2C",
   "main": "index.js",
   "module": "icm20948.js",
