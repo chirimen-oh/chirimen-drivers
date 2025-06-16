@@ -54,30 +54,26 @@
 
 ## Usage
 
-### CHIRIMEN (browser)
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/@chirimen/adt7410"></script>
-```
-
-Using ES Modules:
-
-```html
-<script type="module">
-  import ADT7410 from "https://esm.run/@chirimen/adt7410";
-</script>
-```
-
 ### Node.js
 
-```js
-const ADT7410 = require("@chirimen/adt7410");
+```
+$ npm i node-web-i2c @chirimen/adt7410
 ```
 
-Using ES Modules:
+```js
+import { requestI2CAccess } from "node-web-i2c";
+import ADT7410 from "@chirimen/adt7410";
+
+const i2cAccess = await requestI2CAccess();
+const adt7410 = new ADT7410(i2cAccess.ports.get(1), 0x48);
+await adt7410.read();
+```
+
+### Deno
 
 ```js
-import ADT7410 from "@chirimen/adt7410";
+import { requestI2CAccess } from "npm:node-web-i2c";
+import ADT7410 from "npm:@chirimen/adt7410";
 ```
 
 ## Documents

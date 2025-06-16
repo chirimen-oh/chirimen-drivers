@@ -2,41 +2,30 @@
 
 パッケージを作るときのサンプルコードです。
 
-## CHIRIMEN for Raspberry Pi 環境での開発
+## Node.js 環境での開発
 
-次のようにローカルに存在するパッケージを使って実行できます。
+前提条件として、あらかじめ Raspberry Pi OS に Node.js をインストールしておきます。
 
-サンプルコードのソースコードをクローンします。
+ローカルに存在するパッケージを実行するには、次のコマンドを実行します。
 
 ```sh
-git clone https://github.com/chirimen-oh/chirimen-drivers
-cd chirimen-drivers/raspi-examples/hello-world
+# パッケージのソースコードをクローンします
+git clone https://github.com/chirimen-oh/chirimen-drivers.git
+cd chirimen-drivers
+# リンクしたいパッケージのシンボリックリンクを作ります
+cd packages/hello-world
+npm link
+# サンプルコード本体を実行します
+cd ../..
+cd node-examples/hello-world
+node main.js
 ```
 
-パッケージ本体を取得します。
+実行結果
 
-```sh
-cp ../../packages/hello-world/index.js ./index.js
-```
-
-Node.js を利用し、開発用の Web サーバーを起動します。
-
-Node.js がインストールされていない場合、あらかじめ [Node.js をダウンロード](https://nodejs.org/ja/download/)し、インストールしておきましょう。
-
-Node.js がインストールされ準備が整えば、次のコマンドを実行すると、開発用の Web サーバーが起動します。
-
-```sh
-npx serve
-```
-
-ブラウザーからアクセスし、問題なく表示されていれば成功です。
-
-### 変更の反映
-
-パッケージ本体に変更を反映させます。
-
-```sh
-cp ./index.js ../../packages/hello-world/index.js
+```log
+$ node main.js
+Hello World!
 ```
 
 ## リリース
@@ -63,35 +52,4 @@ rm ./index.js
 
 ```sh
 git rm ./index.js
-```
-
-## Node.js 環境での開発
-
-前提条件として、あらかじめ Raspberry Pi OS に Node.js をインストールしておきます。
-
-ローカルに存在するパッケージを実行するには、次のコマンドを実行します。
-
-```sh
-# パッケージのソースコードをクローンします
-git clone https://github.com/chirimen-oh/chirimen-drivers.git
-cd chirimen-drivers/packages/hello-world
-# パッケージのシンボリックリンクを作ります
-yarn link
-# サンプルコードの存在するディレクトリに移動します
-cd ../../node-examples/hello-world
-# シンボリックリンクを作ったパッケージにリンクします
-yarn link @chirimen/hello-world
-# サンプルコード本体を実行します
-yarn exec node --input-type=module main.js
-```
-
-ここでは [Yarn](https://classic.yarnpkg.com/) を使用しましたが [npm](https://www.npmjs.com/) でも [`npm link`](https://docs.npmjs.com/cli/v6/commands/npm-link) を使って同様に実行できると思います。
-
-実行結果
-
-```log
-$ yarn exec node --input-type=module main.js
-yarn exec v1.22.5
-Hello World!
-✨  Done in 0.11s.
 ```

@@ -1,12 +1,6 @@
 {
-  "name": "@chirimen/hello-world-example",
-  "version": "1.0.0",
-  "main": "main.js",
-  "license": "CC0-1.0",
+  "type": "module",
   "dependencies": {
     "@chirimen/hello-world": "latest"
-  },
-  "engines": {
-    "node": ">=14"
   }
 }
