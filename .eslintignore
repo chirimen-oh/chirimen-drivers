@@ -1,6 +1,0 @@
-node_modules/
-# NOTE: UMDフォーマットのファイルなので無視
-/packages/**/*.js
-# TODO: sleep など定義されておらず大量にエラー
-raspi-examples/
-microbit-examples/

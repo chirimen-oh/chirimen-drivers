@@ -8,12 +8,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "eslint": "^9.0.0",
     "lerna": "^8.0.0"
   },
   "scripts": {
-    "release": "lerna publish from-package",
-    "lint": "eslint .",
-    "lint-report": "eslint --output-file eslint_report.json --format json ."
-  }
+    "release": "lerna publish from-package"
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
