@@ -1,6 +1,6 @@
 # @chirimen/hello-world-example
 
-パッケージを作るときのサンプルコードです。
+サンプルコードです。
 
 ## 開発
 
@@ -9,22 +9,19 @@
 ```sh
 # このサンプルコードのソースコードをクローンします
 git clone https://github.com/chirimen-oh/chirimen-drivers.git
-cd chirimen-drivers/node-examples/hello-world
+cd chirimen-drivers
 # リンクしたいパッケージのシンボリックリンクを作ります
-yarn --cwd ../../packages/hello-world link
-# シンボリックリンクを作ったパッケージにリンクします
-yarn link @chirimen/hello-world
+cd packages/hello-world
+npm link
 # サンプルコード本体を実行します
-yarn exec node --input-type=module main.js
+cd ../..
+cd node-examples/hello-world
+node main.js
 ```
-
-ここでは [Yarn](https://classic.yarnpkg.com/) を使用しましたが [npm](https://www.npmjs.com/) でも [`npm link`](https://docs.npmjs.com/cli/v6/commands/npm-link) を使って同様に実行できます。
 
 実行結果
 
 ```log
-$ yarn exec node --input-type=module main.js
-yarn exec v1.22.5
+$ node main.js
 Hello World!
-✨  Done in 0.11s.
 ```

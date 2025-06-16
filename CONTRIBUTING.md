@@ -68,8 +68,7 @@
 
 ## 推奨するモジュールの構成
 
-[ES Modules](https://tc39.es/ecma262/#sec-imports) または [UMD (Universal Module Definition) パターン](https://github.com/umdjs/umd)を推奨します。
-ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD のフォーマットに変換すると良いでしょう。
+[ES Modules](https://tc39.es/ecma262/#sec-imports) を推奨します。
 
 例: [@chirimen/hello-world](https://www.npmjs.com/package/@chirimen/hello-world)
 
@@ -78,7 +77,8 @@ ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD �
 `name` は、パッケージを公開する際の名前です。
 必ず `@chirimen/` から始めてください。
 
-`module`は [Rollup](https://rollupjs.org/) や [Webpack](https://webpack.js.org/) で ES Modules を扱うためのフィールドです。必要に応じて ES Modules 形式のスクリプトのファイル名を記載しましょう。
+`exports` は、モジュールのエントリーポイントを指定します。
+`exports.import` は、ES Modules のエントリーポイントを指定します。
 
 `scripts` は npm コマンドで実行可能な任意のスクリプトです。
 詳しい説明は [npm-scripts のドキュメント](https://docs.npmjs.com/misc/scripts)を参照してください。
@@ -89,25 +89,22 @@ ES Modules 作成し、[Rollup](https://rollupjs.org/)などを用いて、UMD �
 
 ```json
 {
-  "name": "@chirimen/hello",
+  "name": "@chirimen/hello-world",
   "version": "1.0.0",
-  "main": "index.js",
-  "module": "index.esm.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js"
+    }
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
-    "directory": "packages/hello"
+    "directory": "packages/hello-world"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
-    "prepublishOnly": "npm run build"
-  },
-  "devDependencies": {
-    "rollup": "~1"
   }
 }
 ```
