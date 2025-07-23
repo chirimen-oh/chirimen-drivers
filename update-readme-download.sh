@@ -79,4 +79,4 @@ mv "$temp_file" README.md
 echo "README.mdのDownloadセクションを更新しました。"
 echo ""
 echo "更新されたパッケージ一覧:"
-find packages -maxdepth 1 -type d -name "*" | sed 's|packages/||' | grep -v "^$" | grep -v "^chirimen$" | grep -v "^packages$" | grep -v "^test$" | grep -v "^hello-world$" | sort
+get_sorted_packages "chirimen packages test hello-world"
