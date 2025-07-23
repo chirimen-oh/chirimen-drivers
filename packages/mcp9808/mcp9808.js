@@ -20,6 +20,7 @@ class MCP9808{
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
     await this.write16(MCP9808_REG_CONFIG,0x0);
   }
+
   async readTempC(){
     let temp = null;
     const t = await this.read16(MCP9808_REG_AMBIENT_TEMP);
@@ -33,6 +34,7 @@ class MCP9808{
     }
     return temp;
   }
+
   async readTempF(){
     let temp = null;
     const t = await this.read16(MCP9808_REG_AMBIENT_TEMP);
@@ -47,11 +49,13 @@ class MCP9808{
     }
     return temp;
   }
+
   async shutdown(){
     const conf_register = await this.read16(MCP9808_REG_CONFIG);
     const conf_shutdown = conf_register | MCP9808_REG_CONFIG_SHUTDOWN;
     await this.write16(MCP9808_REG_CONFIG, conf_shutdown);
   }
+
   wake(){
     return new Promise(async (resolve)=>{
       const conf_register = await this.read16(MCP9808_REG_CONFIG);
@@ -64,9 +68,11 @@ class MCP9808{
       }, 260); 
     })
   }
+
   async getResolution(){
     return await this.i2cSlave.read8(MCP9808_REG_RESOLUTION);
   }
+
   async setResolution(value){
     // Mode Resolution SampleTime
     //  0    0.5°C       30 ms
@@ -75,6 +81,7 @@ class MCP9808{
     //  3    0.0625°C    250 ms
     await this.i2cSlave.write8(MCP9808_REG_RESOLUTION, value & 0x03);
   }
+
   async read16(reg){
     const value = await this.i2cSlave.read16(reg);
     // エンディアン変換
@@ -82,6 +89,7 @@ class MCP9808{
     const high = (value >> 8) & 0xFF;
     return (low << 8) | high;
   }
+
   async write16(reg,value){
     // エンディアン変換
     const low = value & 0xFF;
@@ -89,4 +97,5 @@ class MCP9808{
     await this.i2cSlave.write16(reg,((low << 8) | high));
   }
 }
+
 export default MCP9808;
