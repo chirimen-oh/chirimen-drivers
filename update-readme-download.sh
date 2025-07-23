@@ -79,4 +79,4 @@ mv "$temp_file" README.md
 echo "README.mdのDownloadセクションを更新しました。"
 echo ""
 echo "更新されたパッケージ一覧:"
-get_sorted_packages "chirimen packages test hello-world"
+get_sorted_packages "chirimen packages hello-world"
