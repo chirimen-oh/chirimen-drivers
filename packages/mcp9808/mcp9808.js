@@ -15,13 +15,14 @@ class MCP9808{
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
   }
+
   async init() {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
     await this.write16(MCP9808_REG_CONFIG,0x0);
   }
   async readTempC(){
     let temp = null;
-    let t = await this.read16(MCP9808_REG_AMBIENT_TEMP);
+    const t = await this.read16(MCP9808_REG_AMBIENT_TEMP);
 
     if (t != 0xFFFF) {
        temp = t & 0x0FFF;
@@ -34,7 +35,7 @@ class MCP9808{
   }
   async readTempF(){
     let temp = null;
-    let t = await this.read16(MCP9808_REG_AMBIENT_TEMP);
+    const t = await this.read16(MCP9808_REG_AMBIENT_TEMP);
 
     if (t != 0xFFFF) {
        temp = t & 0x0FFF;
@@ -47,14 +48,14 @@ class MCP9808{
     return temp;
   }
   async shutdown(){
-    let conf_register = await this.read16(MCP9808_REG_CONFIG);
-    let conf_shutdown = conf_register | MCP9808_REG_CONFIG_SHUTDOWN;
+    const conf_register = await this.read16(MCP9808_REG_CONFIG);
+    const conf_shutdown = conf_register | MCP9808_REG_CONFIG_SHUTDOWN;
     await this.write16(MCP9808_REG_CONFIG, conf_shutdown);
   }
   wake(){
     return new Promise(async (resolve)=>{
-      let conf_register = await this.read16(MCP9808_REG_CONFIG);
-      let conf_shutdown = conf_register & ~MCP9808_REG_CONFIG_SHUTDOWN;
+      const conf_register = await this.read16(MCP9808_REG_CONFIG);
+      const conf_shutdown = conf_register & ~MCP9808_REG_CONFIG_SHUTDOWN;
       await this.write16(MCP9808_REG_CONFIG, conf_shutdown);
 
       setTimeout(function() {
@@ -75,16 +76,16 @@ class MCP9808{
     await this.i2cSlave.write8(MCP9808_REG_RESOLUTION, value & 0x03);
   }
   async read16(reg){
-    let value = await this.i2cSlave.read16(reg);
+    const value = await this.i2cSlave.read16(reg);
     // エンディアン変換
-    let low = value & 0xFF;
-    let high = (value >> 8) & 0xFF;
+    const low = value & 0xFF;
+    const high = (value >> 8) & 0xFF;
     return (low << 8) | high;
   }
   async write16(reg,value){
     // エンディアン変換
-    let low = value & 0xFF;
-    let high = (value >> 8) & 0xFF;
+    const low = value & 0xFF;
+    const high = (value >> 8) & 0xFF;
     await this.i2cSlave.write16(reg,((low << 8) | high));
   }
 }
