@@ -15,45 +15,38 @@ class MMA7660{
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
   }
-
   async init(){
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
     await this.i2cSlave.write8(MMA7660_MODE, MMA7660_STAND_BY);
     await this.i2cSlave.write8(MMA7660_SR, AUTO_SLEEP_32);
     await this.i2cSlave.write8(MMA7660_MODE, MMA7660_ACTIVE);
   }
-
   async getXYZ(){
     if (this.i2cSlave == null) {
       throw new Error("i2cSlave is not open yet.");
     }
 
-    const XYZresult = new Int8Array(await this.i2cSlave.readBytes(3));
+    let XYZdata = new Int8Array(await this.i2cSlave.readBytes(3));
 
-    const XYZdata = {
-      "X" : (XYZresult[0] << 2) / 4,
-      "Y" : (XYZresult[1] << 2) / 4,
-      "Z" : (XYZresult[2] << 2) / 4,
-    };
+    XYZdata[0] = (XYZdata[0] << 2) / 4;
+    XYZdata[1] = (XYZdata[1] << 2) / 4;
+    XYZdata[2] = (XYZdata[2] << 2) / 4;
 
     return XYZdata;
   }
-
   async getAcceleration(){
     if (this.i2cSlave == null) {
       throw new Error("i2cSlave is not open yet.");
     }
 
-    const XYZdata = await this.getXYZ();
+    let XYZdata = await this.getXYZ();
     
-    const AccelerationData = {
-      "X" : XYZdata.X / 21.00,
-      "Y" : XYZdata.Y / 21.00,
-      "Z" : XYZdata.Z / 21.00,
-    };
+    let AccelerationData = [];
+    AccelerationData[0] = XYZdata[0] / 21.00;
+    AccelerationData[1] = XYZdata[1] / 21.00;
+    AccelerationData[2] = XYZdata[2] / 21.00; 
 
     return AccelerationData
   }
 }
-
 export default MMA7660;
