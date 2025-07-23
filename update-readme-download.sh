@@ -23,6 +23,7 @@ cd "$(dirname "$0")"
 
 # 一時ファイルを作成
 temp_file=$(mktemp)
+trap "rm -f \"$temp_file\"" EXIT
 
 # packagesディレクトリからフォルダ名を取得し、アルファベット順にソート
 echo "# CHIRIMEN Drivers" > "$temp_file"
