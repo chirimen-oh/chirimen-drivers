@@ -34,7 +34,7 @@ echo "" >> "$temp_file"
 
 # packagesディレクトリのフォルダを取得し、アルファベット順にソート
 # chirimen、packages、test、hello-worldディレクトリは除外
-find packages -maxdepth 1 -type d -name "*" | sed 's|packages/||' | grep -v "^$" | grep -v "^chirimen$" | grep -v "^packages$" | grep -v "^hello-world$" | sort | while read -r package; do
+find packages -maxdepth 1 -type d -name "*" | sed 's|packages/||' | grep -v "^$" | grep -v "^chirimen$" | grep -v "^packages$" | grep -v "^test$" | grep -v "^hello-world$" | sort | while read -r package; do
     echo "- [@chirimen/$package](https://www.jsdelivr.com/package/npm/@chirimen/$package)" >> "$temp_file"
 done
 
