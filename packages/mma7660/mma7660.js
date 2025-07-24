@@ -29,13 +29,21 @@ class MMA7660 {
       throw new Error("i2cSlave is not open yet.");
     }
 
-    const XYZresult = new Int8Array(await this.i2cSlave.readBytes(3));
+    const XYZresult = await this.i2cSlave.readBytes(3);
+
+    const int8ArrayMapped = new Int8Array(Array.from(XYZresult, value => {
+        // Convert Uint8 values in the range of 128 to 255 to negative Int8 values.
+        if (value >= 128) {
+            return value - 256;
+        }
+        return value;
+    }));
 
     // Calculations are performed by bit shifting to remove noise
     const XYZdata = {
-      "X" : (XYZresult[0] << 2) / 4,
-      "Y" : (XYZresult[1] << 2) / 4,
-      "Z" : (XYZresult[2] << 2) / 4,
+      "X" : (int8ArrayMapped[0] << 2) / 4,
+      "Y" : (int8ArrayMapped[1] << 2) / 4,
+      "Z" : (int8ArrayMapped[2] << 2) / 4,
     };
 
     return XYZdata;
