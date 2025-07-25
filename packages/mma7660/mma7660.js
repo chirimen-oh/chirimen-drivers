@@ -31,7 +31,7 @@ class MMA7660 {
 
     const XYZresult = await this.i2cSlave.readBytes(3);
 
-    const int8ArrayMapped = new Int8Array(Array.from(XYZresult, value => {
+    const signedValueArray = Array.from(XYZresult, value => {
         // Perform noise reduction with bit masks
         value = value & 0x3F;
         // Converting 6-bit output results to signed values
@@ -39,12 +39,12 @@ class MMA7660 {
             value = value - 64;
         }
         return value;
-    }));
+    });
 
     const XYZdata = {
-      "X" : int8ArrayMapped[0],
-      "Y" : int8ArrayMapped[1],
-      "Z" : int8ArrayMapped[2],
+      "X" : signedValueArray[0],
+      "Y" : signedValueArray[1],
+      "Z" : signedValueArray[2],
     };
 
     return XYZdata;
