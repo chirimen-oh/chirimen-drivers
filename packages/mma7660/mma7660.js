@@ -32,18 +32,19 @@ class MMA7660 {
     const XYZresult = await this.i2cSlave.readBytes(3);
 
     const int8ArrayMapped = new Int8Array(Array.from(XYZresult, value => {
-        // Convert Uint8 values in the range of 128 to 255 to negative Int8 values.
-        if (value >= 128) {
-            return value - 256;
+        // Perform noise reduction with bit masks
+        value = value & 0x3F;
+        // Converting 6-bit output results to signed values
+        if (value >= 32) {
+            value = value - 64;
         }
         return value;
     }));
 
-    // Calculations are performed by bit shifting to remove noise
     const XYZdata = {
-      "X" : (int8ArrayMapped[0] << 2) / 4,
-      "Y" : (int8ArrayMapped[1] << 2) / 4,
-      "Z" : (int8ArrayMapped[2] << 2) / 4,
+      "X" : int8ArrayMapped[0],
+      "Y" : int8ArrayMapped[1],
+      "Z" : int8ArrayMapped[2],
     };
 
     return XYZdata;
