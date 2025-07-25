@@ -1,5 +1,5 @@
 // @ts-check
-// PCF8591 driver for CHIRIMEN
+// MCP9808 driver for CHIRIMEN
 // based from https://github.com/adafruit/Adafruit_MCP9808_Library/blob/master/Adafruit_MCP9808.cpp
 // Programmed by Haruka Terai
 
@@ -8,6 +8,7 @@ const MCP9808_REG_CONFIG= 0x01;             ///< MCP9808 config register
 const MCP9808_REG_CONFIG_SHUTDOWN= 0x0100;  ///< shutdown config
 const MCP9808_REG_AMBIENT_TEMP= 0x05;       ///< ambient temperature
 const MCP9808_REG_RESOLUTION= 0x08;         ///< resolution
+const WAKEUP_WAITING_TIME = 260;
 
 class MCP9808{
     constructor(i2cPort,slaveAddress){
@@ -63,9 +64,8 @@ class MCP9808{
       await this.write16(MCP9808_REG_CONFIG, conf_shutdown);
 
       setTimeout(function() {
-        console.log("260ms delay");
         return resolve();
-      }, 260); 
+      }, WAKEUP_WAITING_TIME); 
     })
   }
 
