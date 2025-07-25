@@ -3,11 +3,11 @@
 // based from https://github.com/adafruit/Adafruit_MCP9808_Library/blob/master/Adafruit_MCP9808.cpp
 // Programmed by Haruka Terai
 
-const MCP9808_I2CADDR_DEFAULT= 0x18;      ///< I2C address
-const MCP9808_REG_CONFIG= 0x01;           ///< MCP9808 config register
-const MCP9808_REG_CONFIG_SHUTDOWN= 0x0100 ///< shutdown config
-const MCP9808_REG_AMBIENT_TEMP= 0x05      ///< ambient temperature
-const MCP9808_REG_RESOLUTION= 0x08        ///< resolution
+const MCP9808_I2CADDR_DEFAULT= 0x18;        ///< I2C address
+const MCP9808_REG_CONFIG= 0x01;             ///< MCP9808 config register
+const MCP9808_REG_CONFIG_SHUTDOWN= 0x0100;  ///< shutdown config
+const MCP9808_REG_AMBIENT_TEMP= 0x05;       ///< ambient temperature
+const MCP9808_REG_RESOLUTION= 0x08;         ///< resolution
 
 class MCP9808{
     constructor(i2cPort,slaveAddress){
