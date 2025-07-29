@@ -46,12 +46,12 @@ class WaterLevelSensor {
     let touch_val = 0;
     let trig_section = 0;
 
-    for (let i = 0 ; i < 8; i++) {
+    for (let i = 0; i < 8; i++) {
       if (low_data[i] > THRESHOLD) {
         touch_val |= 1 << i;
       }
     }
-    for (let i = 0 ; i < 12; i++) {
+    for (let i = 0; i < 12; i++) {
       if (high_data[i] > THRESHOLD) {
         touch_val |= 1 << (8 + i);
       }
