@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/grove-water-level-sensor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for grove-water-level-sensor with WebI2C",
   "main": "index.js",
   "module": "grove-water-level-sensor.js",
