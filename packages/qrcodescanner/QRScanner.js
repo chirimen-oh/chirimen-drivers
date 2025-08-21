@@ -74,12 +74,12 @@ class QRScanner {
   async scanData() {
     for (;;) {
       let status = await this.getDecodeReadyStatus();
-      if (status == 1) {
+      if (status == 1 || status == 2) {
         const length = await this.getDecodeLength();
-        const data = await this.getDecodeData(length);
-        return data;
-      } else if (status == 2) {
-        throw new Error("ReadyStatus == 2 デバイスを再起動してください。");
+        if (length > 0) {
+          const data = await this.getDecodeData(length);
+          return data;
+        }
       }
       await this.wait(10);
     }
