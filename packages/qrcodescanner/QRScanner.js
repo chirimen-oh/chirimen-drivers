@@ -2,15 +2,10 @@
 // based from https://github.com/m5stack/M5Unit-QRCode/blob/main/src/M5UnitQRCodeI2C.cpp
 // Programmed by Ryoma Aoki
 
-const qrscanner_QRCODE_ADDR = 0x21;
-const qrscanner_QRCODE_TRIGGER_REG = 0x0000;
 const qrscanner_QRCODE_READY_REG = 0x0010;
 const qrscanner_QRCODE_LENGTH_REG = 0x0020;
 const qrscanner_QRCODE_TRIGGER_MODE_REG = 0x0030;
-const qrscanner_QRCODE_TRIGGER_KEY_REG = 0x0040;
 const qrscanner_QRCODE_DATA_REG = 0x1000;
-const JUMP_TO_BOOTLOADER_REG = 0x00fd;
-const FIRMWARE_VERSION_REG = 0x00fe;
 
 class QRScanner {
   constructor(i2cPort, slaveAddress) {
