@@ -6,6 +6,8 @@ const qrscanner_QRCODE_READY_REG = 0x0010;
 const qrscanner_QRCODE_LENGTH_REG = 0x0020;
 const qrscanner_QRCODE_TRIGGER_MODE_REG = 0x0030;
 const qrscanner_QRCODE_DATA_REG = 0x1000;
+const QRCODE_STATUS_READY = 1;
+const QRCODE_STATUS_DECODED = 2;
 
 class QRScanner {
   constructor(i2cPort, slaveAddress) {
@@ -68,6 +70,9 @@ class QRScanner {
   async scanData(timeoutMs = 5000) {
     const startTime = Date.now();
     for (;;) {
+      if (Date.now() - startTime >= timeoutMs) {
+        throw new Error("QRScanner scanData timed out");
+      }
       let status = await this.getDecodeReadyStatus();
       if (status == QRCODE_STATUS_READY || status == QRCODE_STATUS_DECODED) {
         const length = await this.getDecodeLength();
