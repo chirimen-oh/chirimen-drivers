@@ -2,10 +2,10 @@
 // based from https://github.com/m5stack/M5Unit-QRCode/blob/main/src/M5UnitQRCodeI2C.cpp
 // Programmed by Ryoma Aoki
 
-const qrscanner_QRCODE_READY_REG = 0x0010;
-const qrscanner_QRCODE_LENGTH_REG = 0x0020;
-const qrscanner_QRCODE_TRIGGER_MODE_REG = 0x0030;
-const qrscanner_QRCODE_DATA_REG = 0x1000;
+const QRCODE_READY_REG = 0x0010;
+const QRCODE_LENGTH_REG = 0x0020;
+const QRCODE_TRIGGER_MODE_REG = 0x0030;
+const QRCODE_DATA_REG = 0x1000;
 const QRCODE_STATUS_READY = 1;
 const QRCODE_STATUS_DECODED = 2;
 
@@ -28,7 +28,7 @@ class QRScanner {
     return await this.i2cSlave.writeBytes(sendArray);
   }
 
-  async _read(reg16, length) {
+  async #read(reg16, length) {
     let sendData = [];
     sendData[0] = reg16 & 0x00ff;
     sendData[1] = (reg16 >> 8) & 0x00ff;
@@ -37,25 +37,25 @@ class QRScanner {
   }
 
   async setTriggerMode(mode) {
-    await this._write(qrscanner_QRCODE_TRIGGER_MODE_REG, [mode]);
+    await this._write(QRCODE_TRIGGER_MODE_REG, [mode]);
   }
   async getTriggerMode() {
-    const modeArr = await this._read(qrscanner_QRCODE_TRIGGER_MODE_REG, 1);
+    const modeArr = await this.#read(QRCODE_TRIGGER_MODE_REG, 1);
     return modeArr[0];
   }
 
   async getDecodeReadyStatus() {
-    const statusArr = await this._read(qrscanner_QRCODE_READY_REG, 1);
+    const statusArr = await this.#read(QRCODE_READY_REG, 1);
     return statusArr[0];
   }
 
   async getDecodeLength() {
-    const data = await this._read(qrscanner_QRCODE_LENGTH_REG, 2);
+    const data = await this.#read(QRCODE_LENGTH_REG, 2);
     return (data[1] << 8) | data[0];
   }
 
   async getDecodeData(length) {
-    const data = await this._read(qrscanner_QRCODE_DATA_REG, length);
+    const data = await this.#read(QRCODE_DATA_REG, length);
     const decoder = new TextDecoder("utf-8");
     return decoder.decode(Uint8Array.from(data));
   }
