@@ -1,0 +1,23 @@
+{
+  "name": "@chirimen/qrcodescanner",
+  "version": "1.0.0",
+  "description": "Driver for QR_code_scanner with WebI2C",
+  "main": "index.js",
+  "module": "QRScanner.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/qrcodescanner"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c --bundleConfigAsCjs",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "rollup": "^4.0.0"
+  }
+}
