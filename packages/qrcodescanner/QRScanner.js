@@ -6,7 +6,7 @@ const QRCODE_READY_REG = 0x0010;
 const QRCODE_LENGTH_REG = 0x0020;
 const QRCODE_TRIGGER_MODE_REG = 0x0030;
 const QRCODE_DATA_REG = 0x1000;
-const QRCODE_STATUS_DETECT = 1;
+const QRCODE_STATUS_DETECTED = 1;
 const QRCODE_STATUS_LOADING = 2;
 
 class QRScanner {
@@ -20,7 +20,7 @@ class QRScanner {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
   }
 
-  async _write(reg16, data) {
+  async #write(reg16, data) {
     let sendData = [];
     sendData[0] = reg16 & 0x00ff;
     sendData[1] = (reg16 >> 8) & 0x00ff;
@@ -37,7 +37,7 @@ class QRScanner {
   }
 
   async setTriggerMode(mode) {
-    await this._write(QRCODE_TRIGGER_MODE_REG, [mode]);
+    await this.#write(QRCODE_TRIGGER_MODE_REG, [mode]);
   }
   async getTriggerMode() {
     const modeArr = await this.#read(QRCODE_TRIGGER_MODE_REG, 1);
@@ -67,14 +67,14 @@ class QRScanner {
       }, ms);
     });
   }
-  async scanData(timeoutMs = 5000) {
+  async scanData(timeoutMs = 180000) {
     const startTime = Date.now();
     for (;;) {
       if (Date.now() - startTime >= timeoutMs) {
         throw new Error("QRScanner scanData timed out");
       }
       let status = await this.getDecodeReadyStatus();
-      if (status == QRCODE_STATUS_DETECT || status == QRCODE_STATUS_LOADING) {
+      if (status == QRCODE_STATUS_DETECTED || status == QRCODE_STATUS_LOADING) {
         const length = await this.getDecodeLength();
         if (length > 0) {
           const data = await this.getDecodeData(length);
