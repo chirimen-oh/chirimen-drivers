@@ -14,6 +14,7 @@
 - [@chirimen/apds9960](https://www.jsdelivr.com/package/npm/@chirimen/apds9960)
 - [@chirimen/arduino-stepping-motor](https://www.jsdelivr.com/package/npm/@chirimen/arduino-stepping-motor)
 - [@chirimen/as3935](https://www.jsdelivr.com/package/npm/@chirimen/as3935)
+- [@chirimen/as5600](https://www.jsdelivr.com/package/npm/@chirimen/as5600)
 - [@chirimen/bh1750](https://www.jsdelivr.com/package/npm/@chirimen/bh1750)
 - [@chirimen/bme280](https://www.jsdelivr.com/package/npm/@chirimen/bme280)
 - [@chirimen/bme680](https://www.jsdelivr.com/package/npm/@chirimen/bme680)
@@ -28,10 +29,13 @@
 - [@chirimen/grove-light](https://www.jsdelivr.com/package/npm/@chirimen/grove-light)
 - [@chirimen/grove-oled-display](https://www.jsdelivr.com/package/npm/@chirimen/grove-oled-display)
 - [@chirimen/grove-touch](https://www.jsdelivr.com/package/npm/@chirimen/grove-touch)
+- [@chirimen/grove-water-level-sensor](https://www.jsdelivr.com/package/npm/@chirimen/grove-water-level-sensor)
+- [@chirimen/ht16k33](https://www.jsdelivr.com/package/npm/@chirimen/ht16k33)
 - [@chirimen/htu21d](https://www.jsdelivr.com/package/npm/@chirimen/htu21d)
 - [@chirimen/icm20948](https://www.jsdelivr.com/package/npm/@chirimen/icm20948)
 - [@chirimen/ina219](https://www.jsdelivr.com/package/npm/@chirimen/ina219)
 - [@chirimen/ltr390](https://www.jsdelivr.com/package/npm/@chirimen/ltr390)
+- [@chirimen/mcp9808](https://www.jsdelivr.com/package/npm/@chirimen/mcp9808)
 - [@chirimen/mlx90614](https://www.jsdelivr.com/package/npm/@chirimen/mlx90614)
 - [@chirimen/mpu6050](https://www.jsdelivr.com/package/npm/@chirimen/mpu6050)
 - [@chirimen/mpu6500](https://www.jsdelivr.com/package/npm/@chirimen/mpu6500)
@@ -39,6 +43,7 @@
 - [@chirimen/pca9685-pwm](https://www.jsdelivr.com/package/npm/@chirimen/pca9685-pwm)
 - [@chirimen/pca9685](https://www.jsdelivr.com/package/npm/@chirimen/pca9685)
 - [@chirimen/pcf8591](https://www.jsdelivr.com/package/npm/@chirimen/pcf8591)
+- [@chirimen/qrcodescanner](https://www.jsdelivr.com/package/npm/@chirimen/qrcodescanner)
 - [@chirimen/rc522_ws1850s](https://www.jsdelivr.com/package/npm/@chirimen/rc522_ws1850s)
 - [@chirimen/s11059](https://www.jsdelivr.com/package/npm/@chirimen/s11059)
 - [@chirimen/scd40](https://www.jsdelivr.com/package/npm/@chirimen/scd40)
@@ -52,6 +57,7 @@
 - [@chirimen/veml6070](https://www.jsdelivr.com/package/npm/@chirimen/veml6070)
 - [@chirimen/vl53l0x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l0x)
 - [@chirimen/vl53l1x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l1x)
+- [@chirimen/vl6180x](https://www.jsdelivr.com/package/npm/@chirimen/vl6180x)
 
 ## Usage
 
