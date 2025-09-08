@@ -38,6 +38,8 @@ export { default as NEOPIXEL_I2C } from "@chirimen/neopixel-i2c";
 export { default as PCA9685 } from "@chirimen/pca9685";
 export { default as PCA9685_PWM } from "@chirimen/pca9685-pwm";
 export { default as PCF8591 } from "@chirimen/pcf8591";
+export { default as QRScanner } from "@chirimen/qrcodescanner";
+export { default as RC522 } from "@chirimen/rc522_ws1850s";
 export { default as S11059 } from "@chirimen/s11059";
 export { default as SCD40 } from "@chirimen/scd40";
 export { default as Seesaw } from "@chirimen/seesaw";
@@ -50,6 +52,8 @@ export { default as TSL2591 } from "@chirimen/tsl2591";
 export { default as VEML6070 } from "@chirimen/veml6070";
 export { default as VL53L0X } from "@chirimen/vl53l0x";
 export { default as VL53L1X } from "@chirimen/vl53l1x";
+export { default as VL6180X } from "@chirimen/vl6180x";
+
 export {
   GPIOAccess,
   GPIOPort,

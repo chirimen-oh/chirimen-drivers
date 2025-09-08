@@ -1,6 +1,6 @@
 {
   "name": "@chirimen/qrcodescanner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Driver for QR_code_scanner with WebI2C",
   "main": "index.js",
   "module": "QRScanner.js",
