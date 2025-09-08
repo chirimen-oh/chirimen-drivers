@@ -69,6 +69,8 @@
     "@chirimen/pca9685": "latest",
     "@chirimen/pca9685-pwm": "latest",
     "@chirimen/pcf8591": "latest",
+    "@chirimen/qrcodescanner": "latest",
+    "@chirimen/rc522_ws1850s": "latest",
     "@chirimen/s11059": "latest",
     "@chirimen/scd40": "latest",
     "@chirimen/seesaw": "latest",
@@ -81,6 +83,7 @@
     "@chirimen/veml6070": "latest",
     "@chirimen/vl53l0x": "latest",
     "@chirimen/vl53l1x": "latest",
+    "@chirimen/vl6180x": "latest",
     "node-web-gpio": "latest",
     "node-web-i2c": "latest"
   },
