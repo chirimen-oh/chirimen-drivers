@@ -61,7 +61,6 @@
     "@chirimen/ina219": "latest",
     "@chirimen/ltr390": "latest",
     "@chirimen/mcp9808": "latest",
-    "@chirimen/microbit": "latest",
     "@chirimen/mlx90614": "latest",
     "@chirimen/mma7660": "latest",
     "@chirimen/mpu6050": "latest",
