@@ -112,7 +112,7 @@ export class MAX30102 {
   async *readSamples(
     samples = 100,
   ): AsyncGenerator<{ ir: number; red: number }> {
-    while (samples > 0) {
+    while (0 < samples) {
       for (
         let bytes = await this.available();
         0 < samples && 0 < bytes;
