@@ -5,6 +5,8 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    # 最後のコミットが自動README更新の場合はCI全体をスキップ
+    if: contains(github.event.head_commit.message, '[bot] Update README download section') == false
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
@@ -18,12 +20,17 @@ jobs:
           chmod +x update-readme-download.sh
           ./update-readme-download.sh
           if [ -n "$(git status --porcelain)" ]; then
+            BRANCH_NAME="bot/update-readme-$(date +%Y%m%d-%H%M%S)"
             git config user.name release-bot
             git config user.email release-bot@users.noreply.github.com
+            git checkout -b "$BRANCH_NAME"
             git add README.md
-            git commit -m "docs: update README download section"
-            git push
+            git commit -m "[bot] Update README download section [skip ci]"
+            git push origin "$BRANCH_NAME"
+            gh pr create --title "docs: update README download section" --body "This PR updates the README download section automatically." --base master --head "$BRANCH_NAME"
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release
         run: |
           git config user.name release-bot
