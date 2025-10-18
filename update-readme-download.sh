@@ -24,21 +24,10 @@ cd "$(dirname "$0")"
 # 一時ファイルを作成
 temp_file=$(mktemp)
 
-# packagesディレクトリからフォルダ名を取得し、アルファベット順にソート
+# READMEを生成（新しいセクション順序：Usage → Documents → Contributing Guidelines → Download）
 echo "# CHIRIMEN Drivers" > "$temp_file"
 echo "" >> "$temp_file"
 echo "[![release](https://github.com/chirimen-oh/chirimen-drivers/actions/workflows/release.yml/badge.svg)](https://github.com/chirimen-oh/chirimen-drivers/actions/workflows/release.yml)" >> "$temp_file"
-echo "" >> "$temp_file"
-echo "## Download" >> "$temp_file"
-echo "" >> "$temp_file"
-
-# packagesディレクトリのフォルダを取得し、アルファベット順にソート
-# chirimen、packages、test、hello-worldディレクトリは除外
-find packages -maxdepth 1 -type d -name "*" | sed 's|packages/||' | grep -v "^$" | grep -v "^chirimen$" | grep -v "^packages$" | grep -v "^test$" | grep -v "^hello-world$" | sort | while read -r package; do
-    echo "- [@chirimen/$package](https://www.jsdelivr.com/package/npm/@chirimen/$package)" >> "$temp_file"
-done
-
-# Usageセクション以降を追加
 echo "" >> "$temp_file"
 echo "## Usage" >> "$temp_file"
 echo "" >> "$temp_file"
@@ -72,6 +61,15 @@ echo "" >> "$temp_file"
 echo "## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)" >> "$temp_file"
 echo "" >> "$temp_file"
 echo "- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)" >> "$temp_file"
+echo "" >> "$temp_file"
+echo "## Download" >> "$temp_file"
+echo "" >> "$temp_file"
+
+# packagesディレクトリのフォルダを取得し、アルファベット順にソート
+# chirimen、packages、test、hello-worldディレクトリは除外
+find packages -maxdepth 1 -type d -name "*" | sed 's|packages/||' | grep -v "^$" | grep -v "^chirimen$" | grep -v "^packages$" | grep -v "^test$" | grep -v "^hello-world$" | sort | while read -r package; do
+    echo "- [@chirimen/$package](https://www.jsdelivr.com/package/npm/@chirimen/$package)" >> "$temp_file"
+done
 
 # 新しい内容でREADMEを更新
 mv "$temp_file" README.md
