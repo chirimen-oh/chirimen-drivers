@@ -2,6 +2,39 @@
 
 [![release](https://github.com/chirimen-oh/chirimen-drivers/actions/workflows/release.yml/badge.svg)](https://github.com/chirimen-oh/chirimen-drivers/actions/workflows/release.yml)
 
+## Usage
+
+### Node.js
+
+```
+$ npm i chirimen
+```
+
+```js
+import { requestI2CAccess, ADT7410 } from "chirimen";
+
+const i2cAccess = await requestI2CAccess();
+const adt7410 = new ADT7410(i2cAccess.ports.get(1), 0x48);
+await adt7410.init();
+await adt7410.read();
+```
+
+### Deno
+
+```js
+import { requestI2CAccess, ADT7410 } from "npm:chirimen";
+```
+
+## Documents
+
+- [CHIRIMEN Tutorial](https://r.chirimen.org/tutorial)
+- [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
+- [Web I2C API](https://browserobo.github.io/WebI2C/)
+
+## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
+
+- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
+
 ## Download
 
 - [@chirimen/ads1015](https://www.jsdelivr.com/package/npm/@chirimen/ads1015)
@@ -60,36 +93,3 @@
 - [@chirimen/vl53l0x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l0x)
 - [@chirimen/vl53l1x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l1x)
 - [@chirimen/vl6180x](https://www.jsdelivr.com/package/npm/@chirimen/vl6180x)
-
-## Usage
-
-### Node.js
-
-```
-$ npm i chirimen
-```
-
-```js
-import { requestI2CAccess, ADT7410 } from "chirimen";
-
-const i2cAccess = await requestI2CAccess();
-const adt7410 = new ADT7410(i2cAccess.ports.get(1), 0x48);
-await adt7410.init();
-await adt7410.read();
-```
-
-### Deno
-
-```js
-import { requestI2CAccess, ADT7410 } from "npm:chirimen";
-```
-
-## Documents
-
-- [CHIRIMEN Tutorial](https://r.chirimen.org/tutorial)
-- [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
-- [Web I2C API](https://browserobo.github.io/WebI2C/)
-
-## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
-
-- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
