@@ -8,7 +8,7 @@ jobs:
     # 最後のコミットが自動README更新の場合はCI全体をスキップ
     if: contains(github.event.head_commit.message, '[bot] Update README download section') == false
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: "lts/*"
