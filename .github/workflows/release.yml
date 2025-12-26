@@ -5,24 +5,33 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
     # 最後のコミットが自動README更新の場合はCI全体をスキップ
     if: contains(github.event.head_commit.message, '[bot] Update README download section') == false
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version: "lts/*"
           cache: npm
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - name: Git Setup
+        run: |
+          git config user.name release[bot]
+          git config user.email "release[bot]@users.noreply.github.com"
       - name: Update README Download Section
         run: |
           chmod +x update-readme-download.sh
           ./update-readme-download.sh
           if [ -n "$(git status --porcelain)" ]; then
             BRANCH_NAME="bot/update-readme-$(date +%Y%m%d-%H%M%S)"
-            git config user.name release-bot
-            git config user.email release-bot@users.noreply.github.com
             git checkout -b "$BRANCH_NAME"
             git add README.md
             git commit -m "[bot] Update README download section [skip ci]"
@@ -32,10 +41,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release
-        run: |
-          git config user.name release-bot
-          git config user.email release-bot@example
-          git fetch --unshallow --tags
-          node --run release
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node --run release
