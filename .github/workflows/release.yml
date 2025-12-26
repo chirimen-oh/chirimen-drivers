@@ -25,7 +25,7 @@ jobs:
       - name: Git Setup
         run: |
           git config user.name release[bot]
-          git config user.email chirimen-oh@users.noreply.github.com
+          git config user.email "release[bot]@users.noreply.github.com"
       - name: Update README Download Section
         run: |
           chmod +x update-readme-download.sh
