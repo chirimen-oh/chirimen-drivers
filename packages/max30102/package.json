@@ -1,7 +1,7 @@
 {
   "name": "@chirimen/max30102",
   "description": "Driver for MAX30102 with WebI2C",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Kohei Watanabe <nebel@fogtype.com>",
   "license": "MIT",
   "publishConfig": {
@@ -22,7 +22,7 @@
     "prepare": "node --run=build"
   },
   "devDependencies": {
-    "node-web-i2c": "^1.1.36",
-    "pkgroll": "^2.13.1"
+    "node-web-i2c": "^1.1.47",
+    "pkgroll": "^2.21.4"
   }
 }

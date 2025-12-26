@@ -81,6 +81,10 @@ export class MAX30102 {
   async available(): Promise<number> {
     if (!this.#device) throw new Error("Device not initialized");
 
+    const overflow = await this.#device.read8(REG_OVF_COUNTER);
+
+    if (overflow > 0) return 32; // FIFO buffer size
+
     const readPtr = await this.#device.read8(REG_FIFO_RD_PTR);
     const writePtr = await this.#device.read8(REG_FIFO_WR_PTR);
 
