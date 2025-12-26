@@ -1,7 +1,7 @@
 {
   "name": "chirimen",
   "description": "A comprehensive collection of CHIRIMEN IoT device drivers and utilities",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -60,6 +60,7 @@
     "@chirimen/icm20948": "latest",
     "@chirimen/ina219": "latest",
     "@chirimen/ltr390": "latest",
+    "@chirimen/max30102": "latest",
     "@chirimen/mcp9808": "latest",
     "@chirimen/mlx90614": "latest",
     "@chirimen/mma7660": "latest",
