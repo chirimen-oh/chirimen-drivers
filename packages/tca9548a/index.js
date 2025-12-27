@@ -27,7 +27,7 @@ export class TCA9548ANotFoundError extends Error {
 
 /**
  * @param {import("node-web-i2c").I2CPort} bus
- * @param {TCA9548AAddress} [address=112]
+ * @param {TCA9548AAddress} [address=0x70]
  * @returns {{
  *   i2cSlave: import("node-web-i2c").I2CSlaveDevice | null,
  *   init: () => Promise<void>,
