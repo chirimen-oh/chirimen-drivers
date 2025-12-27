@@ -17,16 +17,7 @@
     "actuators"
   ],
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "scripts": {
-    "build": "pkgroll",
-    "prepare": "node --run=build"
-  },
+  "exports": "./index.js",
   "dependencies": {
     "@chirimen/ads1015": "latest",
     "@chirimen/ads1x15": "latest",
@@ -87,8 +78,5 @@
     "@chirimen/vl6180x": "latest",
     "node-web-gpio": "latest",
     "node-web-i2c": "latest"
-  },
-  "devDependencies": {
-    "pkgroll": "^2.13.1"
   }
 }

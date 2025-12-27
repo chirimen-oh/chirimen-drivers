@@ -1,14 +1,16 @@
 {
   "name": "chirimen-drivers",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": "git@github.com:chirimen-oh/chirimen-drivers.git",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^9.0.0"
+    "lerna": "^9.0.3",
+    "prettier": "^3.7.4"
   },
   "scripts": {
     "release": "lerna publish from-package"

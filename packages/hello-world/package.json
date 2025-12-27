@@ -1,13 +1,9 @@
 {
   "name": "@chirimen/hello-world",
-  "version": "1.0.0",
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./index.js"
-    }
-  },
+  "version": "2.0.0",
   "license": "MIT",
+  "type": "module",
+  "exports": "./index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git",

@@ -1,9 +1,7 @@
 {
   "name": "@chirimen/icm20948",
-  "version": "1.0.1",
   "description": "Driver for ICM20948 with WebI2C",
-  "main": "index.js",
-  "module": "icm20948.js",
+  "version": "2.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,11 +11,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
-    "prepublishOnly": "npm run build"
-  },
-  "devDependencies": {
-    "rollup": "^4.0.0"
+  "type": "module",
+  "exports": "./index.js",
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
   }
 }
