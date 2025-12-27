@@ -40,7 +40,7 @@
 
 ## プロジェクト構成
 
-このリポジトリは [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) と [Lerna](https://lerna.js.org/) で管理される **monorepo** です。複数の CHIRIMEN ドライバパッケージを一つのリポジトリで管理しています。
+このリポジトリは [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) と [Lerna](https://lerna.js.org/) で管理される **monorepo** です。複数の CHIRIMEN ドライバパッケージを一つのリポジトリで管理しています。
 
 ### ファイル構造
 
