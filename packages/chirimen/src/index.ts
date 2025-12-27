@@ -59,6 +59,6 @@ export {
   GPIOAccess,
   GPIOPort,
   GPIOPortMap,
-  requestGPIOAccess
+  requestGPIOAccess,
 } from "node-web-gpio";
 export * from "node-web-i2c";
