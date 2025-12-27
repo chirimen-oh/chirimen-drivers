@@ -1,3 +1,5 @@
+{% include translate.md %}
+
 # Contributing Guidelines
 
 [CHIRIMEN Drivers](https://github.com/chirimen-oh/chirimen-drivers) へのコントリビュート方法です。
