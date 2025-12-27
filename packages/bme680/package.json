@@ -1,9 +1,7 @@
 {
   "name": "@chirimen/bme680",
-  "version": "1.0.0",
   "description": "Driver for bme680 with WebI2C",
-  "main": "bme680.js",
-  "module": "bme680.js",
+  "version": "2.0.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -12,5 +10,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
   }
 }

@@ -1,38 +1,20 @@
 {
   "name": "@chirimen/tca9548a",
-  "version": "1.0.6",
   "description": "Driver for TCA9548A with WebI2C",
-  "author": "Kohei Watanabe <kou029w@gmail.com>",
+  "version": "2.0.0",
+  "author": "Kohei Watanabe <nebel@fogtype.com>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "umd/index.js",
-  "module": "esm/index.js",
-  "types": "esm/index.d.ts",
-  "files": [
-    "esm",
-    "umd"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
     "directory": "packages/tca9548a"
   },
-  "scripts": {
-    "doc": "typedoc",
-    "build": "run-p build:*",
-    "build:esm": "tsc --declaration --outDir esm",
-    "build:umd": "rollup -c --bundleConfigAsCjs",
-    "prepublishOnly": "npm run build"
-  },
-  "devDependencies": {
-    "@rollup/plugin-typescript": "^12.0.0",
-    "node-web-i2c": "latest",
-    "npm-run-all2": "^8.0.0",
-    "rollup": "^4.0.0",
-    "typedoc": "^0.28.0",
-    "typedoc-plugin-markdown": "^4.0.0",
-    "typescript": "^5.0.0"
+  "type": "module",
+  "exports": "./index.js",
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
   }
 }

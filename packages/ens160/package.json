@@ -1,9 +1,7 @@
 {
   "name": "@chirimen/ens160",
-  "version": "1.0.1",
   "description": "Driver for ens160 with WebI2C",
-  "main": "ens160.js",
-  "module": "ens160.js",
+  "version": "2.0.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -12,5 +10,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
   }
 }

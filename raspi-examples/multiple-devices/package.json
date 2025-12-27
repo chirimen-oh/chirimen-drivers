@@ -5,6 +5,6 @@
   "dependencies": {
     "@chirimen-raspi/chirimen-driver-i2c-adt7410": "^1.0.0",
     "@chirimen-raspi/chirimen-driver-i2c-grove-light": "^1.0.0",
-    "@chirimen-raspi/polyfill": "^1.0.1"
+    "@chirimen-raspi/polyfill": "^1.0.6"
   }
 }
