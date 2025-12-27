@@ -572,6 +572,6 @@ GitHub Actions のワークフロー ([.github/workflows/release.yml](.github/wo
 ## 参考リンク
 
 - [CHIRIMEN 公式サイト](https://chirimen.org/)
-- [npm workspaces ドキュメント](https://docs.npmjs.com/cli/v8/using-npm/workspaces)
+- [npm workspaces ドキュメント](https://docs.npmjs.com/cli/using-npm/workspaces)
 - [Lerna ドキュメント](https://lerna.js.org/)
 - [セマンティックバージョニング](https://semver.org/lang/ja/)
