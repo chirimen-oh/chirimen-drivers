@@ -29,6 +29,7 @@ export { default as HTU21D } from "@chirimen/htu21d";
 export { default as ICM20948 } from "@chirimen/icm20948";
 export { default as INA219 } from "@chirimen/ina219";
 export { default as LTR390 } from "@chirimen/ltr390";
+export { default as MAX30102 } from "@chirimen/max30102";
 export { default as MCP9808 } from "@chirimen/mcp9808";
 export { default as MLX90614 } from "@chirimen/mlx90614";
 export { default as MMA7660 } from "@chirimen/mma7660";

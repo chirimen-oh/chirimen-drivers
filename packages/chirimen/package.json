@@ -1,7 +1,7 @@
 {
   "name": "chirimen",
   "description": "A comprehensive collection of CHIRIMEN IoT device drivers and utilities",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "MIT",
   "repository": {
     "type": "git",
