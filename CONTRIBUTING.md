@@ -324,7 +324,7 @@ async function main() {
 
   while (true) {
     const data = await bme280.read();
-    console.log(`Temperature: \${data.temperature.toFixed(2)}℃`);
+    console.log(`Temperature: ${data.temperature.toFixed(2)}℃`);
     await sleep(1000);
   }
 }
