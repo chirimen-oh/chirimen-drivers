@@ -208,8 +208,20 @@ export class MAX30102 {
       intervals.push(peaks[i] - peaks[i - 1]);
     }
 
+    // Remove outliers based on median
+    const sorted = [...intervals].sort((a, b) => a - b);
+    const median = sorted[Math.floor(sorted.length / 2)];
+    const filtered = intervals.filter(
+      (v) => v > median * 0.7 && v < median * 1.3,
+    );
+
+    // Fall back to null if all intervals are filtered out
+    if (filtered.length === 0) {
+      return null;
+    }
+
     const averageInterval =
-      intervals.reduce((acc, val) => acc + val, 0) / intervals.length;
+      filtered.reduce((acc, val) => acc + val, 0) / filtered.length;
 
     const heartRate = Math.round((samplingRate * 60) / averageInterval);
 
