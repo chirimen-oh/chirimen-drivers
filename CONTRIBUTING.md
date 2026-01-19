@@ -362,7 +362,7 @@ npx prettier --write node-examples/bme280/
 
 ### ステップ 8: 動作確認する
 
-実際のハードウェアがある場合は動作確認を行います:
+実際のハードウェアがある場合は動作確認を行います:(optional)
 
 ```bash
 cd node-examples/bme280
@@ -372,7 +372,22 @@ node main.js
 
 ---
 
-### ステップ 9: 変更をコミットする
+### ステップ 9A: 動作確認する
+
+実際のハードウェアがある場合は動作確認を行います:(optional)
+
+```bash
+# ルートディレクトリに戻る
+
+cd /path/to/chirimen-drivers
+
+# npm installする
+npm install
+```
+
+---
+
+### ステップ 9B: 変更をコミットする
 
 ```bash
 # すべての変更をステージング
