@@ -65,6 +65,7 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [@chirimen/grove-water-level-sensor](https://www.jsdelivr.com/package/npm/@chirimen/grove-water-level-sensor)
 - [@chirimen/ht16k33](https://www.jsdelivr.com/package/npm/@chirimen/ht16k33)
 - [@chirimen/htu21d](https://www.jsdelivr.com/package/npm/@chirimen/htu21d)
+- [@chirimen/i2c1602lcd](https://www.jsdelivr.com/package/npm/@chirimen/i2c1602lcd)
 - [@chirimen/icm20948](https://www.jsdelivr.com/package/npm/@chirimen/icm20948)
 - [@chirimen/ina219](https://www.jsdelivr.com/package/npm/@chirimen/ina219)
 - [@chirimen/ltr390](https://www.jsdelivr.com/package/npm/@chirimen/ltr390)
