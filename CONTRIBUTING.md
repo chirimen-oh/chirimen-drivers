@@ -372,9 +372,9 @@ node main.js
 
 ---
 
-### ステップ 9A: 動作確認する
+### ステップ 9A: package-lock.jsonを更新する
 
-実際のハードウェアがある場合は動作確認を行います:(optional)
+package-lock.jsonを更新します:
 
 ```bash
 # ルートディレクトリに戻る
