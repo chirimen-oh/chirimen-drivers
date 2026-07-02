@@ -54,13 +54,7 @@
 ├── .github/workflows/ # GitHub Actions ワークフロー
 │ ├── ci.yml # CI (npm ci の実行)
 │ └── release.yml # リリース自動化
-├── examples/ # ドキュメント用のMarkdownファイル
-├── raspi-examples/ # CHIRIMEN for Raspberry Pi ブラウザ用サンプルコード
 ├── microbit-examples/ # CHIRIMEN with micro:bit 用サンプルコード
-├── node-examples/ # Node.js 用サンプルコード
-│ └── adt7410/ # 各ドライバのサンプル
-│ ├── main.js
-│ └── package.json
 ├── lerna.json # Lerna 設定ファイル
 ├── package.json # ルート package.json (workspaces 設定)
 └── packages/ # ドライバモジュールのソースコード
@@ -294,57 +288,7 @@ export default BME280;
 
 ---
 
-### ステップ 6: サンプルコードを作成する（推奨）
-
-`node-examples/bme280/` ディレクトリにサンプルコードを追加します:
-
-```bash
-mkdir -p node-examples/bme280
-```
-
-`node-examples/bme280/package.json`:
-
-```json
-{
-  "name": "bme280-example",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@chirimen/bme280": "*",
-    "node-web-i2c": "^1.1.51"
-  }
-}
-```
-
-`node-examples/bme280/main.js`:
-
-```javascript
-import { requestI2CAccess } from "node-web-i2c";
-import BME280 from "@chirimen/bme280";
-
-async function main() {
-  const i2cAccess = await requestI2CAccess();
-  const port = i2cAccess.ports.get(1);
-  const bme280 = new BME280(port, 0x76);
-  await bme280.init();
-
-  while (true) {
-    const data = await bme280.read();
-    console.log(`Temperature: ${data.temperature.toFixed(2)}℃`);
-    await sleep(1000);
-  }
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-main().catch(console.error);
-```
-
----
-
-### ステップ 7: コードをフォーマットする
+### ステップ 6: コードをフォーマットする
 
 ```bash
 
@@ -355,24 +299,30 @@ cd /path/to/chirimen-drivers
 # Prettierでフォーマット
 
 npx prettier --write packages/bme280/
-npx prettier --write node-examples/bme280/
 ```
 
 ---
 
-### ステップ 8: 動作確認する
+### ステップ 7: 動作確認する
 
-実際のハードウェアがある場合は動作確認を行います:(optional)
+実際のハードウェアがある場合は、`npm ci` 実行後 workspaces 経由で解決される `@chirimen/bme280` を直接読み込んで動作確認します:(optional)
 
 ```bash
-cd node-examples/bme280
-npm install
-node main.js
+node -e "
+import('@chirimen/bme280').then(async (m) => {
+  const { requestI2CAccess } = await import('node-web-i2c');
+  const i2cAccess = await requestI2CAccess();
+  const port = i2cAccess.ports.get(1);
+  const bme280 = new m.default(port, 0x76);
+  await bme280.init();
+  console.log(await bme280.read());
+});
+"
 ```
 
 ---
 
-### ステップ 9A: package-lock.jsonを更新する
+### ステップ 8A: package-lock.jsonを更新する
 
 package-lock.jsonを更新します:
 
@@ -387,19 +337,17 @@ npm install
 
 ---
 
-### ステップ 9B: 変更をコミットする
+### ステップ 8B: 変更をコミットする
 
 ```bash
 # すべての変更をステージング
 git add packages/bme280/
-git add node-examples/bme280/
 
 # コミット
 git commit -m "feat: add BME280 sensor driver
 
 - Add BME280 I2C driver for temperature, humidity and pressure
 - Add comprehensive README with API documentation
-- Add Node.js example code
 - Support I2C addresses 0x76 and 0x77"
 
 # あなたのフォークにプッシュ
@@ -415,7 +363,7 @@ git push origin add-bme280-driver
 
 ---
 
-### ステップ 10: Pull Request を作成する
+### ステップ 9: Pull Request を作成する
 
 1. GitHub であなたのフォークを開く
 2. 「Compare & pull request」ボタンをクリック
