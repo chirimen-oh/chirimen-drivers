@@ -305,20 +305,37 @@ npx prettier --write packages/bme280/
 
 ### ステップ 7: 動作確認する
 
-実際のハードウェアがある場合は、`npm ci` 実行後 workspaces 経由で解決される `@chirimen/bme280` を直接読み込んで動作確認します:(optional)
+実際のハードウェアがある場合は動作確認を行います:(optional)
+
+まだ npm に公開していないパッケージなので、レジストリからではなくローカルの `packages/bme280` を直接指定してインストールします:
 
 ```bash
-node -e "
-import('@chirimen/bme280').then(async (m) => {
-  const { requestI2CAccess } = await import('node-web-i2c');
-  const i2cAccess = await requestI2CAccess();
-  const port = i2cAccess.ports.get(1);
-  const bme280 = new m.default(port, 0x76);
-  await bme280.init();
-  console.log(await bme280.read());
-});
-"
+# ルートディレクトリに動作確認用の一時ディレクトリを作る（コミット不要）
+mkdir tmp-check && cd tmp-check
+npm init -y
+npm install ../packages/bme280 node-web-i2c
 ```
+
+`tmp-check/main.js` を作成します:
+
+```javascript
+import BME280 from "@chirimen/bme280";
+import { requestI2CAccess } from "node-web-i2c";
+
+const i2cAccess = await requestI2CAccess();
+const port = i2cAccess.ports.get(1);
+const bme280 = new BME280(port, 0x76);
+await bme280.init();
+console.log(await bme280.read());
+```
+
+`tmp-check/package.json` に `"type": "module"` を追記してから実行します:
+
+```bash
+node main.js
+```
+
+確認が終わったら `tmp-check/` ディレクトリごと削除してください。
 
 ---
 
