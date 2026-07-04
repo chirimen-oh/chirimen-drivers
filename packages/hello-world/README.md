@@ -12,13 +12,10 @@
 # パッケージのソースコードをクローンします
 git clone https://github.com/chirimen-oh/chirimen-drivers.git
 cd chirimen-drivers
-# リンクしたいパッケージのシンボリックリンクを作ります
-cd packages/hello-world
-npm link
-# サンプルコード本体を実行します
-cd ../..
-cd node-examples/hello-world
-node main.js
+# workspaces の依存関係をインストールします
+npm ci
+# パッケージ本体を実行します
+node -e "import('@chirimen/hello-world').then((m) => console.log(m.default))"
 ```
 
 実行結果

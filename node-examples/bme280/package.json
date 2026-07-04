@@ -1,9 +1,0 @@
-{
-  "name": "i2c-bme280-example",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@chirimen/bme280": "latest",
-    "node-web-i2c": "latest"
-  }
-}

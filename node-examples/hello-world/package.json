@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "dependencies": {
-    "@chirimen/hello-world": "latest"
-  }
-}
