@@ -40,6 +40,7 @@ git remote -v
 ```bash
 git checkout master
 git pull upstream master   # upstream を追加している場合
+# git pull origin master   # upstream を追加していない場合
 git checkout -b type/short-description
 ```
 
