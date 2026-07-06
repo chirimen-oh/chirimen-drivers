@@ -274,247 +274,96 @@ git push origin fix/adt7410-negative-temperature
 
 GitHub で Pull Request を作成します。
 
-## 新しいドライバの追加：完全ガイド
+## 新しいドライバの追加
 
-新しい I2C デバイスのドライバを追加する完全な手順を説明します。
+新しい I2C デバイス（や GPIO・SPI デバイス）のドライバを追加する手順です。
 
-### 例：BME280 センサードライバを追加する場合
+### チェックリスト
 
-このガイドでは、架空の「BME280」センサーのドライバを追加する例で説明します。
+- [ ] ブランチを作成する（`feat/<デバイス名>`）
+- [ ] `packages/hello-world` をコピーして新パッケージを作成する
+- [ ] `package.json` / `index.js` / `README.md` を編集する
+- [ ] Prettier でフォーマットする
+- [ ] （任意）ハードウェアで動作確認する
+- [ ] ルートで `npm install` して `package-lock.json` を更新する
+- [ ] コミットして PR を作成する
 
----
+### 手順の詳細
 
-### ステップ 1: ブランチを作成する
+**1. ブランチの作成**
+
+[共通の Git ワークフロー](#共通の-git-ワークフロー) に従い、ブランチ名は `feat/<デバイス名>` とします。
 
 ```bash
-
-# masterブランチから最新の状態で新しいブランチを作成
-
 git checkout master
-git pull upstream master # upstreamを追加している場合
-git checkout -b add-bme280-driver
+git pull upstream master
+git checkout -b feat/example-sensor
 ```
 
----
+**2. テンプレートからパッケージを作成**
 
-### ステップ 2: パッケージディレクトリを作成する
+[packages/hello-world/](packages/hello-world/) が最小構成のテンプレートです。これをコピーして新しいディレクトリを作ります。
 
 ```bash
-
-# packagesディレクトリ内に新しいドライバ用のディレクトリを作成
-
-mkdir packages/bme280
-cd packages/bme280
+cp -r packages/hello-world packages/example-sensor
 ```
 
-**命名規則**: デバイスの型番を小文字にしたもの（例: `adt7410`, `bme280`, `mpu6050`）
+ディレクトリ名はデバイス型番の小文字（例: `adt7410`, `mpu6050`）にします。
 
----
+**3. ファイルの編集**
 
-### ステップ 3: package.json を作成する
+| ファイル | やること |
+| --- | --- |
+| `package.json` | `name`, `description`, `version`, `repository.directory` を更新。I2C ドライバなら `peerDependencies` に `node-web-i2c` を追加 |
+| `index.js` | センサーの読み取りロジックをクラスとして実装 |
+| `README.md` | 仕様・使い方・API リファレンスを記述（日本語推奨） |
 
-`packages/bme280/package.json` を以下の内容で作成します:
+`package.json` と `index.js` のテンプレートは [付録](#付録) を参照してください。
 
-```json
-{
-  "name": "@chirimen/bme280",
-  "description": "CHIRIMEN driver for BME280 temperature, humidity and pressure sensor",
-  "version": "1.0.0",
-  "license": "MIT",
-  "type": "module",
-  "exports": "./index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
-    "directory": "packages/bme280"
-  },
-  "keywords": [
-    "CHIRIMEN",
-    "IoT",
-    "I2C",
-    "sensor",
-    "BME280",
-    "temperature",
-    "humidity",
-    "pressure"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "node-web-i2c": "^1.1.51"
-  }
-}
-```
+**実装の参考ドライバ:**
 
-**重要なフィールド:**
+| 難易度 | パッケージ | 特徴 |
+| --- | --- | --- |
+| 最小構成 | [packages/hello-world/](packages/hello-world/) | パッケージ構造の雛形 |
+| シンプル | [packages/adt7410/](packages/adt7410/) | I2C 温度センサー |
+| 複雑 | [packages/amg8833/](packages/amg8833/) | 赤外線アレイセンサー |
 
-- `name`: 必ず `@chirimen/` で始める
-- `description`: センサーの機能を簡潔に説明
-- `version`: 初版は `1.0.0` から開始
-- `type`: `"module"` を指定（ES Modules を使用）
-- `exports`: エントリーポイント（通常は `"./index.js"`）
-- `repository.directory`: パッケージのパス
-- `peerDependencies`: `node-web-i2c` を指定（I2C 通信に必要）
-
----
-
-### ステップ 4: ドライバコード (index.js) を作成する
-
-`packages/bme280/index.js` を作成します。実際の実装例は `packages/adt7410/index.js` を参考にしてください。
-
-基本的な構造:
-
-```javascript
-// @ts-check
-
-class BME280 {
-  constructor(i2cPort, slaveAddress = 0x76) {
-    this.i2cPort = i2cPort;
-    this.i2cSlave = null;
-    this.slaveAddress = slaveAddress;
-  }
-
-  async init() {
-    this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-    // センサーの初期化処理をここに記述
-  }
-
-  async read() {
-    if (this.i2cSlave == null) {
-      throw new Error("i2cSlave is not initialized. Call init() first.");
-    }
-    // データ読み取り処理をここに記述
-    return { temperature: 0, humidity: 0, pressure: 0 };
-  }
-}
-
-export default BME280;
-```
-
-**実装のポイント:**
-
-1. **クラスベースの設計**: ES6 クラスを使用
-2. **コンストラクタ**: I2C ポートとアドレスを受け取る
-3. **init() メソッド**: センサーの初期化処理
-4. **read() メソッド**: データ読み取り
-5. **エラーハンドリング**: 適切なエラーメッセージ
-6. **非同期処理**: async/await を使用
-
----
-
-### ステップ 5: README.md を作成する
-
-`packages/bme280/README.md` を作成します。`packages/adt7410/README.md` を参考に、以下の内容を含めます:
-
-- センサーの仕様
-- インストール方法
-- 使い方（サンプルコード）
-- API リファレンス
-- 参考リンク（データシートなど）
-
----
-
-### ステップ 6: コードをフォーマットする
+**4. フォーマット**
 
 ```bash
-
-# ルートディレクトリに戻る
-
-cd /path/to/chirimen-drivers
-
-# Prettierでフォーマット
-
-npx prettier --write packages/bme280/
+npx prettier --write packages/example-sensor/
 ```
 
----
+**5. 動作確認（任意）**
 
-### ステップ 7: 動作確認する
-
-実際のハードウェアがある場合は動作確認を行います:(optional)
-
-まだ npm に公開していないパッケージなので、レジストリからではなくローカルの `packages/bme280` を直接指定してインストールします:
+ハードウェアがある場合、ローカルパッケージを直接インストールして確認できます。
 
 ```bash
-# ルートディレクトリに動作確認用の一時ディレクトリを作る（コミット不要）
 mkdir tmp-check && cd tmp-check
 npm init -y
-npm install ../packages/bme280 node-web-i2c
+npm install ../packages/example-sensor node-web-i2c
 ```
 
-`tmp-check/main.js` を作成します:
+`tmp-check/package.json` に `"type": "module"` を追記し、サンプルコードを実行します。確認後は `tmp-check/` を削除してください（コミット不要）。
 
-```javascript
-import BME280 from "@chirimen/bme280";
-import { requestI2CAccess } from "node-web-i2c";
+**6. package-lock.json の更新**
 
-const i2cAccess = await requestI2CAccess();
-const port = i2cAccess.ports.get(1);
-const bme280 = new BME280(port, 0x76);
-await bme280.init();
-console.log(await bme280.read());
-```
-
-`tmp-check/package.json` に `"type": "module"` を追記してから実行します:
+新パッケージを workspace に追加したため、ルートで以下を実行します。
 
 ```bash
-node main.js
-```
-
-確認が終わったら `tmp-check/` ディレクトリごと削除してください。
-
----
-
-### ステップ 8A: package-lock.jsonを更新する
-
-package-lock.jsonを更新します:
-
-```bash
-# ルートディレクトリに戻る
-
 cd /path/to/chirimen-drivers
-
-# npm installする
 npm install
 ```
 
----
-
-### ステップ 8B: 変更をコミットする
+**7. コミットと PR**
 
 ```bash
-# すべての変更をステージング
-git add packages/bme280/
-
-# コミット
-git commit -m "feat: add BME280 sensor driver
-
-- Add BME280 I2C driver for temperature, humidity and pressure
-- Add comprehensive README with API documentation
-- Support I2C addresses 0x76 and 0x77"
-
-# あなたのフォークにプッシュ
-git push origin add-bme280-driver
+git add packages/example-sensor/ package-lock.json
+git commit -m "feat: add example-sensor driver"
+git push origin feat/example-sensor
 ```
 
-**コミットメッセージの規約:**
-
-- `feat:` - 新機能追加
-- `fix:` - バグ修正
-- `docs:` - ドキュメントのみの変更
-- `refactor:` - リファクタリング
-
----
-
-### ステップ 9: Pull Request を作成する
-
-1. GitHub であなたのフォークを開く
-2. 「Compare & pull request」ボタンをクリック
-3. タイトルと説明を記入
-4. 「Create pull request」をクリック
-
----
+[共通の Git ワークフロー](#共通の-git-ワークフロー) に従い、GitHub で Pull Request を作成します。PR がマージされると、GitHub Actions が自動的に npm へ公開します。
 
 ## コーディング規約
 
@@ -640,3 +489,163 @@ GitHub Actions のワークフロー ([.github/workflows/release.yml](.github/wo
 - [npm workspaces ドキュメント](https://docs.npmjs.com/cli/using-npm/workspaces)
 - [Lerna ドキュメント](https://lerna.js.org/)
 - [セマンティックバージョニング](https://semver.org/lang/ja/)
+
+## 付録
+
+### package.json テンプレート（I2C ドライバ）
+
+`packages/<デバイス名>/package.json` の例です。`YOUR_DEVICE` と `your-device` を実際のデバイス名に置き換えてください。
+
+```json
+{
+  "name": "@chirimen/your-device",
+  "description": "CHIRIMEN driver for YOUR_DEVICE sensor",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/your-device"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
+  }
+}
+```
+
+| フィールド | 説明 |
+| --- | --- |
+| `name` | 必ず `@chirimen/` で始める |
+| `description` | センサーの機能を簡潔に説明 |
+| `version` | 初版は `1.0.0` から開始 |
+| `type` | `"module"` を指定（ES Modules） |
+| `exports` | エントリーポイント（通常 `"./index.js"`） |
+| `repository.directory` | パッケージのパス |
+| `peerDependencies` | I2C ドライバは `node-web-i2c` を指定 |
+
+### index.js の基本構造（I2C ドライバ）
+
+[packages/adt7410/index.js](packages/adt7410/index.js) を参考に、以下のパターンで実装します。
+
+```javascript
+// @ts-check
+
+class YourDevice {
+  constructor(i2cPort, slaveAddress) {
+    this.i2cPort = i2cPort;
+    this.i2cSlave = null;
+    this.slaveAddress = slaveAddress;
+  }
+
+  async init() {
+    this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
+    // センサーの初期化処理
+  }
+
+  async read() {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not initialized. Call init() first.");
+    }
+    // データ読み取り処理
+    return {};
+  }
+}
+
+export default YourDevice;
+```
+
+### Conventional Commits の具体例
+
+```
+feat: add example-sensor driver
+fix(adt7410): fix negative temperature calculation
+docs: fix typo in README
+refactor(bme280): simplify init logic
+```
+
+Issue を閉じる場合はコミット本文に `Fixes #123` を記載します。
+
+## 付録
+
+### package.json テンプレート（I2C ドライバ）
+
+`packages/<デバイス名>/package.json` の例です。`YOUR_DEVICE` と `your-device` を実際のデバイス名に置き換えてください。
+
+```json
+{
+  "name": "@chirimen/your-device",
+  "description": "CHIRIMEN driver for YOUR_DEVICE sensor",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/your-device"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
+  }
+}
+```
+
+| フィールド | 説明 |
+| --- | --- |
+| `name` | 必ず `@chirimen/` で始める |
+| `description` | センサーの機能を簡潔に説明 |
+| `version` | 初版は `1.0.0` から開始 |
+| `type` | `"module"` を指定（ES Modules） |
+| `exports` | エントリーポイント（通常 `"./index.js"`） |
+| `repository.directory` | パッケージのパス |
+| `peerDependencies` | I2C ドライバは `node-web-i2c` を指定 |
+
+### index.js の基本構造（I2C ドライバ）
+
+[packages/adt7410/index.js](packages/adt7410/index.js) を参考に、以下のパターンで実装します。
+
+```javascript
+// @ts-check
+
+class YourDevice {
+  constructor(i2cPort, slaveAddress) {
+    this.i2cPort = i2cPort;
+    this.i2cSlave = null;
+    this.slaveAddress = slaveAddress;
+  }
+
+  async init() {
+    this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
+    // センサーの初期化処理
+  }
+
+  async read() {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not initialized. Call init() first.");
+    }
+    // データ読み取り処理
+    return {};
+  }
+}
+
+export default YourDevice;
+```
+
+### Conventional Commits の具体例
+
+```
+feat: add example-sensor driver
+fix(adt7410): fix negative temperature calculation
+docs: fix typo in README
+refactor(bme280): simplify init logic
+```
+
+Issue を閉じる場合はコミット本文に `Fixes #123` を記載します。
