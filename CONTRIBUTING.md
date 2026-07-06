@@ -389,6 +389,34 @@ git push origin add-bme280-driver
 
 ---
 
+## chirimen lite用サンプル追加 (ステップ10の後に強く推奨)
+### ステップ 11: chirimen lite用サンプルコードを作成する
+- サンプルを`https://github.com/chirimen-oh/chirimen.org/tree/master/pizero/src/esm-examples`以下に新しいディレクトリを作成し、ここに登録して下さい。
+- 同ディレクトリにある他のサンプル(ディレクトリ)を参考にして作成してください。
+  - main.jsファイルにサンプルのコードを入れる
+  - readme.md に説明を入れる
+    - 実体配線図(fritzing)を記載(強く推奨)
+      - 追加したデバイスのfritzingパーツが存在しない場合は、パーツコンテンツを作成(推奨)
+
+### ステップ 12: chirimen lite用サンプルインデックスを更新する
+- https://github.com/chirimen-oh/chirimen.org/blob/master/pizero/src/esm-examples/index_examples.csv にレコードを追加
+- 他のレコードを参考にして編集してください。
+
+---
+
+## パーツリストの追加 (ステップ12の後に強く推奨)
+
+### ステップ13 : partslist.csvを更新
+- https://github.com/chirimen-oh/chirimen.org/blob/master/_data/partslist.csv にレコードを追加
+- 他のレコードを参考にして編集してください
+- 必要カラム：パーツの型番、説明、画像ファイル名、chirimen lite用サンプルへのリンク
+
+### ステップ14 : パーツ画像の追加
+- https://github.com/chirimen-oh/chirimen.org/tree/master/partsImgs に画像ファイルを登録
+- サイズはQCIF or QVGA程度の小さいものを推奨
+
+---
+
 ## 既存ドライバの修正方法
 
 既存のドライバにバグ修正や機能追加を行う場合の手順です。
