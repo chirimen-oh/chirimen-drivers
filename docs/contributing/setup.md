@@ -4,7 +4,7 @@
 
 ## 必要なツール
 
-- **Node.js** (LTS バージョン推奨 — 現在 v20 以上)
+- **Node.js** (LTS バージョン推奨)
 - **npm** (Node.js に同梱)
 - **Git**
 
@@ -45,10 +45,10 @@ git checkout -b type/short-description
 
 **ブランチ名の例:**
 
-| 変更内容 | ブランチ名の例 |
-| --- | --- |
-| README の誤字修正 | `docs/fix-readme-typo` |
-| 新ドライバ追加 | `feat/example-sensor` |
+| 変更内容               | ブランチ名の例            |
+| ---------------------- | ------------------------- |
+| README の誤字修正      | `docs/fix-readme-typo`    |
+| 新ドライバ追加         | `feat/example-sensor`     |
 | 既存ドライバのバグ修正 | `fix/adt7410-temperature` |
 
 **2. 変更を加えてコミット**
@@ -60,12 +60,12 @@ git commit -m "type: short description"
 
 **コミットメッセージの形式（[Conventional Commits](https://www.conventionalcommits.org/)）:**
 
-| プレフィックス | 用途 | 例 |
-| --- | --- | --- |
-| `feat:` | 新機能・新ドライバ追加 | `feat: add example-sensor driver` |
-| `fix:` | バグ修正 | `fix(adt7410): fix negative temperature calculation` |
-| `docs:` | ドキュメントのみの変更 | `docs: fix typo in README` |
-| `refactor:` | 動作を変えないコード整理 | `refactor(bme280): simplify init logic` |
+| プレフィックス | 用途                     | 例                                                   |
+| -------------- | ------------------------ | ---------------------------------------------------- |
+| `feat:`        | 新機能・新ドライバ追加   | `feat: add example-sensor driver`                    |
+| `fix:`         | バグ修正                 | `fix(adt7410): fix negative temperature calculation` |
+| `docs:`        | ドキュメントのみの変更   | `docs: fix typo in README`                           |
+| `refactor:`    | 動作を変えないコード整理 | `refactor(bme280): simplify init logic`              |
 
 **3. フォークにプッシュして PR を作成**
 
