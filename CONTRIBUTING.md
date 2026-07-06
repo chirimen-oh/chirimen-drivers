@@ -62,9 +62,25 @@
 
 ドキュメント追加、モジュール追加、バグ修正、その他改善するための Pull Request を歓迎します。
 
-## プロジェクト構成
+**PR を送るときの基本ルール:**
+
+- ブランチ名は `type/short-description` 形式（例: `docs/fix-readme-typo`, `feat/example-sensor`）
+- コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/) に準拠（`feat:`, `fix:`, `docs:` など）
+- 変更内容と動作確認の結果を PR 説明に記載してください
+
+詳細は [共通の Git ワークフロー](#共通の-git-ワークフロー) を参照してください。
+
+## このリポジトリのしくみ
 
 このリポジトリは [npm workspaces](https://docs.npmjs.com/cli/using-npm/workspaces) と [Lerna](https://lerna.js.org/) で管理される **monorepo** です。複数の CHIRIMEN ドライバパッケージを一つのリポジトリで管理しています。
+
+**monorepo とは:** 通常はパッケージごとにリポジトリを分けますが、ここでは 60 個以上のドライバを `packages/` 以下にまとめています。ルートで `npm ci` を実行すると、すべてのパッケージの依存関係が一括でインストールされます。
+
+**パッケージの命名:** 各ドライバは `@chirimen/デバイス名` という npm パッケージ名で公開されます（例: `@chirimen/adt7410`）。ディレクトリ名はデバイス型番の小文字（例: `adt7410`, `mpu6050`）にします。
+
+**バージョン管理:** Lerna の **independent** モードを使っており、各パッケージが独立したバージョン番号を持ちます。あるドライバだけを更新しても、他のドライバのバージョンには影響しません。
+
+**I2C 通信:** 多くのドライバは I2C バス経由でセンサーと通信します。ブラウザや Node.js 環境では [`node-web-i2c`](https://www.npmjs.com/package/node-web-i2c) を通じて I2C にアクセスします。I2C ドライバの `package.json` には `peerDependencies` として `node-web-i2c` を指定します。
 
 ### ファイル構造
 
@@ -91,48 +107,80 @@
 
 ## 開発環境のセットアップ
 
+コードの変更を行う前に、以下の手順で環境を整えます。
+
 ### 必要なツール
 
-- **Node.js** (LTS バージョン推奨 - 現在 v20 以上)
+- **Node.js** (LTS バージョン推奨 — 現在 v20 以上)
 - **npm** (Node.js に同梱)
 - **Git**
 
-### 初期セットアップ手順
+### 初期セットアップ
 
-**ステップ 1**: GitHub でリポジトリをフォークする
-
-1. [chirimen-drivers リポジトリ](https://github.com/chirimen-oh/chirimen-drivers) にアクセス
-2. 右上の「Fork」ボタンをクリック
-3. あなたのアカウントにフォークされます
-
-**ステップ 2**: ローカルにクローンする
+1. **フォーク:** [chirimen-drivers リポジトリ](https://github.com/chirimen-oh/chirimen-drivers) の右上「Fork」ボタンで、自分のアカウントにコピーを作成
+2. **クローン:** フォークしたリポジトリをローカルに取得
 
 ```bash
-# あなたのフォークをクローン
 git clone https://github.com/YOUR_USERNAME/chirimen-drivers.git
-
-# ディレクトリに移動
 cd chirimen-drivers
 ```
 
-**ステップ 3**: 依存関係をインストールする
+3. **依存関係のインストール:** ルートディレクトリで実行（すべての workspace パッケージが対象）
 
 ```bash
-# すべてのworkspaceパッケージの依存関係をインストール
 npm ci
 ```
 
-これで開発環境の準備が完了です！
-
-**ステップ 4**: オリジナルリポジトリをリモートに追加（オプション）
+4. **upstream の追加（推奨）:** 本家リポジトリの最新変更を取り込むため
 
 ```bash
-# 最新の変更を取得するため
 git remote add upstream https://github.com/chirimen-oh/chirimen-drivers.git
-
-# 確認
 git remote -v
 ```
+
+### 共通の Git ワークフロー
+
+ドキュメント修正・ドライバ修正・新規追加など、コード変更の PR はすべて以下の流れに従います。
+
+**1. 最新の master を取得してブランチを作成**
+
+```bash
+git checkout master
+git pull upstream master   # upstream を追加している場合
+git checkout -b type/short-description
+```
+
+**ブランチ名の例:**
+
+| 変更内容 | ブランチ名の例 |
+| --- | --- |
+| README の誤字修正 | `docs/fix-readme-typo` |
+| 新ドライバ追加 | `feat/example-sensor` |
+| 既存ドライバのバグ修正 | `fix/adt7410-temperature` |
+
+**2. 変更を加えてコミット**
+
+```bash
+git add <変更したファイル>
+git commit -m "type: short description"
+```
+
+**コミットメッセージの形式（[Conventional Commits](https://www.conventionalcommits.org/)）:**
+
+| プレフィックス | 用途 | 例 |
+| --- | --- | --- |
+| `feat:` | 新機能・新ドライバ追加 | `feat: add example-sensor driver` |
+| `fix:` | バグ修正 | `fix(adt7410): fix negative temperature calculation` |
+| `docs:` | ドキュメントのみの変更 | `docs: fix typo in README` |
+| `refactor:` | 動作を変えないコード整理 | `refactor(bme280): simplify init logic` |
+
+**3. フォークにプッシュして PR を作成**
+
+```bash
+git push origin type/short-description
+```
+
+GitHub でフォークを開き、「Compare & pull request」から PR を作成します。タイトルと説明に変更内容・動作確認結果を記載してください。
 
 ## 初めての貢献：ドキュメント修正
 
