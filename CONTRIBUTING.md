@@ -367,34 +367,32 @@ git push origin feat/example-sensor
 
 ## コーディング規約
 
-### 必須事項
+ドライバ実装時は以下の規約に従ってください。具体例は [付録](#付録) の `index.js` テンプレートと [packages/adt7410/](packages/adt7410/) を参照してください。
 
-- **ES Modules を使用**: `type: "module"` を package.json に記述
-- **クラスベースの実装**: センサードライバはクラスとして実装
-- **非同期処理**: `async/await` を使用（Promise も可）
-- **エラーハンドリング**: 適切なエラーメッセージを含める
+### 必須
 
-### 推奨事項
+| ルール | 説明 |
+| --- | --- |
+| ES Modules | `package.json` に `"type": "module"` を記述 |
+| クラスベース | センサードライバは ES6 クラスとして実装 |
+| 非同期処理 | `async/await` を使用（`init()`, `read()` など） |
+| エラーハンドリング | 未初期化時など、わかりやすいエラーメッセージを返す |
+| I2C の初期化 | コンストラクタでポートとアドレスを受け取り、`init()` で `i2cPort.open()` を呼ぶ |
 
-- **型注釈**: JSDoc で型情報を記述
-- **わかりやすい命名**: 変数名・関数名は英語で明確に
-- **コメント**: 複雑なロジックには説明を追加
+### 推奨
+
+- **JSDoc**: 型情報を記述（`@param`, `@returns` など）
+- **命名**: 変数名・関数名は英語で明確に
+- **コメント**: 複雑なロジック（レジスタ操作など）に説明を追加
 - **フォーマット**: Prettier を使用（スペース 2 個）
 
-### コードフォーマット
-
-プロジェクトには Prettier が設定されています:
-
 ```bash
-# 自動フォーマット
 npx prettier --write packages/your-driver/
 ```
 
 ## テストについて
 
-現在、このプロジェクトには自動テストの仕組みはありません。
-
-**推奨される動作確認方法:**
+現在、このプロジェクトには自動テストの仕組みはありません。以下の方法で動作確認を行ってください。
 
 1. 実際のハードウェアで動作確認
 2. サンプルコードが正しく動作することを確認
@@ -402,13 +400,13 @@ npx prettier --write packages/your-driver/
 
 ## リリース方法
 
+> **一般のコントリビュータ向け:** PR が master にマージされると、GitHub Actions が自動的に npm へパッケージを公開します。手動でリリース作業を行う必要はありません。
+
+以下は、バージョン管理の仕組みを理解したい方・メンテナ向けの説明です。
+
 ### バージョン管理の仕組み
 
-このプロジェクトは Lerna の **`independent` モード**を使用しており、各パッケージが独立したバージョン番号を持ちます。
-
-### バージョンの更新方法
-
-**手動で** 各パッケージの `package.json` の `version` フィールドを編集します:
+各パッケージは Lerna の **independent** モードで独立したバージョン番号を持ちます（[このリポジトリのしくみ](#このリポジトリのしくみ) 参照）。バージョンの更新は、各パッケージの `package.json` を手動で編集します。
 
 ```json
 {
@@ -417,71 +415,62 @@ npx prettier --write packages/your-driver/
 }
 ```
 
-### バージョニングの指針（セマンティックバージョニング）
+### バージョニングの指針
 
-- **MAJOR (1.0.0 → 2.0.0)**: 後方互換性のない変更
-- **MINOR (1.0.0 → 1.1.0)**: 後方互換性のある機能追加
-- **PATCH (1.0.0 → 1.0.1)**: 後方互換性のあるバグ修正
+| 種類 | 例 | いつ使うか |
+| --- | --- | --- |
+| PATCH | `1.0.0` → `1.0.1` | バグ修正（後方互換） |
+| MINOR | `1.0.0` → `1.1.0` | 機能追加（後方互換） |
+| MAJOR | `1.0.0` → `2.0.0` | 破壊的変更 |
+
+詳細は [セマンティックバージョニング](https://semver.org/lang/ja/) を参照してください。
 
 ### 自動リリースの流れ
 
-1. package.json の version を更新
-2. 変更を commit して master ブランチに push（または PR をマージ）
-3. GitHub Actions が自動的に npm へパッケージを公開
-
-GitHub Actions のワークフロー ([.github/workflows/release.yml](.github/workflows/release.yml)) が以下を実行します:
-
-1. README の更新（自動）
-2. `lerna publish from-package` の実行
-3. バージョンが更新されたパッケージのみ npm に公開
+1. `package.json` の `version` を更新して PR をマージ
+2. GitHub Actions（[.github/workflows/release.yml](.github/workflows/release.yml)）が起動
+3. README の更新、`lerna publish from-package` の実行
+4. バージョンが更新されたパッケージのみ npm に公開
 
 ### 公開の確認
 
-**npm での確認:**
-
-`https://www.npmjs.com/package/{パッケージ名}`
-
-例: https://www.npmjs.com/package/@chirimen/hello-world
+`https://www.npmjs.com/package/{パッケージ名}`（例: https://www.npmjs.com/package/@chirimen/hello-world）
 
 ## よくある質問
 
 ### Q1. 新しいパッケージを追加したのに npm に公開されない
 
-**A.** 以下を確認してください:
+以下を確認してください:
 
 1. `package.json` の `name` が `@chirimen/` で始まっているか
 2. `publishConfig.access` が `"public"` に設定されているか
-3. `version` フィールドが正しく設定されているか
-4. PR がマージされて master ブランチに反映されているか
-5. [GitHub Actions のログ](https://github.com/chirimen-oh/chirimen-drivers/actions)でエラーが出ていないか
+3. `version` が `1.0.0` など正しく設定されているか
+4. PR が master にマージされているか
+5. [GitHub Actions のログ](https://github.com/chirimen-oh/chirimen-drivers/actions) にエラーがないか
 
 ### Q2. monorepo の依存関係はどう管理するか
 
-**A.** ルートディレクトリで `npm ci` を実行すれば、すべての workspace パッケージの依存関係が自動的にインストールされます。
+ルートディレクトリで `npm ci` を実行すれば、すべての workspace パッケージの依存関係が一括でインストールされます。
 
 ### Q3. Lerna のコマンドを使う必要があるか
 
-**A.** 通常の開発では不要です。リリースは GitHub Actions が自動的に行います。
+通常の開発では不要です。リリースは GitHub Actions が自動的に行います。
 
 ### Q4. 既存のドライバを参考にしたい
 
-**A.** 以下のドライバが参考になります:
+[新しいドライバの追加](#新しいドライバの追加) の「実装の参考ドライバ」を参照してください。最小構成は `hello-world`、I2C センサーは `adt7410`、複雑な例は `amg8833` です。
 
-- **シンプルな例**: `packages/hello-world/` - 最小構成
-- **実用的な例**: `packages/adt7410/` - 温度センサー
-- **複雑な例**: `packages/amg8833/` - 赤外線アレイセンサー
+### Q5. I2C 以外のデバイス（GPIO、SPI など）のドライバも追加できるか
 
-### Q5. I2C 以外のデバイス（GPIO、SPI など）のドライバも追加できますか
+はい、可能です。主に I2C デバイスを扱っていますが、GPIO や SPI のドライバも歓迎します。
 
-**A.** はい、可能です。このリポジトリは主に I2C デバイスを扱っていますが、GPIO や SPI を使用するドライバも歓迎します。
+### Q6. ドキュメントは日本語で書くべきか
 
-### Q6. ドキュメントは日本語で書くべきですか
-
-**A.** README は日本語で記述することを推奨します。コード内のコメントやコミットメッセージは英語でも日本語でも構いません。
+README は日本語推奨です。コード内コメントやコミットメッセージは英語・日本語どちらでも構いません。
 
 ## 質問・相談
 
-不明点があれば、お気軽に [Issue](https://github.com/chirimen-oh/chirimen-drivers/issues) を作成してください。
+不明点があれば、お気軽に [Issue](https://github.com/chirimen-oh/chirimen-drivers/issues) を作成してください。どのセクションを読めばよいかわからない場合は、[貢献の種類と手順の選び方](#貢献の種類と手順の選び方) から始めてください。
 
 ## 参考リンク
 
@@ -489,86 +478,6 @@ GitHub Actions のワークフロー ([.github/workflows/release.yml](.github/wo
 - [npm workspaces ドキュメント](https://docs.npmjs.com/cli/using-npm/workspaces)
 - [Lerna ドキュメント](https://lerna.js.org/)
 - [セマンティックバージョニング](https://semver.org/lang/ja/)
-
-## 付録
-
-### package.json テンプレート（I2C ドライバ）
-
-`packages/<デバイス名>/package.json` の例です。`YOUR_DEVICE` と `your-device` を実際のデバイス名に置き換えてください。
-
-```json
-{
-  "name": "@chirimen/your-device",
-  "description": "CHIRIMEN driver for YOUR_DEVICE sensor",
-  "version": "1.0.0",
-  "license": "MIT",
-  "type": "module",
-  "exports": "./index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
-    "directory": "packages/your-device"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "node-web-i2c": "^1.1.51"
-  }
-}
-```
-
-| フィールド | 説明 |
-| --- | --- |
-| `name` | 必ず `@chirimen/` で始める |
-| `description` | センサーの機能を簡潔に説明 |
-| `version` | 初版は `1.0.0` から開始 |
-| `type` | `"module"` を指定（ES Modules） |
-| `exports` | エントリーポイント（通常 `"./index.js"`） |
-| `repository.directory` | パッケージのパス |
-| `peerDependencies` | I2C ドライバは `node-web-i2c` を指定 |
-
-### index.js の基本構造（I2C ドライバ）
-
-[packages/adt7410/index.js](packages/adt7410/index.js) を参考に、以下のパターンで実装します。
-
-```javascript
-// @ts-check
-
-class YourDevice {
-  constructor(i2cPort, slaveAddress) {
-    this.i2cPort = i2cPort;
-    this.i2cSlave = null;
-    this.slaveAddress = slaveAddress;
-  }
-
-  async init() {
-    this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
-    // センサーの初期化処理
-  }
-
-  async read() {
-    if (this.i2cSlave == null) {
-      throw new Error("i2cSlave is not initialized. Call init() first.");
-    }
-    // データ読み取り処理
-    return {};
-  }
-}
-
-export default YourDevice;
-```
-
-### Conventional Commits の具体例
-
-```
-feat: add example-sensor driver
-fix(adt7410): fix negative temperature calculation
-docs: fix typo in README
-refactor(bme280): simplify init logic
-```
-
-Issue を閉じる場合はコミット本文に `Fixes #123` を記載します。
 
 ## 付録
 
