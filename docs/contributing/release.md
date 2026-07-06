@@ -34,6 +34,6 @@
 
 ## 公開の確認
 
-`https://www.npmjs.com/package/{パッケージ名}`（例: https://www.npmjs.com/package/@chirimen/hello-world）
+`https://www.npmjs.com/package/{パッケージ名}`（例: <https://www.npmjs.com/package/@chirimen/hello-world>）
 
 [← 目次に戻る](../../CONTRIBUTING.md)
