@@ -31,7 +31,6 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [CHIRIMEN Drivers Documentation](https://chirimen.org/chirimen-drivers/)
 - [Web I2C API](https://browserobo.github.io/WebI2C/)
 
-
 ## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
 
 - [環境構築・Git の基本](https://www.chirimen.org/chirimen-drivers/docs/contributing/setup.html)
