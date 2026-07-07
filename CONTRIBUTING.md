@@ -69,3 +69,12 @@ flowchart TD
 PR が master にマージされると、GitHub Actions が自動的に npm へパッケージを公開します。手動でリリース作業を行う必要はありません。
 
 バージョン管理の仕組みやメンテナ向けの詳細は [リリース方法](docs/contributing/release.md) を参照してください。
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  mermaid.initialize({ startOnLoad: false });
+  await mermaid.run({
+    querySelector: '.language-mermaid',
+  });
+</script>
