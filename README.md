@@ -33,11 +33,7 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 
 ## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
 
-- [環境構築・Git の基本](https://www.chirimen.org/chirimen-drivers/docs/contributing/setup.html)
-- [ドキュメント修正](https://www.chirimen.org/chirimen-drivers/docs/contributing/first-contribution.html)
-- [既存ドライバの修正](https://www.chirimen.org/chirimen-drivers/docs/contributing/fix-driver.html)
-- [新しいドライバの追加](https://www.chirimen.org/chirimen-drivers/docs/contributing/add-driver.html)
-- [リリース方法](https://www.chirimen.org/chirimen-drivers/docs/contributing/release.html)
+- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
 
 ## Download
 
