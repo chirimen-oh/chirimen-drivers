@@ -1,3 +1,14 @@
 lang: ja
 include:
   - CONTRIBUTING.md
+  - docs/contributing/getting-started.md
+  - docs/contributing/repository.md
+  - docs/contributing/setup.md
+  - docs/contributing/first-contribution.md
+  - docs/contributing/fix-driver.md
+  - docs/contributing/add-driver.md
+  - docs/contributing/coding-standards.md
+  - docs/contributing/testing.md
+  - docs/contributing/release.md
+  - docs/contributing/faq.md
+  - docs/contributing/appendix.md
