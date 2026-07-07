@@ -33,7 +33,7 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 
 ## [Contributing Guidelines](https://chirimen.org/chirimen-drivers/CONTRIBUTING)
 
-- [リリース方法](https://chirimen.org/chirimen-drivers/CONTRIBUTING#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%96%B9%E6%B3%95)
+- [リリース方法](https://www.chirimen.org/chirimen-drivers/docs/contributing/release.html)
 
 ## Download
 
