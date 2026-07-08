@@ -41,6 +41,8 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 
 ## Download
 
+<!-- downloads-start -->
+
 - [@chirimen/ads1015](https://www.jsdelivr.com/package/npm/@chirimen/ads1015)
 - [@chirimen/ads1x15](https://www.jsdelivr.com/package/npm/@chirimen/ads1x15)
 - [@chirimen/adt7410](https://www.jsdelivr.com/package/npm/@chirimen/adt7410)
@@ -98,3 +100,5 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [@chirimen/vl53l0x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l0x)
 - [@chirimen/vl53l1x](https://www.jsdelivr.com/package/npm/@chirimen/vl53l1x)
 - [@chirimen/vl6180x](https://www.jsdelivr.com/package/npm/@chirimen/vl6180x)
+
+<!-- downloads-stop -->
