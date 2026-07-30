@@ -95,7 +95,7 @@ SMUXの切り替えを伴う2回の測定（F1〜F4系→F5〜F8系）を内部�
 
 ## データシート
 
-データシート要確認（ams-OSRAM AS7341 のデータシートを参照してください）
+- [AS7341 Datasheet (ams-OSRAM)](https://www.mouser.jp/datasheet/3/5912/1/AS7341_DS000504_3_00.pdf)
 
 ## 参考
 
