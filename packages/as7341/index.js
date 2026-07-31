@@ -129,7 +129,7 @@ class AS7341 {
       }
       await this.wait(10);
     }
-    console.error("AS7341.#setSmux() timeout!");
+    throw new Error("AS7341.#setSmux() timeout!");
   }
   async #measure() {
     // 測定開始（ENABLE bit1 = SP_EN を1に）
@@ -144,7 +144,7 @@ class AS7341 {
       }
       await this.wait(10);
     }
-    console.error("AS7341.#measure() timeout!");
+    throw new Error("AS7341.#measure() timeout!");
   }
   async #readChannels() {
     await this.i2cSlave.writeByte(AS7341_CH0_DATA_L);
