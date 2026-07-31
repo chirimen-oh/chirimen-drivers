@@ -32,7 +32,7 @@ const SMUX_F5F8_CLEAR_NIR = [
 ];
 
 class AS7341 {
-  constructor(i2cPort, slaveAddress) {
+  constructor(i2cPort, slaveAddress = 0x39) {
     this.i2cPort = i2cPort;
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
