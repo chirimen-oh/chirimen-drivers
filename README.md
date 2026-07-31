@@ -54,6 +54,7 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [@chirimen/arduino-stepping-motor](https://www.jsdelivr.com/package/npm/@chirimen/arduino-stepping-motor)
 - [@chirimen/as3935](https://www.jsdelivr.com/package/npm/@chirimen/as3935)
 - [@chirimen/as5600](https://www.jsdelivr.com/package/npm/@chirimen/as5600)
+- [@chirimen/as7341](https://www.jsdelivr.com/package/npm/@chirimen/as7341)
 - [@chirimen/bh1750](https://www.jsdelivr.com/package/npm/@chirimen/bh1750)
 - [@chirimen/bme280](https://www.jsdelivr.com/package/npm/@chirimen/bme280)
 - [@chirimen/bme680](https://www.jsdelivr.com/package/npm/@chirimen/bme680)
