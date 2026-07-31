@@ -3,8 +3,7 @@
 CHIRIMEN driver for AS7341 (11-channel spectral color sensor)
 
 ams-OSRAM製の11チャンネル分光カラーセンサー AS7341 用のCHIRIMENドライバです。
-可視光域をカバーする8つの分光チャンネル（F1〜F8: 415nm〜680nm）に加え、
-Clear（全可視光）とNIR（近赤外）の測定に対応します。
+本ドライバの read() では、可視光域をカバーする8つの分光チャンネル（F1〜F8: 415nm〜680nm）に加え、Clear（全可視光）とNIR（近赤外）の計10チャンネルの値を取得できます。
 光の色成分・スペクトル分析、色識別、光源の種類判定などの用途に利用できます。
 測定時間（ATIME/ASTEP）とゲイン（0.5倍〜512倍）を設定可能です。
 
@@ -26,30 +25,31 @@ npm install @chirimen/as7341
 ## Usage
 
 ```javascript
-import { requestI2CAccess } from "chirimen";
+import { requestI2CAccess } from "node-web-i2c";
 import AS7341 from "@chirimen/as7341";
+const sleep = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
 
 const i2cAccess = await requestI2CAccess();
-const i2cPort = i2cAccess.ports.get(1);
-const as7341 = new AS7341(i2cPort, 0x39);
+const as7341 = new AS7341(i2cAccess.ports.get(1));
 
 await as7341.init();
 
-setInterval(async () => {
-  const data = await as7341.read();
-  // { f1, f2, f3, f4, f5, f6, f7, f8, clear, nir }
-  console.log(data);
-}, 1000);
+while (true) {
+  // f1〜f8（各波長の強度）、clear（全可視光）、nir（近赤外）
+  const { f1, f2, f3, f4, f5, f6, f7, f8, clear, nir } = await as7341.read();
+  console.dir({ f1, f2, f3, f4, f5, f6, f7, f8, clear, nir });
+  await sleep(1000);
+}
 ```
 
 ## API
 
-### `new AS7341(i2cPort, slaveAddress)`
+### `new AS7341(i2cPort, slaveAddress = 0x39)`
 
 ドライバのインスタンスを生成します。
 
 - `i2cPort`: `requestI2CAccess()` で取得したI2Cポート
-- `slaveAddress`: I2Cアドレス（`0x39`）
+- `slaveAddress`: I2Cアドレス（省略可。デフォルト値: `0x39`）
 
 ### `async init()`
 
