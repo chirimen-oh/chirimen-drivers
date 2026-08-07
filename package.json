@@ -9,8 +9,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^9.0.3",
-    "prettier": "^3.7.4"
+    "lerna": "^10.0.0",
+    "prettier": "^3.9.6"
   },
   "scripts": {
     "release": "lerna publish from-package"
