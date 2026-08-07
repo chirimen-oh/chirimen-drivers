@@ -1,0 +1,19 @@
+{
+  "name": "@chirimen/apds9930",
+  "description": "CHIRIMEN driver for APDS9930 sensor",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chirimen-oh/chirimen-drivers.git",
+    "directory": "packages/apds9930"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
+  }
+}
