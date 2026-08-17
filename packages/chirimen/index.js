@@ -1,4 +1,12 @@
 // @ts-check
+export {
+  GPIOAccess,
+  GPIOPort,
+  GPIOPortMap,
+  requestGPIOAccess,
+} from "node-web-gpio";
+export * from "node-web-i2c";
+export { setTimeout as sleep } from "node:timers/promises";
 
 export { default as ADS1015 } from "@chirimen/ads1015";
 export { default as ADS1x15 } from "@chirimen/ads1x15";
@@ -58,11 +66,3 @@ export { default as VEML6070 } from "@chirimen/veml6070";
 export { default as VL53L0X } from "@chirimen/vl53l0x";
 export { default as VL53L1X } from "@chirimen/vl53l1x";
 export { default as VL6180X } from "@chirimen/vl6180x";
-
-export {
-  GPIOAccess,
-  GPIOPort,
-  GPIOPortMap,
-  requestGPIOAccess,
-} from "node-web-gpio";
-export * from "node-web-i2c";
