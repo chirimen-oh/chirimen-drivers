@@ -15,6 +15,7 @@ export { default as AHT10 } from "@chirimen/aht10";
 export { default as AHTX0 } from "@chirimen/ahtx0";
 export { default as AK8963 } from "@chirimen/ak8963";
 export { default as AMG8833 } from "@chirimen/amg8833";
+export { default as APDS9930 } from "@chirimen/apds9930";
 export { default as APDS9960 } from "@chirimen/apds9960";
 export { default as SteppingMotor } from "@chirimen/arduino-stepping-motor";
 export { default as AS3935 } from "@chirimen/as3935";
