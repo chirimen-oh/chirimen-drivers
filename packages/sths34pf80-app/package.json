@@ -1,0 +1,19 @@
+{
+  "name": "@chirimen/sths34pf80",
+  "description": "Driver for STHS34PF80 with WebI2C",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:OgataNao/chirimen-drivers.git",
+    "directory": "packages/sths34pf80-app"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "exports": "./index.js",
+  "peerDependencies": {
+    "node-web-i2c": "^1.1.51"
+  }
+}
