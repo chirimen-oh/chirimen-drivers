@@ -42,7 +42,7 @@ class TMP117 {
     const deviceId = await this.#readRegister16(DEVICE_ID_REGISTER);
     if (deviceId !== EXPECTED_DEVICE_ID) {
       throw new Error(
-        `Unexpected device ID: 0x${deviceId.toString(16)} (expected 0x0117)`
+        `Unexpected device ID: 0x${deviceId.toString(16)} (expected 0x0117)`,
       );
     }
   }
