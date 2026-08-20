@@ -51,14 +51,25 @@ class TMP117 {
 
   /**
    * Performs a software reset via I2C's General Call Reset mechanism.
-   * Called automatically during init(), but also exposed publicly in
-   * case a caller wants to reset the sensor back to its default state
-   * later without a full power cycle.
+   * Called automatically during init().
+   *
+   * WARNING: General Call Reset is a bus-wide broadcast, not a
+   * TMP117-specific command. It will also reset ANY other I2C device
+   * on the same bus that responds to General Call Reset (e.g. other
+   * TI sensors) - not just this TMP117 instance. Avoid calling this
+   * if other General-Call-capable devices are sharing the bus and
+   * should not be reset.
+   *
+   * Resets the hardware CONFIGURATION register back to its factory
+   * default (continuous conversion mode), so this.mode is reset to
+   * MODE_CONTINUOUS here to keep it in sync with the actual hardware
+   * state.
    */
   async reset() {
     const generalCallSlave = await this.i2cPort.open(GENERAL_CALL_ADDRESS);
     await generalCallSlave.writeByte(GENERAL_CALL_RESET_DATA);
     await this.#wait(RESET_WAIT_MS);
+    this.mode = MODE_CONTINUOUS;
   }
 
   #wait(ms) {
