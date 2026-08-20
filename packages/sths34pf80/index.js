@@ -1,4 +1,8 @@
-// STHS34PF80実機動作確認
+// @ts-check
+
+// STHS34PF80 driver for CHIRIMEN
+
+// https://www.st.com/resource/en/datasheet/sths34pf80.pdf
 const ADDRESS = 0x5A;
 
 // Registers

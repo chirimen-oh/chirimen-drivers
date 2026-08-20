@@ -5,6 +5,13 @@
   "license": "MIT",
   "type": "module",
   "exports": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KDDI-Technology/chirimen-drivers.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "node-web-i2c": "^1.1.51"
   }
