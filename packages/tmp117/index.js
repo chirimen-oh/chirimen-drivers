@@ -6,6 +6,7 @@
 const TEMP_RESULT_REGISTER = 0x00;
 const CONFIG_REGISTER = 0x01;
 const DEVICE_ID_REGISTER = 0x0f;
+const EXPECTED_DEVICE_ID_MASK = 0x0fff; // lower 12 bits are DID; upper 4 bits are silicon revision
 const EXPECTED_DEVICE_ID = 0x0117;
 const TEMP_RESOLUTION = 0.0078125; // °C per LSB
 
@@ -34,20 +35,27 @@ class TMP117 {
 
   async init() {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
+    await this.reset();
     await this.#checkDeviceId();
     return this;
   }
 
   async #checkDeviceId() {
     const deviceId = await this.#readRegister16(DEVICE_ID_REGISTER);
-    if (deviceId !== EXPECTED_DEVICE_ID) {
+    if ((deviceId & EXPECTED_DEVICE_ID_MASK) !== EXPECTED_DEVICE_ID) {
       throw new Error(
         `Unexpected device ID: 0x${deviceId.toString(16)} (expected 0x0117)`,
       );
     }
   }
 
-  async #reset() {
+  /**
+   * Performs a software reset via I2C's General Call Reset mechanism.
+   * Called automatically during init(), but also exposed publicly in
+   * case a caller wants to reset the sensor back to its default state
+   * later without a full power cycle.
+   */
+  async reset() {
     const generalCallSlave = await this.i2cPort.open(GENERAL_CALL_ADDRESS);
     await generalCallSlave.writeByte(GENERAL_CALL_RESET_DATA);
     await this.#wait(RESET_WAIT_MS);
