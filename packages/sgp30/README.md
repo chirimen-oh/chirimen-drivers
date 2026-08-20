@@ -3,7 +3,8 @@
 Sensirion SGP30 を搭載した室内空気品質センサ。eCO2（CO2相当値、ppm）と TVOC（総揮発性有機化合物、ppb）を
 I2C で取得できる。センサー素子の生信号（水素・エタノール）も読み出せる。
 
-動作確認は M5Stack の TVOC/eCO2 ガスセンサユニット（SKU: U088、HY2.0-4P / Grove 互換コネクタ）で行った。
+動作確認は Raspberry Pi Zero で行った。センサーモジュールには M5Stack 製の TVOC/eCO2 ガスセンサユニット
+（SKU: U088、HY2.0-4P / Grove 互換コネクタ）を使用した。
 
 ## 主な仕様
 
