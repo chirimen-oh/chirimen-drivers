@@ -53,85 +53,43 @@ class DRV2605L {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 
     // Internal trigger mode
-    await this.i2cSlave.write8(
-      REG_MODE,
-      MODE_INTERNAL_TRIGGER
-    );
+    await this.i2cSlave.write8(REG_MODE, MODE_INTERNAL_TRIGGER);
 
     // Disable RTP input
-    await this.i2cSlave.write8(
-      REG_RTP_INPUT,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_RTP_INPUT, 0x00);
 
     // Select ERM effect library
-    await this.i2cSlave.write8(
-      REG_LIBRARY,
-      LIBRARY_ERM_A
-    );
+    await this.i2cSlave.write8(REG_LIBRARY, LIBRARY_ERM_A);
 
     // Clear waveform sequence
-    await this.i2cSlave.write8(
-      REG_WAVESEQ1,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_WAVESEQ1, 0x00);
 
-    await this.i2cSlave.write8(
-      REG_WAVESEQ2,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_WAVESEQ2, 0x00);
 
     // Reset timing offsets
-    await this.i2cSlave.write8(
-      REG_OVERDRIVE_TIME_OFFSET,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_OVERDRIVE_TIME_OFFSET, 0x00);
 
-    await this.i2cSlave.write8(
-      REG_SUSTAIN_TIME_OFFSET_POS,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_SUSTAIN_TIME_OFFSET_POS, 0x00);
 
-    await this.i2cSlave.write8(
-      REG_SUSTAIN_TIME_OFFSET_NEG,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_SUSTAIN_TIME_OFFSET_NEG, 0x00);
 
-    await this.i2cSlave.write8(
-      REG_BRAKE_TIME_OFFSET,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_BRAKE_TIME_OFFSET, 0x00);
 
-    await this.i2cSlave.write8(
-      REG_AUDIO_MAX_INPUT,
-      0x64
-    );
+    await this.i2cSlave.write8(REG_AUDIO_MAX_INPUT, 0x64);
 
     // Select ERM mode
-    let feedback =
-      await this.i2cSlave.read8(
-        REG_FEEDBACK_CONTROL
-      );
+    let feedback = await this.i2cSlave.read8(REG_FEEDBACK_CONTROL);
 
     feedback &= 0x7f;
 
-    await this.i2cSlave.write8(
-      REG_FEEDBACK_CONTROL,
-      feedback
-    );
+    await this.i2cSlave.write8(REG_FEEDBACK_CONTROL, feedback);
 
     // ERM open-loop mode
-    let control3 =
-      await this.i2cSlave.read8(
-        REG_CONTROL3
-      );
+    let control3 = await this.i2cSlave.read8(REG_CONTROL3);
 
     control3 |= 0x20;
 
-    await this.i2cSlave.write8(
-      REG_CONTROL3,
-      control3
-    );
+    await this.i2cSlave.write8(REG_CONTROL3, control3);
 
     console.log("DRV2605L initialized");
   }
@@ -143,44 +101,24 @@ class DRV2605L {
    */
   async playEffect(effect = 1) {
     if (!this.i2cSlave) {
-      throw new Error(
-        "DRV2605L is not initialized"
-      );
+      throw new Error("DRV2605L is not initialized");
     }
 
-    if (
-      !Number.isInteger(effect) ||
-      effect < 1 ||
-      effect > 123
-    ) {
-      throw new RangeError(
-        "effect must be an integer from 1 to 123"
-      );
+    if (!Number.isInteger(effect) || effect < 1 || effect > 123) {
+      throw new RangeError("effect must be an integer from 1 to 123");
     }
 
     // Return to internal trigger mode
-    await this.i2cSlave.write8(
-      REG_MODE,
-      MODE_INTERNAL_TRIGGER
-    );
+    await this.i2cSlave.write8(REG_MODE, MODE_INTERNAL_TRIGGER);
 
     // Select effect
-    await this.i2cSlave.write8(
-      REG_WAVESEQ1,
-      effect
-    );
+    await this.i2cSlave.write8(REG_WAVESEQ1, effect);
 
     // End waveform sequence
-    await this.i2cSlave.write8(
-      REG_WAVESEQ2,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_WAVESEQ2, 0x00);
 
     // Start playback
-    await this.i2cSlave.write8(
-      REG_GO,
-      GO
-    );
+    await this.i2cSlave.write8(REG_GO, GO);
   }
 
   /**
@@ -191,58 +129,31 @@ class DRV2605L {
    */
   async vibrate(strength = 100, duration = 200) {
     if (!this.i2cSlave) {
-      throw new Error(
-        "DRV2605L is not initialized"
-      );
+      throw new Error("DRV2605L is not initialized");
     }
 
-    if (
-      !Number.isInteger(strength) ||
-      strength < 0 ||
-      strength > 127
-    ) {
-      throw new RangeError(
-        "strength must be an integer from 0 to 127"
-      );
+    if (!Number.isInteger(strength) || strength < 0 || strength > 127) {
+      throw new RangeError("strength must be an integer from 0 to 127");
     }
 
-    if (
-      !Number.isInteger(duration) ||
-      duration < 0
-    ) {
-      throw new RangeError(
-        "duration must be a positive integer"
-      );
+    if (!Number.isInteger(duration) || duration < 0) {
+      throw new RangeError("duration must be a positive integer");
     }
 
     // Change to Real-Time Playback mode
-    await this.i2cSlave.write8(
-      REG_MODE,
-      MODE_REAL_TIME_PLAYBACK
-    );
+    await this.i2cSlave.write8(REG_MODE, MODE_REAL_TIME_PLAYBACK);
 
     // Start vibration
-    await this.i2cSlave.write8(
-      REG_RTP_INPUT,
-      strength
-    );
+    await this.i2cSlave.write8(REG_RTP_INPUT, strength);
 
     // Keep vibrating for the specified duration
-    await new Promise((resolve) =>
-      setTimeout(resolve, duration)
-    );
+    await new Promise((resolve) => setTimeout(resolve, duration));
 
     // Stop vibration
-    await this.i2cSlave.write8(
-      REG_RTP_INPUT,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_RTP_INPUT, 0x00);
 
     // Return to internal trigger mode
-    await this.i2cSlave.write8(
-      REG_MODE,
-      MODE_INTERNAL_TRIGGER
-    );
+    await this.i2cSlave.write8(REG_MODE, MODE_INTERNAL_TRIGGER);
   }
 
   /**
@@ -250,28 +161,17 @@ class DRV2605L {
    */
   async stop() {
     if (!this.i2cSlave) {
-      throw new Error(
-        "DRV2605L is not initialized"
-      );
+      throw new Error("DRV2605L is not initialized");
     }
 
     // Stop waveform playback
-    await this.i2cSlave.write8(
-      REG_GO,
-      STOP
-    );
+    await this.i2cSlave.write8(REG_GO, STOP);
 
     // Stop RTP vibration
-    await this.i2cSlave.write8(
-      REG_RTP_INPUT,
-      0x00
-    );
+    await this.i2cSlave.write8(REG_RTP_INPUT, 0x00);
 
     // Return to internal trigger mode
-    await this.i2cSlave.write8(
-      REG_MODE,
-      MODE_INTERNAL_TRIGGER
-    );
+    await this.i2cSlave.write8(REG_MODE, MODE_INTERNAL_TRIGGER);
   }
 }
 
