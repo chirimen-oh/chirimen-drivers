@@ -1,25 +1,25 @@
 # DRV2605L
 
-DRV2605L is a haptic motor driver controlled via I2C.
+DRV2605Lは、I2Cで制御するハプティックモータードライバーです。
 
-This CHIRIMEN driver supports ERM vibration motors and provides built-in waveform playback and Real-Time Playback (RTP) vibration control.
+このCHIRIMENドライバーはERM振動モーターに対応し、内蔵波形エフェクトの再生とReal-Time Playback（RTP）モードによる振動制御を行えます。
 
-## Specifications
+## 仕様
 
-- Device: DRV2605L
-- Interface: I2C
-- Default I2C address: `0x5A`
-- Supported motor type: ERM
-- Built-in waveform effects: 1–123
-- RTP vibration strength: 0–127
+- デバイス: DRV2605L
+- インターフェイス: I2C
+- デフォルトI2Cアドレス: `0x5A`
+- 対応モーター: ERM
+- 内蔵波形エフェクト: 1〜123
+- RTP振動強度: 0〜127
 
-## Installation
+## インストール
 
 ```bash
 npm install @chirimen/drv2605l
 ```
 
-## Usage
+## 使用方法
 
 ```js
 import { requestI2CAccess } from "node-web-i2c";
@@ -32,7 +32,7 @@ const motor = new DRV2605L(i2cPort, 0x5a);
 
 await motor.init();
 
-// Vibrate with strength 80 for 400 ms
+// 強度80で400ミリ秒振動
 await motor.vibrate(80, 400);
 ```
 
@@ -40,24 +40,24 @@ await motor.vibrate(80, 400);
 
 ### `constructor(i2cPort, slaveAddress)`
 
-Creates a DRV2605L driver instance.
+DRV2605Lドライバーのインスタンスを生成します。
 
-- `i2cPort`: I2C port instance
-- `slaveAddress`: I2C slave address. Defaults to `0x5A`
+- `i2cPort`: I2Cポートのインスタンス
+- `slaveAddress`: I2Cスレーブアドレス。省略時は `0x5A`
 
 ### `init()`
 
-Initializes the DRV2605L for an ERM vibration motor.
+DRV2605LをERM振動モーター用に初期化します。
 
-The driver uses the ERM effect library and configures the device for open-loop ERM operation.
+ERM用エフェクトライブラリを選択し、ERMオープンループ動作用に設定します。
 
 ### `playEffect(effect = 1)`
 
-Plays one of the DRV2605L built-in waveform effects.
+DRV2605Lに内蔵されている波形エフェクトを再生します。
 
-- `effect`: Effect number from `1` to `123`
+- `effect`: エフェクト番号。`1`〜`123`
 
-Example:
+例:
 
 ```js
 await motor.playEffect(1);
@@ -65,12 +65,12 @@ await motor.playEffect(1);
 
 ### `vibrate(strength = 100, duration = 200)`
 
-Vibrates the motor using Real-Time Playback (RTP) mode.
+Real-Time Playback（RTP）モードを使用して振動モーターを動作させます。
 
-- `strength`: Vibration strength from `0` to `127`
-- `duration`: Duration in milliseconds
+- `strength`: 振動強度。`0`〜`127`
+- `duration`: 振動時間。ミリ秒単位
 
-Example:
+例:
 
 ```js
 await motor.vibrate(80, 400);
@@ -78,16 +78,16 @@ await motor.vibrate(80, 400);
 
 ### `stop()`
 
-Stops waveform playback and RTP vibration.
+波形エフェクトの再生およびRTP振動を停止します。
 
-Example:
+例:
 
 ```js
 await motor.stop();
 ```
 
-## Datasheet
+## データシート
 
-Texas Instruments DRV2605L product page:
+Texas Instruments DRV2605L:
 
 https://www.ti.com/product/DRV2605L
