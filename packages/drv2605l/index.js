@@ -17,7 +17,6 @@ const REG_OVERDRIVE_TIME_OFFSET = 0x0d;
 const REG_SUSTAIN_TIME_OFFSET_POS = 0x0e;
 const REG_SUSTAIN_TIME_OFFSET_NEG = 0x0f;
 const REG_BRAKE_TIME_OFFSET = 0x10;
-const REG_AUDIO_MAX_INPUT = 0x13;
 const REG_OVERDRIVE_CLAMP = 0x17;
 const REG_FEEDBACK_CONTROL = 0x1a;
 const REG_CONTROL3 = 0x1d;
@@ -81,8 +80,6 @@ class DRV2605L {
 
     await this.i2cSlave.write8(REG_BRAKE_TIME_OFFSET, 0x00);
 
-    await this.i2cSlave.write8(REG_AUDIO_MAX_INPUT, 0x64);
-
     // Set the full-scale voltage reference for ERM open-loop operation.
     // 0x8C corresponds to approximately 3.02 V.
     await this.i2cSlave.write8(REG_OVERDRIVE_CLAMP, DEFAULT_OVERDRIVE_CLAMP);
@@ -100,8 +97,6 @@ class DRV2605L {
     control3 |= 0x20;
 
     await this.i2cSlave.write8(REG_CONTROL3, control3);
-
-    console.log("DRV2605L initialized");
   }
 
   /**

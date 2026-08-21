@@ -90,4 +90,4 @@ await motor.stop();
 
 Texas Instruments DRV2605L:
 
-https://www.ti.com/product/DRV2605L
+https://www.ti.com/lit/ds/symlink/drv2605l.pdf
