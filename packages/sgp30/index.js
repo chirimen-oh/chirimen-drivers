@@ -31,6 +31,13 @@ const PRODUCT_TYPE_SGP30 = 0x00;
 
 const BASELINE_MAX = 0xffff;
 
+/**
+ * Sensirion SGP30 ガスセンサーのドライバー。
+ *
+ * I2C のトランザクション（コマンド送信 → 待ち → 読み出し）を排他制御していないため、
+ * **各メソッドは必ず await して逐次呼び出すこと。** Promise.all() などで複数のメソッドを
+ * 同時に呼ぶとトランザクションが割り込まれて通信が壊れる。
+ */
 class SGP30 {
   /**
    * @param {import('node-web-i2c').I2CPort} i2cPort
@@ -38,6 +45,7 @@ class SGP30 {
    */
   constructor(i2cPort, slaveAddress = 0x58) {
     this.i2cPort = i2cPort;
+    /** @type {import('node-web-i2c').I2CSlaveDevice | null} */
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
   }
@@ -50,16 +58,24 @@ class SGP30 {
   async init() {
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 
-    // 配線ミス・アドレス違いをここで検出する
-    const [featureSet] = await this.#readWords(GET_FEATURE_SET);
-    const productType = featureSet >> 8;
-    if (productType !== PRODUCT_TYPE_SGP30) {
-      throw new Error(
-        `SGP30.init: this is not an SGP30 (product type ${productType}, feature set 0x${featureSet.toString(16).padStart(4, "0")}). Check wiring and I2C address.`,
-      );
+    try {
+      // 配線ミス・アドレス違いをここで検出する
+      const [featureSet] = await this.#readWords(GET_FEATURE_SET);
+      const productType = featureSet >> 8;
+      if (productType !== PRODUCT_TYPE_SGP30) {
+        throw new Error(
+          `SGP30.init: this is not an SGP30 (product type ${productType}, feature set 0x${featureSet.toString(16).padStart(4, "0")}). Check wiring and I2C address.`,
+        );
+      }
+
+      await this.#sendCommand(INIT_AIR_QUALITY);
+    } catch (error) {
+      // 初期化に失敗したまま測定メソッドを呼ばれると、誤ったデバイスへコマンドを
+      // 送り続けてしまうため、未初期化状態に戻す
+      this.i2cSlave = null;
+      throw error;
     }
 
-    await this.#sendCommand(INIT_AIR_QUALITY);
     return this;
   }
 
@@ -119,10 +135,12 @@ class SGP30 {
    * @param {number} tvoc getBaseline() で得た tvoc。0 - 65535 の整数
    */
   async setBaseline(eCO2, tvoc) {
-    for (const [name, value] of [
+    /** @type {[string, number][]} */
+    const args = [
       ["eCO2", eCO2],
       ["tvoc", tvoc],
-    ]) {
+    ];
+    for (const [name, value] of args) {
       if (!Number.isInteger(value) || value < 0 || value > BASELINE_MAX) {
         throw new Error(
           `SGP30.setBaseline: ${name} must be an integer between 0 and ${BASELINE_MAX}, got ${value}`,
@@ -143,23 +161,38 @@ class SGP30 {
     return [...bytes, this.#crc8(bytes)];
   }
 
-  /** コマンドと任意のパラメータを送り、規定の待ち時間だけ待つ */
-  async #sendCommand(command, payload = []) {
+  /** 初期化済みであることを確認し、I2CSlaveDevice を返す */
+  #requireSlave() {
     if (this.i2cSlave === null) {
       throw new Error("SGP30: i2cSlave is not initialized. Call init() first.");
     }
-    await this.i2cSlave.writeBytes([
+    return this.i2cSlave;
+  }
+
+  /** コマンドと任意のパラメータを送り、規定の待ち時間だけ待つ */
+  async #sendCommand(command, payload = []) {
+    const i2cSlave = this.#requireSlave();
+    await i2cSlave.writeBytes([
       (command.code >> 8) & 0xff,
       command.code & 0xff,
       ...payload,
     ]);
     await sleep(command.wait);
+    return i2cSlave;
   }
 
   /** コマンドを送り、応答のワードを CRC 検証しつつ配列で返す */
   async #readWords(command) {
-    await this.#sendCommand(command);
-    const bytes = await this.i2cSlave.readBytes(command.words * 3);
+    const i2cSlave = await this.#sendCommand(command);
+    const expectedLength = command.words * 3;
+    const bytes = await i2cSlave.readBytes(expectedLength);
+    // 期待より短い応答を黙って通すと、CRC 検証にも掛からずに要素数の足りない
+    // 配列を返してしまうため、ここで明示的に失敗させる
+    if (bytes.length !== expectedLength) {
+      throw new Error(
+        `SGP30: short read on command 0x${command.code.toString(16)} (expected ${expectedLength} bytes, got ${bytes.length})`,
+      );
+    }
     const words = [];
     for (let i = 0; i < bytes.length; i += 3) {
       const data = bytes.slice(i, i + 2);
