@@ -24,9 +24,9 @@ class TMP117 {
   /**
    * @constructor
    * @param {import('node-web-i2c').I2CPort} i2cPort I2C port instance
-   * @param {number} slaveAddress I2C slave address
+   * @param {number} [slaveAddres]s I2C slave address (default: 0x48)
    */
-  constructor(i2cPort, slaveAddress) {
+  constructor(i2cPort, slaveAddress = 0x48) {
     this.i2cPort = i2cPort;
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
