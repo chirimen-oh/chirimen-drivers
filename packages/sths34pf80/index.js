@@ -39,8 +39,9 @@ class STHS34PF80 {
       // BDU = 1, ODR = 4 Hz
       await this.i2cSlave.write8(CTRL1, 0x15);
     } catch (e) {
-      console.error("STHS34PF80.init() error : " + e);
-      return null;
+      // read*系と同じく、初期化失敗時もthrowして呼び出し元のtry/catchに委ねる
+      this.i2cSlave = null;
+      throw e;
     }
     return this;
   }
@@ -71,12 +72,15 @@ class STHS34PF80 {
   }
 
   // ODR周期(4Hzなら250ms)より速く連続でreadすると古いデータを読んでしまうため、
-  // STATUSのDRDYビットが立つまで待つ
+  // STATUSのDRDYビットが立つまで待つ。DRDYはSTATUSやTOBJECT/TAMBIENTを読んでも
+  // クリアされず、FUNC_STATUS(0x25)を読むことで初めてクリアされるため、
+  // 次回呼び出しのために明示的にFUNC_STATUSを読んでおく
   async #waitForDataReady(timeoutMs = 500) {
     const steps = Math.ceil(timeoutMs / 10);
     for (let i = 0; i < steps; i++) {
       const status = await this.i2cSlave.read8(STATUS);
       if (status & STATUS_DRDY) {
+        await this.i2cSlave.read8(FUNC_STATUS);
         return;
       }
       await this.wait(10);
@@ -109,11 +113,21 @@ class STHS34PF80 {
     return { objectRaw, ambientRaw };
   }
 
+  /**
+   * objectとambientを同一サンプルで揃えて取得したい場合はread()を使うこと。
+   * 本メソッド単体では、呼び出しのたびにDRDY待ちが発生するため、
+   * read()内でまとめて取得する場合とは異なるサンプルになり得る。
+   */
   async readObjectTemperatureRaw() {
     const { objectRaw } = await this.#readTemperatures();
     return objectRaw;
   }
 
+  /**
+   * objectとambientを同一サンプルで揃えて取得したい場合はread()を使うこと。
+   * 本メソッド単体では、呼び出しのたびにDRDY待ちが発生するため、
+   * read()内でまとめて取得する場合とは異なるサンプルになり得る。
+   */
   async readAmbientTemperatureRaw() {
     const { ambientRaw } = await this.#readTemperatures();
     return ambientRaw;

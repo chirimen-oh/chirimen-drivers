@@ -32,7 +32,12 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const i2cAccess = await requestI2CAccess();
 const sths34pf80 = new STHS34PF80(i2cAccess.ports.get(1));
 
-await sths34pf80.init();
+try {
+  await sths34pf80.init();
+} catch (e) {
+  console.error("センサーの初期化に失敗しました:", e);
+  throw e;
+}
 
 while (true) {
   const data = await sths34pf80.read();
@@ -53,7 +58,7 @@ while (true) {
 ### `async init()`
 
 センサーを初期化します。WHO_AM_Iレジスタの値を確認したうえで、BDU（Block Data Update）を有効化し、出力データレート（ODR）を4Hzに設定します。
-初期化に失敗した場合は `null` を返します。
+初期化に失敗した場合は例外（`Error`）をthrowします。呼び出し側で`try/catch`してください。
 
 ### `async readWhoAmI()`
 
