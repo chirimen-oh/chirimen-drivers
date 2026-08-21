@@ -18,6 +18,7 @@ const TAMBIENT_H = 0x29;
 
 const STHS34PF80_ID = 0xd3; // WHO_AM_I の既定値
 const STATUS_DRDY = 0x04; // STATUS(0x23) bit2: TOBJECT/TAMBIENTの新しいデータが準備できたことを示すフラグ
+const TOBJECT_SENSITIVITY = 2000; // TOBJECTの感度(2000 LSB/°C。データシート記載値)
 
 class STHS34PF80 {
   constructor(i2cPort, slaveAddress = ADDRESS) {
@@ -122,9 +123,11 @@ class STHS34PF80 {
     const { objectRaw, ambientRaw } = await this.#readTemperatures();
 
     return {
-      // TOBJECTはセンサー感度2000 LSB/°Cの生IR強度で、絶対温度への変換には
-      // AN5867記載の補正アルゴリズムが必要なため、変換せず生値のまま返す
       objectTemperatureRaw: objectRaw,
+      // TOBJECTの感度(2000 LSB/°C)による簡易換算値。放射率や距離による補正は
+      // 行っていないため、厳密な絶対温度ではなく目安として扱うこと。より高精度な
+      // 補正が必要な場合はAN5867記載のアルゴリズム(TOBJ_COMP等)を参照
+      objectTemperature: objectRaw / TOBJECT_SENSITIVITY,
       ambientTemperatureRaw: ambientRaw,
       ambientTemperature: ambientRaw / 100,
     };

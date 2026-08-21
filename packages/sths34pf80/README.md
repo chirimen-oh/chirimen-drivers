@@ -8,13 +8,13 @@ STHS34PF80は人感・動体検知（presence/motion detection）を主機能と
 
 ## 主な仕様
 
-| 項目             | 内容                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------ |
-| 型番             | STHS34PF80                                                                           |
-| インターフェース | I2C                                                                                  |
-| I2Cアドレス      | `0x5A`                                                                               |
-| 測定項目         | 周辺温度(`ambientTemperature`)、対象物からの赤外線強度(`objectTemperatureRaw`、生値) |
-| 出力データレート | 4Hz（既定。本ドライバでは固定）                                                      |
+| 項目             | 内容                                                                          |
+| ---------------- | ----------------------------------------------------------------------------- |
+| 型番             | STHS34PF80                                                                    |
+| インターフェース | I2C                                                                           |
+| I2Cアドレス      | `0x5A`                                                                        |
+| 測定項目         | 周辺温度(`ambientTemperature`)、対象物の温度(`objectTemperature`、簡易換算値) |
+| 出力データレート | 4Hz（既定。本ドライバでは固定）                                               |
 
 ## Installation
 
@@ -82,12 +82,13 @@ FUNC_STATUSレジスタの値を取得します。bit0〜2はそれぞれ周辺�
 ```js
 {
   objectTemperatureRaw: number,   // 対象物からの赤外線強度の生値（未変換）
+  objectTemperature: number,      // 対象物の温度（°C、簡易換算値）
   ambientTemperatureRaw: number,  // 周辺温度の生値（1/100°C単位）
   ambientTemperature: number      // 周辺温度（°C）
 }
 ```
 
-`objectTemperatureRaw`は生値のまま返します。STHS34PF80のTOBJECTはセンサー感度2000 LSB/°Cの生IR強度であり、絶対温度に変換するには対象物の放射率などを考慮した補正アルゴリズムが必要なためです（詳細は[AN5867](https://www.st.com/resource/en/application_note/an5867-sths34pf80-lowpower-highsensitivity-infrared-ir-sensor-for-presence-and-motion-detection-stmicroelectronics.pdf)を参照）。`ambientTemperature`とは異なり単位付きの温度に変換されていない点に注意してください。
+`objectTemperature`はTOBJECTの感度（2000 LSB/°C）による簡易換算値です。放射率や対象物との距離による補正は行っていないため、厳密な絶対温度ではなく目安として扱ってください。より高精度な補正が必要な場合は、[AN5867](https://www.st.com/resource/en/application_note/an5867-sths34pf80-lowpower-highsensitivity-infrared-ir-sensor-for-presence-and-motion-detection-stmicroelectronics.pdf)記載の補正アルゴリズム（TOBJ_COMPレジスタ等）を参照してください。
 
 ## 対応範囲について
 
