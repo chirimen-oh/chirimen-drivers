@@ -4,13 +4,17 @@
 // Based from https://www.ti.com/lit/ds/symlink/tmp117.pdf
 
 const TEMP_RESULT_REGISTER = 0x00;
+const CONFIG_REGISTER = 0x01;
 const DEVICE_ID_REGISTER = 0x0f;
 const EXPECTED_DEVICE_ID_MASK = 0x0fff; // lower 12 bits are DID; upper 4 bits are silicon revision
 const EXPECTED_DEVICE_ID = 0x0117;
 const TEMP_RESOLUTION = 0.0078125; // °C per LSB
 
-const GENERAL_CALL_ADDRESS = 0x00;
-const GENERAL_CALL_RESET_DATA = 0x06;
+// bit1 of the CONFIGURATION register: writing 1 here triggers a
+// software reset of only THIS device (a normal addressed I2C write),
+// unlike the I2C General Call Reset which broadcasts to every device
+// on the bus. The bit self-clears once the reset completes.
+const CONFIG_SOFT_RESET_BIT = 0b0000000000000010;
 const RESET_WAIT_MS = 20;
 
 class TMP117 {
@@ -36,25 +40,21 @@ class TMP117 {
     const deviceId = await this.#readRegister16(DEVICE_ID_REGISTER);
     if ((deviceId & EXPECTED_DEVICE_ID_MASK) !== EXPECTED_DEVICE_ID) {
       throw new Error(
-        `Unexpected device ID: 0x${deviceId.toString(16)} (expected 0x0117)`,
+        `Unexpected device ID: 0x${deviceId.toString(16)} (expected 0x${EXPECTED_DEVICE_ID.toString(16)})`,
       );
     }
   }
-
   /**
-   * Performs a software reset via I2C's General Call Reset mechanism.
-   * Called automatically during init().
+   * Performs a software reset of this TMP117 instance only, by writing
+   * the Soft_Reset bit in its own CONFIGURATION register. Because this
+   * is an ordinary addressed I2C write (to this.slaveAddress), only
+   * this device receives it - other devices sharing the bus are not
+   * affected.
    *
-   * WARNING: General Call Reset is a bus-wide broadcast, not a
-   * TMP117-specific command. It will also reset ANY other I2C device
-   * on the same bus that responds to General Call Reset (e.g. other
-   * TI sensors) - not just this TMP117 instance. Avoid calling this
-   * if other General-Call-capable devices are sharing the bus and
-   * should not be reset.
+   * Called automatically during init().
    */
   async reset() {
-    const generalCallSlave = await this.i2cPort.open(GENERAL_CALL_ADDRESS);
-    await generalCallSlave.writeByte(GENERAL_CALL_RESET_DATA);
+    await this.#writeRegister16(CONFIG_REGISTER, CONFIG_SOFT_RESET_BIT);
     await this.#wait(RESET_WAIT_MS);
   }
 
@@ -72,6 +72,12 @@ class TMP117 {
     }
     const rawValue = await this.i2cSlave.read16(register);
     return this.#swapBytes(rawValue);
+  }
+  async #writeRegister16(register, value) {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
+    await this.i2cSlave.write16(register, this.#swapBytes(value));
   }
 
   async read() {
