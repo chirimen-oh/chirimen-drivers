@@ -32,8 +32,8 @@ const motor = new DRV2605L(i2cPort, 0x5a);
 
 await motor.init();
 
-// 強度80で400ミリ秒振動
-await motor.vibrate(80, 400);
+// 強度100で200ミリ秒振動
+await motor.vibrate(100, 200);
 ```
 
 ## API
@@ -55,7 +55,7 @@ ERM用エフェクトライブラリを選択し、ERMオープンループ動�
 
 DRV2605Lに内蔵されている波形エフェクトを再生します。
 
-- `effect`: エフェクト番号。`1`〜`123`
+- `effect`: エフェクト番号を`1`〜`123`の整数で指定します。デフォルト値は `1` です。
 
 例:
 
@@ -67,13 +67,13 @@ await motor.playEffect(1);
 
 Real-Time Playback（RTP）モードを使用して振動モーターを動作させます。
 
-- `strength`: 振動強度。`0`〜`127`
-- `duration`: 振動時間。ミリ秒単位
+- `strength`: 振動強度を `0`〜`127` の整数で指定します。デフォルト値は `100` です。
+- `duration`: 振動時間を0以上の整数でミリ秒単位で指定します。デフォルト値は `200` です。
 
 例:
 
 ```js
-await motor.vibrate(80, 400);
+await motor.vibrate(100, 200);
 ```
 
 ### `stop()`

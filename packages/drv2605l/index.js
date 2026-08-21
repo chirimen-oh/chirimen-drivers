@@ -4,6 +4,7 @@
 // Haptic Motor Driver
 
 const DEFAULT_SLAVE_ADDRESS = 0x5a;
+const DEFAULT_OVERDRIVE_CLAMP = 0x8c;
 
 // DRV2605L registers
 const REG_MODE = 0x01;
@@ -17,6 +18,7 @@ const REG_SUSTAIN_TIME_OFFSET_POS = 0x0e;
 const REG_SUSTAIN_TIME_OFFSET_NEG = 0x0f;
 const REG_BRAKE_TIME_OFFSET = 0x10;
 const REG_AUDIO_MAX_INPUT = 0x13;
+const REG_OVERDRIVE_CLAMP = 0x17;
 const REG_FEEDBACK_CONTROL = 0x1a;
 const REG_CONTROL3 = 0x1d;
 
@@ -34,22 +36,26 @@ class DRV2605L {
   /**
    * @constructor
    * @param {import('node-web-i2c').I2CPort} i2cPort I2C port instance
-   * @param {number?} slaveAddress I2C slave address
+   * @param {number} [slaveAddress] I2C slave address
    */
   constructor(i2cPort, slaveAddress) {
-    if (!slaveAddress) {
+    if (slaveAddress === undefined) {
       slaveAddress = DEFAULT_SLAVE_ADDRESS;
     }
 
     this.i2cPort = i2cPort;
     this.i2cSlave = null;
     this.slaveAddress = slaveAddress;
+    this.operationId = 0;
   }
 
   /**
    * Initialize DRV2605L for an ERM vibration motor.
    */
   async init() {
+    if (this.i2cSlave) {
+      return;
+    }
     this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 
     // Internal trigger mode
@@ -76,6 +82,10 @@ class DRV2605L {
     await this.i2cSlave.write8(REG_BRAKE_TIME_OFFSET, 0x00);
 
     await this.i2cSlave.write8(REG_AUDIO_MAX_INPUT, 0x64);
+
+    // Set the full-scale voltage reference for ERM open-loop operation.
+    // 0x8C corresponds to approximately 3.02 V.
+    await this.i2cSlave.write8(REG_OVERDRIVE_CLAMP, DEFAULT_OVERDRIVE_CLAMP);
 
     // Select ERM mode
     let feedback = await this.i2cSlave.read8(REG_FEEDBACK_CONTROL);
@@ -104,6 +114,8 @@ class DRV2605L {
       throw new Error("DRV2605L is not initialized");
     }
 
+    const operationId = ++this.operationId;
+
     if (!Number.isInteger(effect) || effect < 1 || effect > 123) {
       throw new RangeError("effect must be an integer from 1 to 123");
     }
@@ -119,6 +131,14 @@ class DRV2605L {
 
     // Start playback
     await this.i2cSlave.write8(REG_GO, GO);
+
+    // Wait until playback completes.
+    while ((await this.i2cSlave.read8(REG_GO)) & GO) {
+      if (operationId !== this.operationId) {
+        return;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
   }
 
   /**
@@ -140,14 +160,21 @@ class DRV2605L {
       throw new RangeError("duration must be a positive integer");
     }
 
+    const operationId = ++this.operationId;
+
     // Change to Real-Time Playback mode
     await this.i2cSlave.write8(REG_MODE, MODE_REAL_TIME_PLAYBACK);
 
     // Start vibration
     await this.i2cSlave.write8(REG_RTP_INPUT, strength);
-
     // Keep vibrating for the specified duration
     await new Promise((resolve) => setTimeout(resolve, duration));
+
+    // Another operation may have started while waiting.
+    // In that case, do not overwrite its state.
+    if (operationId !== this.operationId) {
+      return;
+    }
 
     // Stop vibration
     await this.i2cSlave.write8(REG_RTP_INPUT, 0x00);
@@ -163,6 +190,8 @@ class DRV2605L {
     if (!this.i2cSlave) {
       throw new Error("DRV2605L is not initialized");
     }
+
+    this.operationId++;
 
     // Stop waveform playback
     await this.i2cSlave.write8(REG_GO, STOP);
