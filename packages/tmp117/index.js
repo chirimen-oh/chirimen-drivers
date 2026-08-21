@@ -2,6 +2,7 @@
 
 // TMP117 driver for CHIRIMEN
 // Based from https://www.ti.com/lit/ds/symlink/tmp117.pdf
+// Programmed by Jasmine Ortiz
 
 const TEMP_RESULT_REGISTER = 0x00;
 const CONFIG_REGISTER = 0x01;
