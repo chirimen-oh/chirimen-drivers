@@ -1,7 +1,8 @@
 // @ts-check
 
 // DRV2605L driver for CHIRIMEN
-// Haptic Motor Driver
+// Reference: https://www.ti.com/lit/ds/symlink/drv2605l.pdf
+// Programmed by Mutsuki Kikuchi
 
 const DEFAULT_SLAVE_ADDRESS = 0x5a;
 const DEFAULT_OVERDRIVE_CLAMP = 0x8c;
