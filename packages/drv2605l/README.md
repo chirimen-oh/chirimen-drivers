@@ -10,6 +10,7 @@ DRV2605Lは、I2Cで制御するハプティックモータードライバーで
 - インターフェイス: I2C
 - デフォルトI2Cアドレス: `0x5A`
 - 対応モーター: ERM
+- デフォルトOverdrive Clamp値: `0x8C`（約3.02V）
 - 内蔵波形エフェクト: 1〜123
 - RTP振動強度: 0〜127
 
@@ -38,12 +39,13 @@ await motor.vibrate(100, 200);
 
 ## API
 
-### `constructor(i2cPort, slaveAddress)`
+### `constructor(i2cPort, slaveAddress, overdriveClamp)`
 
 DRV2605Lドライバーのインスタンスを生成します。
 
 - `i2cPort`: I2Cポートのインスタンス
 - `slaveAddress`: I2Cスレーブアドレス。省略時は `0x5A`
+- `overdriveClamp`: ERMオープンループ動作時のOverdrive Clampレジスタ値を `0`〜`255` の整数で指定します。省略時は `0x8C`（約3.02V）です。使用するモーターの定格電圧に合わせて設定してください。
 
 ### `init()`
 
