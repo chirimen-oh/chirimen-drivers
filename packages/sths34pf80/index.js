@@ -1,12 +1,13 @@
 // @ts-check
 
 // STHS34PF80 driver for CHIRIMEN
-
 // https://www.st.com/resource/en/datasheet/sths34pf80.pdf
-const ADDRESS = 0x5A;
+// Programmed by x-na-ogata
+
+const ADDRESS = 0x5a;
 
 // Registers
-const WHO_AM_I = 0x0F;
+const WHO_AM_I = 0x0f;
 const CTRL1 = 0x20;
 const STATUS = 0x23;
 const FUNC_STATUS = 0x25;
@@ -14,6 +15,9 @@ const TOBJECT_L = 0x26;
 const TOBJECT_H = 0x27;
 const TAMBIENT_L = 0x28;
 const TAMBIENT_H = 0x29;
+
+const STHS34PF80_ID = 0xd3; // WHO_AM_I の既定値
+const STATUS_DRDY = 0x04; // STATUS(0x23) bit2: TOBJECT/TAMBIENTの新しいデータが準備できたことを示すフラグ
 
 class STHS34PF80 {
   constructor(i2cPort, slaveAddress = ADDRESS) {
@@ -23,60 +27,106 @@ class STHS34PF80 {
   }
 
   async init() {
-    this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
+    try {
+      this.i2cSlave = await this.i2cPort.open(this.slaveAddress);
 
-    // BDU = 1, ODR = 4 Hz
-    await this.i2cSlave.write8(CTRL1, 0x15);
+      const id = await this.i2cSlave.read8(WHO_AM_I);
+      if (id !== STHS34PF80_ID) {
+        throw new Error("STHS34PF80 not found. id=0x" + id.toString(16));
+      }
+
+      // BDU = 1, ODR = 4 Hz
+      await this.i2cSlave.write8(CTRL1, 0x15);
+    } catch (e) {
+      console.error("STHS34PF80.init() error : " + e);
+      return null;
+    }
+    return this;
+  }
+
+  wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   async readWhoAmI() {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
     return await this.i2cSlave.read8(WHO_AM_I);
   }
 
   async readStatus() {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
     return await this.i2cSlave.read8(STATUS);
   }
 
   async readFunctionStatus() {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
     return await this.i2cSlave.read8(FUNC_STATUS);
   }
 
-  async readObjectTemperatureRaw() {
-    const low = await this.i2cSlave.read8(TOBJECT_L);
-    const high = await this.i2cSlave.read8(TOBJECT_H);
+  // ODR周期(4Hzなら250ms)より速く連続でreadすると古いデータを読んでしまうため、
+  // STATUSのDRDYビットが立つまで待つ
+  async #waitForDataReady(timeoutMs = 500) {
+    const steps = Math.ceil(timeoutMs / 10);
+    for (let i = 0; i < steps; i++) {
+      const status = await this.i2cSlave.read8(STATUS);
+      if (status & STATUS_DRDY) {
+        return;
+      }
+      await this.wait(10);
+    }
+    throw new Error("STHS34PF80: measurement timeout");
+  }
 
-    let value = (high << 8) | low;
+  // TOBJECT_L(0x26)〜TAMBIENT_H(0x29)は連続したレジスタなので、
+  // read8を4回に分けず1回のバーストリードで取得する
+  async #readTemperatures() {
+    if (this.i2cSlave == null) {
+      throw new Error("i2cSlave is not open yet.");
+    }
+    await this.#waitForDataReady();
+    await this.i2cSlave.writeByte(TOBJECT_L);
+    const raw = await this.i2cSlave.readBytes(4);
 
+    let objectRaw = raw[0] | (raw[1] << 8);
     // Convert unsigned 16-bit to signed 16-bit
-    if (value & 0x8000) {
-      value -= 0x10000;
+    if (objectRaw & 0x8000) {
+      objectRaw -= 0x10000;
     }
 
-    return value;
+    let ambientRaw = raw[2] | (raw[3] << 8);
+    // Convert unsigned 16-bit to signed 16-bit
+    if (ambientRaw & 0x8000) {
+      ambientRaw -= 0x10000;
+    }
+
+    return { objectRaw, ambientRaw };
+  }
+
+  async readObjectTemperatureRaw() {
+    const { objectRaw } = await this.#readTemperatures();
+    return objectRaw;
   }
 
   async readAmbientTemperatureRaw() {
-    const low = await this.i2cSlave.read8(TAMBIENT_L);
-    const high = await this.i2cSlave.read8(TAMBIENT_H);
-
-    let value = (high << 8) | low;
-
-    // Convert unsigned 16-bit to signed 16-bit
-    if (value & 0x8000) {
-      value -= 0x10000;
-    }
-
-    return value;
+    const { ambientRaw } = await this.#readTemperatures();
+    return ambientRaw;
   }
 
   async read() {
-    const objectRaw = await this.readObjectTemperatureRaw();
-    const ambientRaw = await this.readAmbientTemperatureRaw();
+    const { objectRaw, ambientRaw } = await this.#readTemperatures();
 
     return {
+      // TOBJECTはセンサー感度2000 LSB/°Cの生IR強度で、絶対温度への変換には
+      // AN5867記載の補正アルゴリズムが必要なため、変換せず生値のまま返す
       objectTemperatureRaw: objectRaw,
       ambientTemperatureRaw: ambientRaw,
-      ambientTemperature: ambientRaw / 100
+      ambientTemperature: ambientRaw / 100,
     };
   }
 }
