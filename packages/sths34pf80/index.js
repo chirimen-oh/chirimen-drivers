@@ -20,7 +20,14 @@ const STHS34PF80_ID = 0xd3; // WHO_AM_I の既定値
 const STATUS_DRDY = 0x04; // STATUS(0x23) bit2: TOBJECT/TAMBIENTの新しいデータが準備できたことを示すフラグ
 const TOBJECT_SENSITIVITY = 2000; // TOBJECTの感度(2000 LSB/°C。データシート記載値)
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 class STHS34PF80 {
+  /**
+   * @constructor
+   * @param {import('node-web-i2c').I2CPort} i2cPort I2C port instance
+   * @param {number} slaveAddress I2C slave address
+   */
   constructor(i2cPort, slaveAddress = ADDRESS) {
     this.i2cPort = i2cPort;
     this.slaveAddress = slaveAddress;
@@ -44,10 +51,6 @@ class STHS34PF80 {
       throw e;
     }
     return this;
-  }
-
-  wait(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   async readWhoAmI() {
@@ -83,7 +86,7 @@ class STHS34PF80 {
         await this.i2cSlave.read8(FUNC_STATUS);
         return;
       }
-      await this.wait(10);
+      await sleep(10);
     }
     throw new Error("STHS34PF80: measurement timeout");
   }
