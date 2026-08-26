@@ -97,6 +97,7 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [@chirimen/sgp40](https://www.jsdelivr.com/package/npm/@chirimen/sgp40)
 - [@chirimen/sht30](https://www.jsdelivr.com/package/npm/@chirimen/sht30)
 - [@chirimen/sht40](https://www.jsdelivr.com/package/npm/@chirimen/sht40)
+- [@chirimen/sths34pf80](https://www.jsdelivr.com/package/npm/@chirimen/sths34pf80)
 - [@chirimen/tca9548a](https://www.jsdelivr.com/package/npm/@chirimen/tca9548a)
 - [@chirimen/tcs34725](https://www.jsdelivr.com/package/npm/@chirimen/tcs34725)
 - [@chirimen/tmp117](https://www.jsdelivr.com/package/npm/@chirimen/tmp117)
