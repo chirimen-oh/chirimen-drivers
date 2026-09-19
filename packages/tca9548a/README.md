@@ -29,7 +29,7 @@ while (true) {
 
 `read()` and `write()` still work too, for selecting a channel manually before each access.
 
-Every I2C operation issued through a mux instance (whether via `read()`/`write()` or a `get(channel)`-wrapped device) is serialized, so it's safe to call them concurrently. If a single operation doesn't complete within 5 seconds (an unresponsive device, a stuck bus), it fails with `TCA9548ALockTimeoutError` instead of blocking every later call forever.
+Every I2C operation issued through a mux instance (whether via `read()`/`write()` or a `get(channel)`-wrapped device) is serialized, so it's safe to call them concurrently. If a single operation doesn't complete within 5 seconds, that call rejects with `TCA9548ALockTimeoutError` so your code isn't left waiting forever. Later calls on the same mux still wait for the stuck operation to actually finish, though — there's no way to cancel an I2C transaction once it's issued, so letting other calls proceed early could interleave with whatever the stuck operation eventually does to the bus.
 
 ## Breaking changes in 3.0.0
 
@@ -62,9 +62,9 @@ _Defined in [packages/tca9548a/index.js:79](https://github.com/chirimen-oh/chiri
 
 - **read**(): _Promise‹[TCA9548AChannel](#tca9548achannel) | null›_
 
-- **write**(`channel`: [TCA9548AChannel](#tca9548achannel)): _Promise‹void›_
+- **write**(`channel`: [TCA9548AChannel](#tca9548achannel)): _Promise‹void›_ — throws `RangeError` for a channel outside 0-7.
 
-- **get**(`channel`: [TCA9548AChannel](#tca9548achannel)): _I2CPort-like object_ — see [Usage](#usage). Calling `get()` twice with the same channel returns the same object.
+- **get**(`channel`: [TCA9548AChannel](#tca9548achannel)): _I2CPort-like object_ — see [Usage](#usage). Calling `get()` twice with the same channel returns the same object. Throws `RangeError` for a channel outside 0-7.
 
 ### `Const` TCA9548AChannels
 

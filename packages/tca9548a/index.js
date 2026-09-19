@@ -30,6 +30,18 @@ function isTCA9548AChannel(value) {
   return TCA9548AChannels.includes(/** @type {TCA9548AChannel} */ (value));
 }
 
+/**
+ * @param {number} channel
+ * @returns {asserts channel is TCA9548AChannel}
+ */
+function assertTCA9548AChannel(channel) {
+  if (!isTCA9548AChannel(channel)) {
+    throw new RangeError(
+      `Invalid TCA9548A channel: ${channel}. Must be one of ${TCA9548AChannels.join(", ")}.`,
+    );
+  }
+}
+
 export class TCA9548ANotFoundError extends Error {
   /**
    * @param {string} message
@@ -105,34 +117,37 @@ export class TCA9548A {
    * @returns {Promise<T>}
    */
   #withLock(task) {
-    const run = () =>
-      /** @type {Promise<T>} */ (
-        new Promise((resolve, reject) => {
-          const timer = setTimeout(() => {
-            reject(
-              new TCA9548ALockTimeoutError(
-                `TCA9548A I2C operation timed out after ${LOCK_TIMEOUT_MS}ms`,
-              ),
-            );
-          }, LOCK_TIMEOUT_MS);
-          task().then(
-            (value) => {
-              clearTimeout(timer);
-              resolve(value);
-            },
-            (error) => {
-              clearTimeout(timer);
-              reject(error);
-            },
-          );
-        })
-      );
-    const result = this.#queue.then(run, run);
-    this.#queue = result.then(
+    // `settled` tracks the real task to completion, however long that
+    // takes, and #queue only ever advances once it does — later calls
+    // must never start while an earlier one might still be mid-transaction
+    // on the shared bus, or they could interleave with it. The timeout
+    // below only bounds how long *this* caller waits for a response; it
+    // does not release the queue early, since we have no way to cancel
+    // the underlying I2C operation once issued.
+    const settled = this.#queue.then(task, task);
+    this.#queue = settled.then(
       () => {},
       () => {},
     );
-    return result;
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject(
+          new TCA9548ALockTimeoutError(
+            `TCA9548A I2C operation timed out after ${LOCK_TIMEOUT_MS}ms`,
+          ),
+        );
+      }, LOCK_TIMEOUT_MS);
+      settled.then(
+        (value) => {
+          clearTimeout(timer);
+          resolve(value);
+        },
+        (error) => {
+          clearTimeout(timer);
+          reject(error);
+        },
+      );
+    });
   }
 
   async #read() {
@@ -143,6 +158,7 @@ export class TCA9548A {
 
   /** @param {TCA9548AChannel} [channel=0] */
   async #write(channel = 0) {
+    assertTCA9548AChannel(channel);
     const slave = await this.#ensureSlave();
     await slave.writeByte(1 << channel);
   }
@@ -178,6 +194,7 @@ export class TCA9548A {
    * @returns {TCA9548AChannelPort}
    */
   get(channel) {
+    assertTCA9548AChannel(channel);
     const cached = this.#ports.get(channel);
     if (cached != null) return cached;
 
