@@ -3,7 +3,7 @@
 // DRV8830 driver for CHIRIMEN
 // Reference: https://www.ti.com/lit/ds/symlink/drv8830.pdf
 
-const DEFAULT_SLAVE_ADDRESS = 0x60;
+const DEFAULT_SLAVE_ADDRESS = 0x64;
 
 // DRV8830 registers
 const REG_CONTROL = 0x00;
