@@ -8,7 +8,7 @@ DRV8830は、I2Cで制御する低電圧モータードライバーICです。
 
 - デバイス: DRV8830
 - インターフェイス: I2C
-- デフォルトI2Cアドレス: `0x60`（アドレスピンA0・A1の設定により`0x60`〜`0x68`の範囲で変更可能）
+- デフォルトI2Cアドレス: `0x64`（アドレスピンA0・A1の設定により`0x60`〜`0x68`の範囲で変更可能）
 - 動作電源電圧: 2.75V〜6.8V
 - 出力電圧範囲: 約0V〜5.06V（64段階、約0.08V刻み）
 - 最大出力電流: 1A（連続）
@@ -34,7 +34,8 @@ await motor.forward(); // 正転
 await sleep(1000);
 await motor.reverse(); // 逆転
 await sleep(1000);
-await motor.stop(); // 停止（ハイインピーダンス）
+await motor.stop(); // 停止
+await motor.clearFault();
 ```
 
 ## API
