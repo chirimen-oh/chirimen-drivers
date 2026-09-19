@@ -64,6 +64,7 @@ import { requestI2CAccess, ADT7410 } from "npm:chirimen";
 - [@chirimen/canzasi](https://www.jsdelivr.com/package/npm/@chirimen/canzasi)
 - [@chirimen/ccs811](https://www.jsdelivr.com/package/npm/@chirimen/ccs811)
 - [@chirimen/drv2605l](https://www.jsdelivr.com/package/npm/@chirimen/drv2605l)
+- [@chirimen/drv8830](https://www.jsdelivr.com/package/npm/@chirimen/drv8830)
 - [@chirimen/ens160](https://www.jsdelivr.com/package/npm/@chirimen/ens160)
 - [@chirimen/gp2y0e03](https://www.jsdelivr.com/package/npm/@chirimen/gp2y0e03)
 - [@chirimen/grove-accelerometer](https://www.jsdelivr.com/package/npm/@chirimen/grove-accelerometer)
