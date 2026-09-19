@@ -45,7 +45,7 @@ await motor.clearFault();
 DRV8830ドライバーのインスタンスを生成します。
 
 - `i2cPort`: I2Cポートのインスタンス
-- `slaveAddress`: I2Cスレーブアドレス。省略時は `0x60`
+- `slaveAddress`: I2Cスレーブアドレス。省略時は `0x64`
 
 ### `init()`
 
