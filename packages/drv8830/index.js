@@ -153,6 +153,12 @@ class DRV8830 {
 
     await this.i2cSlave.write8(REG_FAULT, FAULT_CLEAR);
   }
+
+  // @ts-ignore
+  async [Symbol.asyncDispose]() {
+    await this.stop();
+    await this.clearFault();
+  }
 }
 
 export default DRV8830;
