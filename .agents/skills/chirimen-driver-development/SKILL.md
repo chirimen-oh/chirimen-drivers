@@ -101,6 +101,40 @@ reference がある作業は、現行ガイドとその reference の両方を�
 
 ブランチ名は `type/short-description`。コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/) に従う。
 
+## 利用方法
+
+入口は `.agents/skills/chirimen-driver-development/SKILL.md` である。Cursor と Claude Code は、このリポジトリ内の Skill を読む。依頼文には `chirimen-driver-development` と作業種別（新規 driver、既存 driver の修正、review）を書く。
+
+次の例は、日常のドライバ作業で Agent に渡す prompt である。Skill 自体を historical pull request で確認する prompt は [references/validation.md](references/validation.md) の Case 1–3 にある。
+
+### 新規 driver
+
+```text
+新しい I2C driver を追加したい。
+chirimen-driver-development Skill に従って、
+最初に必要な変更箇所と実装計画を提示してください。
+まだコードは変更しないでください。
+```
+
+### 既存 driver の修正
+
+```text
+既存の driver を修正したい。
+chirimen-driver-development Skill に従って、
+変更範囲、互換、README、version を含む実装計画を提示してください。
+まだコードは変更しないでください。
+```
+
+### review
+
+```text
+この driver の変更を review してください。
+chirimen-driver-development Skill の review checklist を使用し、
+public API、async behavior、package integration、documentation の観点を確認してください。
+```
+
+日常のドライバ追加、修正、review では [references/validation.md](references/validation.md) を読まない。Skill 自体が現行の開発パターンを再現できるかを確認するときだけ読む。実施結果は同ファイルの「実施結果」にある。expected checklist から落ちた項目は無く、reference への追記も無い。
+
 ## references
 
 このディレクトリのファイルは、SKILL.md から 1 階層で参照する。
