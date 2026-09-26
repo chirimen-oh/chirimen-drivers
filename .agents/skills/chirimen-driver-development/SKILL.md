@@ -113,3 +113,4 @@ reference がある作業は、現行ガイドとその reference の両方を�
 - [references/coding-conventions.md](references/coding-conventions.md) — 命名、private、async、timeout、定数
 - [references/package-integration.md](references/package-integration.md) — driver package から `chirimen` の public export、lockfile、version まで
 - [references/review-checklist.md](references/review-checklist.md) — API の境界、定数、timeout、エラー、export 漏れ、無関係な差分
+- [references/validation.md](references/validation.md) — historical pull request を使った再現の確認と、不足の戻し方
