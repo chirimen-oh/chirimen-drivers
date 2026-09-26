@@ -147,4 +147,38 @@ expected checklist の項目が計画または review から落ちたときだ�
 
 ## 実施結果
 
-上の手順で 3 ケースを実行したあと、この節に結果を書く。実行前は空である。
+[SKILL.md](../SKILL.md) と該当 reference だけで計画または review を書き、その後に validation source を見た。expected checklist から落ちた項目は無い。reference への追記は無し。
+
+### Case 1
+
+新規 I2C driver の計画は、個別 package、Pure ESM、同種の現行 package、public API、README、`chirimen` の dependency と re-export、version、lockfile、Prettier / `npm ci` / ハードウェア確認を含んでいた。
+
+[#405](https://github.com/chirimen-oh/chirimen-drivers/pull/405) との差は、不足ではない。
+
+- ソースは `vl6180x.js` と rollup で、`index.js` は生成物として `.gitignore` されている
+- package 直下の README は無く、公開の案内はルート README のパッケージ一覧である
+- `packages/chirimen/` の dependency と re-export は無い
+- ルート README には `vl6180x` 以外の package 名も足され、`packages/rc522_ws1850s/rollup.config.js` の出力名も変わっている
+
+レジスタの初期化列と、`getRange` 以外の読み取り名は、このデバイス固有である。
+
+### Case 2
+
+既存 driver の変更計画は、対象 package への限定、振る舞いによる種別、PATCH / MINOR / MAJOR、README、無関係な version を変えないこと、ブランチ名を含んでいた。
+
+[#404](https://github.com/chirimen-oh/chirimen-drivers/pull/404) は `packages/rc522_ws1850s/package.json` と実装、lockfile の version だけを変えている。`1.0.0` から `1.0.1` の PATCH である。戻り値の形が変わっている箇所があるため、現行の [modify-driver.md](modify-driver.md) では MAJOR になる。historical pull request の PATCH は、その分類を上書きしない。package の README は同じ差分に無い。
+
+### Case 3
+
+[#402](https://github.com/chirimen-oh/chirimen-drivers/pull/402) の review は、範囲、public API、定数、timeout、エラー、async、README、package integration、export、無関係な差分を使った。`src/index.ts` が無いことは不足にしなかった。
+
+観点が当たった箇所は次のとおり。
+
+- レジスタアドレスが instance の public なプロパティになっている
+- 準備待ちに上限の無い `while` がある
+- 読み取り失敗が `null` で返っている
+- package 直下の README が無い
+- `chirimen` の dependency と re-export が無く、lockfile とルート README の一覧だけがある
+- rollup の出力名が `VEML6070` で、class 名 `RC522` と違う
+
+rollup とルート README の一覧は現行の必須ファイルではない。別デバイス名は、現行の export 名の確認として見る。
