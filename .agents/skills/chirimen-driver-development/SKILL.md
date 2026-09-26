@@ -11,7 +11,7 @@ description: >-
 
 `chirimen-oh/chirimen-drivers` でドライバを追加・変更・修正・レビューするときの入口。配置・目的・基本 workflow はここ、コアの repository knowledge は `references/` にある。
 
-コア reference は、repository structure、新規 driver、既存 driver の変更、coding conventions の 4 本である。package integration と review checklist は、まだ `references/` に無い。
+コア reference は、repository structure、新規 driver、既存 driver の変更、coding conventions の 4 本である。新規 package を利用者の import まで届ける確認は [references/package-integration.md](references/package-integration.md)、差分の確認項目は [references/review-checklist.md](references/review-checklist.md) にある。
 
 ドライバ実装そのものはこの Skill の対象外である。依頼された package だけを変更する。
 
@@ -60,11 +60,12 @@ Pure ESM 移行より前の pull request は、当時の package structure の�
 | 作業 | 現行ガイド | reference |
 | --- | --- | --- |
 | 新規 driver | [docs/contributing/add-driver.md](../../../docs/contributing/add-driver.md) | [references/add-new-driver.md](references/add-new-driver.md) |
+| package integration | 現行の [packages/chirimen/](../../../packages/chirimen/) | [references/package-integration.md](references/package-integration.md) |
 | 既存 driver の変更、bug fix | [docs/contributing/fix-driver.md](../../../docs/contributing/fix-driver.md) | [references/modify-driver.md](references/modify-driver.md) |
 | 実装の書き方 | [docs/contributing/coding-standards.md](../../../docs/contributing/coding-standards.md) | [references/coding-conventions.md](references/coding-conventions.md) |
 | リポジトリ構成 | [docs/contributing/repository.md](../../../docs/contributing/repository.md) | [references/repository-structure.md](references/repository-structure.md) |
 | ブランチとコミット | [docs/contributing/setup.md](../../../docs/contributing/setup.md) | 未追加 |
-| review の基本ルール | [docs/contributing/getting-started.md](../../../docs/contributing/getting-started.md) | 未追加 |
+| review の基本ルール | [docs/contributing/getting-started.md](../../../docs/contributing/getting-started.md) | [references/review-checklist.md](references/review-checklist.md) |
 
 reference がある作業は、現行ガイドとその reference の両方を読む。reference が無い主題は、現行ガイドを使う。historical pull request を読む場合も、上の「判断の優先順位」と「Pure ESM より前の pull request」に従う。
 
@@ -77,6 +78,7 @@ reference がある作業は、現行ガイドとその reference の両方を�
 3. 同種の現行 package を見て public API を決める
 4. `package.json`、`index.js`、`README.md` を更新する
 5. Prettier を実行し、リポジトリルートで `npm install` して lockfile を更新する
+6. [references/package-integration.md](references/package-integration.md) に従い、`chirimen` の dependency、re-export、lockfile、version を確認する
 
 **既存 driver の変更**
 
@@ -89,12 +91,13 @@ reference がある作業は、現行ガイドとその reference の両方を�
 1. 再現条件、期待する動作、実際の動作を確認する
 2. 修正は当該 package に限定する
 3. 後方互換の修正として PATCH の `version` を上げる
+4. `chirimen` から import できない不具合は、[references/package-integration.md](references/package-integration.md) に従い、re-export と `packages/chirimen` の PATCH で直す
 
 **review**
 
 1. 差分が依頼された package と、その変更に必要な metadata に収まっているかを見る
 2. public API、async、エラーメッセージ、README が現行の [coding-standards.md](../../../docs/contributing/coding-standards.md) に沿っているかを見る
-3. 詳細な review checklist は `references/` に追加され次第、そのファイルを使う
+3. [references/review-checklist.md](references/review-checklist.md) で、public API、定数、timeout、エラー、async、README、package integration、export、無関係な差分を確認する
 
 ### 4. 変更を Conventional Commits で残す
 
@@ -108,5 +111,5 @@ reference がある作業は、現行ガイドとその reference の両方を�
 - [references/add-new-driver.md](references/add-new-driver.md) — 類似 driver の調査、package 作成、public API、README、確認
 - [references/modify-driver.md](references/modify-driver.md) — API の互換、bug fix と機能変更、README、version
 - [references/coding-conventions.md](references/coding-conventions.md) — 命名、private、async、timeout、定数
-
-package integration と review checklist は未追加である。review の詳細 checklist は、追加され次第この節から参照する。
+- [references/package-integration.md](references/package-integration.md) — driver package から `chirimen` の public export、lockfile、version まで
+- [references/review-checklist.md](references/review-checklist.md) — API の境界、定数、timeout、エラー、export 漏れ、無関係な差分
