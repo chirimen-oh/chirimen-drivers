@@ -18,11 +18,27 @@ description: >-
 | 作業 | 内容 |
 | --- | --- |
 | 新規 driver の追加 | `packages/` に新しいドライバ package を追加する |
-| 既存 driver の変更 | 既存 package の API や振る舞いを、互換を保ったまま広げる |
+| 既存 driver の変更 | 既存 package の API や振る舞いを変える。互換の有無で version を分ける |
 | bug fix | 期待と違う動作を、当該 package に限定して直す |
 | review | 差分が現行の規約と依頼範囲に合っているかを確認する |
 
 リリース判断、`chirimen.org` のサンプル実装、無関係な package の整理は、この workflow の途中で始めない。
+
+## 判断の優先順位
+
+実装と review の基準は、現在の repository conventions である。優先順は次のとおり。
+
+1. 現行の `packages/` と [docs/contributing/](../../../docs/contributing/)
+2. `references/` にある文書
+3. historical pull request は、判断の背景を確認する材料
+
+historical pull request の差分は、そのままテンプレートにしない。PR 固有の手順や、現行の構成と食い違うファイル配置は、一般ルールとして固定しない。現行の規約と historical pull request が矛盾するときは、現行の規約を採用する。
+
+## Pure ESM より前の pull request
+
+package structure の基準は、現行の Pure ESM package である。`package.json` の `"type": "module"`、`exports`、ES Modules の class 実装を正解とする。
+
+Pure ESM 移行より前の pull request は、当時の package structure の記録である。新しい package のディレクトリ構成、module 形式、export の書き方に使わない。構成を決めるときは、[packages/hello-world/](../../../packages/hello-world/) と、同じ種類の現行 driver を見る。
 
 ## 基本 workflow
 
@@ -48,7 +64,7 @@ description: >-
 | ブランチとコミット | [docs/contributing/setup.md](../../../docs/contributing/setup.md) |
 | review の基本ルール | [docs/contributing/getting-started.md](../../../docs/contributing/getting-started.md) |
 
-`references/` に同じ主題のファイルがあるときは、そのファイルも読む。ファイルがまだ無い主題は、上表の現行ガイドを使う。
+`references/` に同じ主題のファイルがあるときは、そのファイルも読む。ファイルがまだ無い主題は、上表の現行ガイドを使う。historical pull request を読む場合も、上の「判断の優先順位」と「Pure ESM より前の pull request」に従う。
 
 ### 3. 種別に応じて進める
 
