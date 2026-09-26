@@ -71,33 +71,31 @@ reference がある作業は、現行ガイドとその reference の両方を�
 
 ### 3. 種別に応じて進める
 
+手順の全文は、種別に対応する reference にある。ここには入口と、完了とみなす状態だけを書く。
+
 **新規 driver**
 
-1. `feat/<デバイス名>` ブランチを作る
-2. [packages/hello-world/](../../../packages/hello-world/) をコピーして package を作る
-3. 同種の現行 package を見て public API を決める
-4. `package.json`、`index.js`、`README.md` を更新する
-5. Prettier を実行し、リポジトリルートで `npm install` して lockfile を更新する
-6. [references/package-integration.md](references/package-integration.md) に従い、`chirimen` の dependency、re-export、lockfile、version を確認する
+手順は [references/add-new-driver.md](references/add-new-driver.md)。利用者の import までは [references/package-integration.md](references/package-integration.md)。
+
+個別 package（`index.js`、`package.json`、`README.md`）と、`chirimen` の dependency および re-export が揃っていること。
 
 **既存 driver の変更**
 
-1. 対象 package と公開 API を確認する
-2. 互換を保つ変更は MINOR、互換を壊す変更は MAJOR として `package.json` の `version` を上げる
-3. 振る舞いが変わるときは、その package の README を更新する
+手順は [references/modify-driver.md](references/modify-driver.md)。
+
+互換を保つ変更は MINOR、互換を壊す変更は MAJOR。振る舞いが変わるときは、その package の README を同じ変更で更新する。
 
 **bug fix**
 
-1. 再現条件、期待する動作、実際の動作を確認する
-2. 修正は当該 package に限定する
-3. 後方互換の修正として PATCH の `version` を上げる
-4. `chirimen` から import できない不具合は、[references/package-integration.md](references/package-integration.md) に従い、re-export と `packages/chirimen` の PATCH で直す
+手順は [references/modify-driver.md](references/modify-driver.md)。
+
+当該 package に限定した後方互換の修正として PATCH を上げる。`chirimen` から import できない不具合は [references/package-integration.md](references/package-integration.md) に従い、re-export と `packages/chirimen` の PATCH で直す。
 
 **review**
 
-1. 差分が依頼された package と、その変更に必要な metadata に収まっているかを見る
-2. public API、async、エラーメッセージ、README が現行の [coding-standards.md](../../../docs/contributing/coding-standards.md) に沿っているかを見る
-3. [references/review-checklist.md](references/review-checklist.md) で、public API、定数、timeout、エラー、async、README、package integration、export、無関係な差分を確認する
+確認項目は [references/review-checklist.md](references/review-checklist.md)。
+
+差分が依頼された package と必要な metadata に収まり、public API、async、README、package integration が現行の規約に沿っていること。
 
 ### 4. 変更を Conventional Commits で残す
 
