@@ -9,7 +9,9 @@ description: >-
 
 # CHIRIMEN driver development
 
-`chirimen-oh/chirimen-drivers` でドライバを追加・変更・修正・レビューするときの入口。詳細な repository knowledge は `references/` に後続の変更で追加する。この Skill は配置・目的・基本 workflow を定義し、reference の本文は持たない。
+`chirimen-oh/chirimen-drivers` でドライバを追加・変更・修正・レビューするときの入口。配置・目的・基本 workflow はここ、コアの repository knowledge は `references/` にある。
+
+コア reference は、repository structure、新規 driver、既存 driver の変更、coding conventions の 4 本である。package integration と review checklist は、まだ `references/` に無い。
 
 ドライバ実装そのものはこの Skill の対象外である。依頼された package だけを変更する。
 
@@ -55,16 +57,16 @@ Pure ESM 移行より前の pull request は、当時の package structure の�
 
 作業種別に対応する文書を先に読む。
 
-| 作業 | 現行ガイド |
-| --- | --- |
-| 新規 driver | [docs/contributing/add-driver.md](../../../docs/contributing/add-driver.md) |
-| 既存 driver の変更、bug fix | [docs/contributing/fix-driver.md](../../../docs/contributing/fix-driver.md) |
-| 実装の書き方 | [docs/contributing/coding-standards.md](../../../docs/contributing/coding-standards.md) |
-| リポジトリ構成 | [docs/contributing/repository.md](../../../docs/contributing/repository.md) |
-| ブランチとコミット | [docs/contributing/setup.md](../../../docs/contributing/setup.md) |
-| review の基本ルール | [docs/contributing/getting-started.md](../../../docs/contributing/getting-started.md) |
+| 作業 | 現行ガイド | reference |
+| --- | --- | --- |
+| 新規 driver | [docs/contributing/add-driver.md](../../../docs/contributing/add-driver.md) | [references/add-new-driver.md](references/add-new-driver.md) |
+| 既存 driver の変更、bug fix | [docs/contributing/fix-driver.md](../../../docs/contributing/fix-driver.md) | [references/modify-driver.md](references/modify-driver.md) |
+| 実装の書き方 | [docs/contributing/coding-standards.md](../../../docs/contributing/coding-standards.md) | [references/coding-conventions.md](references/coding-conventions.md) |
+| リポジトリ構成 | [docs/contributing/repository.md](../../../docs/contributing/repository.md) | [references/repository-structure.md](references/repository-structure.md) |
+| ブランチとコミット | [docs/contributing/setup.md](../../../docs/contributing/setup.md) | 未追加 |
+| review の基本ルール | [docs/contributing/getting-started.md](../../../docs/contributing/getting-started.md) | 未追加 |
 
-`references/` に同じ主題のファイルがあるときは、そのファイルも読む。ファイルがまだ無い主題は、上表の現行ガイドを使う。historical pull request を読む場合も、上の「判断の優先順位」と「Pure ESM より前の pull request」に従う。
+reference がある作業は、現行ガイドとその reference の両方を読む。reference が無い主題は、現行ガイドを使う。historical pull request を読む場合も、上の「判断の優先順位」と「Pure ESM より前の pull request」に従う。
 
 ### 3. 種別に応じて進める
 
@@ -100,4 +102,11 @@ Pure ESM 移行より前の pull request は、当時の package structure の�
 
 ## references
 
-`references/` は後続の変更で repository knowledge を置く場所である。このディレクトリのファイルは、SKILL.md から 1 階層で参照する。
+このディレクトリのファイルは、SKILL.md から 1 階層で参照する。
+
+- [references/repository-structure.md](references/repository-structure.md) — 現行の package 構成と、historical pull request を読むときの注意
+- [references/add-new-driver.md](references/add-new-driver.md) — 類似 driver の調査、package 作成、public API、README、確認
+- [references/modify-driver.md](references/modify-driver.md) — API の互換、bug fix と機能変更、README、version
+- [references/coding-conventions.md](references/coding-conventions.md) — 命名、private、async、timeout、定数
+
+package integration と review checklist は未追加である。review の詳細 checklist は、追加され次第この節から参照する。
