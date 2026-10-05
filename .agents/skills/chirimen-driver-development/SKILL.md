@@ -105,7 +105,7 @@ reference がある作業は、現行ガイドとその reference の両方を�
 
 ## references
 
-このディレクトリのファイルは、SKILL.md から 1 階層で参照する。
+ドライバ作業で読む reference は、SKILL.md から 1 階層で参照する。
 
 - [references/repository-structure.md](references/repository-structure.md) — 現行の package 構成と、historical pull request を読むときの注意
 - [references/add-new-driver.md](references/add-new-driver.md) — 類似 driver の調査、package 作成、public API、README、確認
@@ -113,4 +113,3 @@ reference がある作業は、現行ガイドとその reference の両方を�
 - [references/coding-conventions.md](references/coding-conventions.md) — 命名、private、async、timeout、定数
 - [references/package-integration.md](references/package-integration.md) — driver package から `chirimen` の public export、lockfile、version まで
 - [references/review-checklist.md](references/review-checklist.md) — API の境界、定数、timeout、エラー、export 漏れ、無関係な差分
-- [references/validation.md](references/validation.md) — historical pull request を使った再現の確認と、不足の戻し方

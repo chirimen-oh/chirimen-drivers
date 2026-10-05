@@ -1,5 +1,7 @@
 # Historical pull request validation
 
+Skill 自体を点検したときの手順と実施記録である。ドライバの追加、変更、レビューでは読まない。
+
 `chirimen-driver-development` Skill が、現行の開発パターンを再現できるかを確認する手順。Skill を書くときに読んだ pull request では自己評価しない。別の historical pull request を validation data にする。
 
 再現の正は、現行の `packages/` と [docs/contributing/](../../../../docs/contributing/)、およびこのディレクトリの reference である。historical pull request の差分は、観点が出るかを見る材料である。当時のファイル配置や module 形式を、計画の期待値にしない。
