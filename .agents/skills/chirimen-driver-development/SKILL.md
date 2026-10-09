@@ -105,7 +105,7 @@ reference がある作業は、現行ガイドとその reference の両方を�
 
 ## references
 
-ドライバ作業で読む reference は、SKILL.md から 1 階層で参照する。
+このディレクトリのファイルは、SKILL.md から 1 階層で参照する。
 
 - [references/repository-structure.md](references/repository-structure.md) — 現行の package 構成と、historical pull request を読むときの注意
 - [references/add-new-driver.md](references/add-new-driver.md) — 類似 driver の調査、package 作成、public API、README、確認
